@@ -8,8 +8,8 @@
     <TargetOsDescription>Windows 10.0</TargetOsDescription>
     <SolutionConfiguration>Debug|x86</SolutionConfiguration>
     <PackageArchitecture>x86</PackageArchitecture>
-    <PackageIdentityName>e50b4a14-f8ba-4045-9585-fcd2ac470b22</PackageIdentityName>
-    <PackageIdentityPublisher>CN=kimjh</PackageIdentityPublisher>
+    <PackageIdentityName>6a0ddf8a-0f04-44c9-801a-e83d5489e313</PackageIdentityName>
+    <PackageIdentityPublisher>CN=584C1875-2417-4AFB-8DBA-E9C42BBE3505</PackageIdentityPublisher>
     <IntermediateOutputPath>C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\obj\x86\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType>
     </RemoteDeploymentType>
@@ -19,24 +19,24 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>8DF386F5E8646B7F0BC0205736BECB6FF4D7D8391A81DF849DD508AAAAB588B6</RegisteredManifestChecksum>
-    <RegisteredPackageMoniker>e50b4a14-f8ba-4045-9585-fcd2ac470b22_1.0.0.0_x86__dbvaan0ryswbr</RegisteredPackageMoniker>
-    <RegisteredUserModeAppID>e50b4a14-f8ba-4045-9585-fcd2ac470b22_dbvaan0ryswbr!App</RegisteredUserModeAppID>
-    <RegisteredPackageID>e50b4a14-f8ba-4045-9585-fcd2ac470b22</RegisteredPackageID>
-    <RegisteredPackagePublisher>CN=kimjh</RegisteredPackagePublisher>
+    <RegisteredManifestChecksum>FEA69753DDDCA52159D7FB161EF274FE586D66ECADDC03EB7B120BD466647CBA</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>41903SaveYourApp.SaveYourApp_1.0.0.0_x86__kxtx5vnpqewq0</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>41903SaveYourApp.SaveYourApp_kxtx5vnpqewq0!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>41903SaveYourApp.SaveYourApp</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=584C1875-2417-4AFB-8DBA-E9C42BBE3505</RegisteredPackagePublisher>
     <RegisteredVersion>1.0.0.0</RegisteredVersion>
   </PropertyGroup>
   <ItemGroup>
     <AppXManifest Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:38.447</Modified>
+      <Modified>2021-06-03T18:21:10.998</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\SYPP.exe">
       <PackagePath>entrypoint\SYPP.exe</PackagePath>
-      <Modified>2021-06-03T17:34:37.354</Modified>
+      <Modified>2021-06-03T18:20:56.723</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\.nuget\packages\colorcode.core\2.0.6\lib\netstandard1.4\ColorCode.Core.dll">
       <PackagePath>ColorCode.Core.dll</PackagePath>
@@ -214,6 +214,285 @@
       <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\Microsoft.Toolkit.Uwp.UI.Controls.xr.xml</PackagePath>
       <Modified>2020-08-13T02:07:10.000</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\BadgeLogo.scale-100.png">
+      <PackagePath>Assets\BadgeLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:17:26.557</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\BadgeLogo.scale-125.png">
+      <PackagePath>Assets\BadgeLogo.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:17:26.563</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\BadgeLogo.scale-150.png">
+      <PackagePath>Assets\BadgeLogo.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:17:26.570</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\BadgeLogo.scale-200.png">
+      <PackagePath>Assets\BadgeLogo.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:17:26.577</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\BadgeLogo.scale-400.png">
+      <PackagePath>Assets\BadgeLogo.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:17:26.588</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\LargeTile.scale-100.png">
+      <PackagePath>Assets\LargeTile.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.752</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\LargeTile.scale-125.png">
+      <PackagePath>Assets\LargeTile.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.772</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\LargeTile.scale-150.png">
+      <PackagePath>Assets\LargeTile.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.796</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\LargeTile.scale-200.png">
+      <PackagePath>Assets\LargeTile.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.832</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\LargeTile.scale-400.png">
+      <PackagePath>Assets\LargeTile.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.955</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SmallTile.scale-100.png">
+      <PackagePath>Assets\SmallTile.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.512</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SmallTile.scale-125.png">
+      <PackagePath>Assets\SmallTile.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.522</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SmallTile.scale-150.png">
+      <PackagePath>Assets\SmallTile.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.529</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SmallTile.scale-200.png">
+      <PackagePath>Assets\SmallTile.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.536</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SmallTile.scale-400.png">
+      <PackagePath>Assets\SmallTile.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.549</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SplashScreen.scale-100.png">
+      <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.129</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SplashScreen.scale-125.png">
+      <PackagePath>Assets\SplashScreen.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.158</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SplashScreen.scale-150.png">
+      <PackagePath>Assets\SplashScreen.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.195</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SplashScreen.scale-400.png">
+      <PackagePath>Assets\SplashScreen.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.484</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square150x150Logo.scale-100.png">
+      <PackagePath>Assets\Square150x150Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.557</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square150x150Logo.scale-125.png">
+      <PackagePath>Assets\Square150x150Logo.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.566</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square150x150Logo.scale-150.png">
+      <PackagePath>Assets\Square150x150Logo.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.576</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square150x150Logo.scale-400.png">
+      <PackagePath>Assets\Square150x150Logo.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.623</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png">
+      <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.071</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png">
+      <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.077</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png">
+      <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.109</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png">
+      <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.082</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png">
+      <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.088</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-unplated_targetsize-16.png">
+      <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-16.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.033</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-unplated_targetsize-256.png">
+      <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-256.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.066</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-unplated_targetsize-32.png">
+      <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-32.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.045</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-unplated_targetsize-48.png">
+      <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-48.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.051</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.scale-100.png">
+      <PackagePath>Assets\Square44x44Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.961</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.scale-125.png">
+      <PackagePath>Assets\Square44x44Logo.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.968</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.scale-150.png">
+      <PackagePath>Assets\Square44x44Logo.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.974</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.scale-400.png">
+      <PackagePath>Assets\Square44x44Logo.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.990</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.targetsize-16.png">
+      <PackagePath>Assets\Square44x44Logo.targetsize-16.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.996</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.targetsize-24.png">
+      <PackagePath>Assets\Square44x44Logo.targetsize-24.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.001</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.targetsize-256.png">
+      <PackagePath>Assets\Square44x44Logo.targetsize-256.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.027</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.targetsize-32.png">
+      <PackagePath>Assets\Square44x44Logo.targetsize-32.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.007</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.targetsize-48.png">
+      <PackagePath>Assets\Square44x44Logo.targetsize-48.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.013</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\StoreLogo.scale-100.png">
+      <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.490</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\StoreLogo.scale-125.png">
+      <PackagePath>Assets\StoreLogo.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.496</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\StoreLogo.scale-150.png">
+      <PackagePath>Assets\StoreLogo.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.503</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\StoreLogo.scale-200.png">
+      <PackagePath>Assets\StoreLogo.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.510</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\StoreLogo.scale-400.png">
+      <PackagePath>Assets\StoreLogo.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.520</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Wide310x150Logo.scale-100.png">
+      <PackagePath>Assets\Wide310x150Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.633</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Wide310x150Logo.scale-125.png">
+      <PackagePath>Assets\Wide310x150Logo.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.644</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Wide310x150Logo.scale-150.png">
+      <PackagePath>Assets\Wide310x150Logo.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.658</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Wide310x150Logo.scale-400.png">
+      <PackagePath>Assets\Wide310x150Logo.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.738</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\LockScreenLogo.scale-200.png">
+      <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
+      <Modified>2021-01-29T18:48:22.995</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SplashScreen.scale-200.png">
+      <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.258</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square150x150Logo.scale-200.png">
+      <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.589</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.scale-200.png">
+      <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.981</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+      <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:04.039</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Wide310x150Logo.scale-200.png">
+      <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2021-06-03T18:18:03.678</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Arrows\Arrow_Left_Icon.svg">
       <PackagePath>Assets\Components\Arrows\Arrow_Left_Icon.svg</PackagePath>
       <Modified>2021-03-22T20:12:25.631</Modified>
@@ -366,260 +645,6 @@
       <PackagePath>Assets\Navigations\Templates_Navigation_UnSelected_Icon.svg</PackagePath>
       <Modified>2021-03-23T04:17:17.799</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\LargeTile.scale-100.png">
-      <PackagePath>Assets\LargeTile.scale-100.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.903</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\LargeTile.scale-125.png">
-      <PackagePath>Assets\LargeTile.scale-125.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.921</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\LargeTile.scale-150.png">
-      <PackagePath>Assets\LargeTile.scale-150.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.946</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\LargeTile.scale-200.png">
-      <PackagePath>Assets\LargeTile.scale-200.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.984</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\LargeTile.scale-400.png">
-      <PackagePath>Assets\LargeTile.scale-400.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.113</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SmallTile.scale-100.png">
-      <PackagePath>Assets\SmallTile.scale-100.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.653</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SmallTile.scale-125.png">
-      <PackagePath>Assets\SmallTile.scale-125.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.660</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SmallTile.scale-150.png">
-      <PackagePath>Assets\SmallTile.scale-150.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.667</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SmallTile.scale-200.png">
-      <PackagePath>Assets\SmallTile.scale-200.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.675</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SmallTile.scale-400.png">
-      <PackagePath>Assets\SmallTile.scale-400.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.688</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SplashScreen.scale-100.png">
-      <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.280</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SplashScreen.scale-125.png">
-      <PackagePath>Assets\SplashScreen.scale-125.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.309</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SplashScreen.scale-150.png">
-      <PackagePath>Assets\SplashScreen.scale-150.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.347</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SplashScreen.scale-400.png">
-      <PackagePath>Assets\SplashScreen.scale-400.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.645</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square150x150Logo.scale-100.png">
-      <PackagePath>Assets\Square150x150Logo.scale-100.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.698</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square150x150Logo.scale-125.png">
-      <PackagePath>Assets\Square150x150Logo.scale-125.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.707</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square150x150Logo.scale-150.png">
-      <PackagePath>Assets\Square150x150Logo.scale-150.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.717</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square150x150Logo.scale-400.png">
-      <PackagePath>Assets\Square150x150Logo.scale-400.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.765</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png">
-      <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.227</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png">
-      <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.232</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png">
-      <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.260</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png">
-      <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.238</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png">
-      <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.244</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-unplated_targetsize-16.png">
-      <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-16.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.189</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-unplated_targetsize-256.png">
-      <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-256.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.221</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-unplated_targetsize-32.png">
-      <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-32.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.201</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.altform-unplated_targetsize-48.png">
-      <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-48.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.207</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.scale-100.png">
-      <PackagePath>Assets\Square44x44Logo.scale-100.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.119</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.scale-125.png">
-      <PackagePath>Assets\Square44x44Logo.scale-125.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.125</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.scale-150.png">
-      <PackagePath>Assets\Square44x44Logo.scale-150.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.131</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.scale-400.png">
-      <PackagePath>Assets\Square44x44Logo.scale-400.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.147</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.targetsize-16.png">
-      <PackagePath>Assets\Square44x44Logo.targetsize-16.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.153</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.targetsize-24.png">
-      <PackagePath>Assets\Square44x44Logo.targetsize-24.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.159</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.targetsize-256.png">
-      <PackagePath>Assets\Square44x44Logo.targetsize-256.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.183</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.targetsize-32.png">
-      <PackagePath>Assets\Square44x44Logo.targetsize-32.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.164</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.targetsize-48.png">
-      <PackagePath>Assets\Square44x44Logo.targetsize-48.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.170</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\StoreLogo.scale-100.png">
-      <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.652</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\StoreLogo.scale-125.png">
-      <PackagePath>Assets\StoreLogo.scale-125.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.658</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\StoreLogo.scale-150.png">
-      <PackagePath>Assets\StoreLogo.scale-150.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.665</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\StoreLogo.scale-200.png">
-      <PackagePath>Assets\StoreLogo.scale-200.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.673</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\StoreLogo.scale-400.png">
-      <PackagePath>Assets\StoreLogo.scale-400.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.683</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Wide310x150Logo.scale-100.png">
-      <PackagePath>Assets\Wide310x150Logo.scale-100.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.775</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Wide310x150Logo.scale-125.png">
-      <PackagePath>Assets\Wide310x150Logo.scale-125.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.788</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Wide310x150Logo.scale-150.png">
-      <PackagePath>Assets\Wide310x150Logo.scale-150.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.802</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Wide310x150Logo.scale-400.png">
-      <PackagePath>Assets\Wide310x150Logo.scale-400.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.889</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\LockScreenLogo.scale-200.png">
-      <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
-      <Modified>2021-01-29T18:48:22.995</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\SplashScreen.scale-200.png">
-      <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.413</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square150x150Logo.scale-200.png">
-      <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.730</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.scale-200.png">
-      <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.138</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
-      <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:26.195</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Wide310x150Logo.scale-200.png">
-      <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-03T17:34:25.823</Modified>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
       <Modified>2021-03-22T03:20:42.400</Modified>
@@ -654,79 +679,79 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.273</Modified>
+      <Modified>2021-06-03T18:21:10.421</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Application\ApplicationsPage.xbf">
       <PackagePath>View\Application\ApplicationsPage.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.165</Modified>
+      <Modified>2021-06-03T18:21:10.318</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Application\Detail\ApplicationDetailPage.xbf">
       <PackagePath>View\Application\Detail\ApplicationDetailPage.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.180</Modified>
+      <Modified>2021-06-03T18:21:10.333</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Application\NewApps\CreateApplicationPage.xbf">
       <PackagePath>View\Application\NewApps\CreateApplicationPage.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.196</Modified>
+      <Modified>2021-06-03T18:21:10.349</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Application\NewTask\NewTaskPage.xbf">
       <PackagePath>View\Application\NewTask\NewTaskPage.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.204</Modified>
+      <Modified>2021-06-03T18:21:10.356</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Auth\SignIn\SignInPage.xbf">
       <PackagePath>View\Auth\SignIn\SignInPage.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.207</Modified>
+      <Modified>2021-06-03T18:21:10.359</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Auth\SignUp\SignUpPage.xbf">
       <PackagePath>View\Auth\SignUp\SignUpPage.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.210</Modified>
+      <Modified>2021-06-03T18:21:10.362</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Calendar\CalendarPage.xbf">
       <PackagePath>View\Calendar\CalendarPage.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.214</Modified>
+      <Modified>2021-06-03T18:21:10.366</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Company\CompaniesPage.xbf">
       <PackagePath>View\Company\CompaniesPage.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.221</Modified>
+      <Modified>2021-06-03T18:21:10.372</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Company\Detail\CompanyDetailedPage.xbf">
       <PackagePath>View\Company\Detail\CompanyDetailedPage.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.236</Modified>
+      <Modified>2021-06-03T18:21:10.387</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Components\Checklists\ChecklistDetailedPage.xbf">
       <PackagePath>View\Components\Checklists\ChecklistDetailedPage.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.273</Modified>
+      <Modified>2021-06-03T18:21:10.421</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Components\Contacts\ContactDetailedPage.xbf">
       <PackagePath>View\Components\Contacts\ContactDetailedPage.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.241</Modified>
+      <Modified>2021-06-03T18:21:10.392</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Components\Events\EventDetailedPage.xbf">
       <PackagePath>View\Components\Events\EventDetailedPage.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.250</Modified>
+      <Modified>2021-06-03T18:21:10.400</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Components\FollowUps\FollowUpDetailedPage.xbf">
       <PackagePath>View\Components\FollowUps\FollowUpDetailedPage.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.254</Modified>
+      <Modified>2021-06-03T18:21:10.404</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Components\Notes\NoteDetailedPage.xbf">
       <PackagePath>View\Components\Notes\NoteDetailedPage.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.259</Modified>
+      <Modified>2021-06-03T18:21:10.408</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Components\UserControls\NotesUserControl.xbf">
       <PackagePath>View\Components\UserControls\NotesUserControl.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.262</Modified>
+      <Modified>2021-06-03T18:21:10.411</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\MainBoard\MainBoard.xbf">
       <PackagePath>View\MainBoard\MainBoard.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.266</Modified>
+      <Modified>2021-06-03T18:21:10.414</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Template\Detail\TemplateDetailedPage.xbf">
       <PackagePath>View\Template\Detail\TemplateDetailedPage.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.274</Modified>
+      <Modified>2021-06-03T18:21:10.422</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\View\Template\TemplatePage.xbf">
       <PackagePath>View\Template\TemplatePage.xbf</PackagePath>
-      <Modified>2021-05-16T22:06:17.272</Modified>
+      <Modified>2021-06-03T18:21:10.421</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.18362.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -734,11 +759,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2021-06-03T17:34:37.889</Modified>
+      <Modified>2021-06-03T18:21:10.572</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Debug\Core\SYPP.exe">
       <PackagePath>SYPP.exe</PackagePath>
-      <Modified>2021-06-03T17:34:38.441</Modified>
+      <Modified>2021-06-03T18:21:10.993</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

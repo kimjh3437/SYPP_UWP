@@ -8,8 +8,8 @@
     <TargetOsDescription>Windows 10.0</TargetOsDescription>
     <SolutionConfiguration>Debug|x86</SolutionConfiguration>
     <PackageArchitecture>x86</PackageArchitecture>
-    <PackageIdentityName>e50b4a14-f8ba-4045-9585-fcd2ac470b22</PackageIdentityName>
-    <PackageIdentityPublisher>CN=kimjh</PackageIdentityPublisher>
+    <PackageIdentityName>6a0ddf8a-0f04-44c9-801a-e83d5489e313</PackageIdentityName>
+    <PackageIdentityPublisher>CN=584C1875-2417-4AFB-8DBA-E9C42BBE3505</PackageIdentityPublisher>
     <IntermediateOutputPath>C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\obj\x86\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType></RemoteDeploymentType>
     <PackageRegistrationPath></PackageRegistrationPath>
@@ -160,119 +160,25 @@
     <AppxPackagedFile Include="C:\Users\kimjh\.nuget\packages\microsoft.toolkit.uwp.ui.controls\6.1.1\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.UI.Controls\Microsoft.Toolkit.Uwp.UI.Controls.xr.xml">
       <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls\Microsoft.Toolkit.Uwp.UI.Controls.xr.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Arrows\Arrow_Left_Icon.svg">
-      <PackagePath>Assets\Components\Arrows\Arrow_Left_Icon.svg</PackagePath>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\BadgeLogo.scale-100.png">
+      <PackagePath>Assets\BadgeLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Arrows\Arrow_Right_Icon.svg">
-      <PackagePath>Assets\Components\Arrows\Arrow_Right_Icon.svg</PackagePath>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\BadgeLogo.scale-125.png">
+      <PackagePath>Assets\BadgeLogo.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Arrows\Dark_Arrow_Down_Icon.svg">
-      <PackagePath>Assets\Components\Arrows\Dark_Arrow_Down_Icon.svg</PackagePath>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\BadgeLogo.scale-150.png">
+      <PackagePath>Assets\BadgeLogo.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Arrows\Downward_Arrow_Gray_Icon.svg">
-      <PackagePath>Assets\Components\Arrows\Downward_Arrow_Gray_Icon.svg</PackagePath>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\BadgeLogo.scale-200.png">
+      <PackagePath>Assets\BadgeLogo.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Checklist\Check_Icon.svg">
-      <PackagePath>Assets\Components\Checklist\Check_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Calendar_Icon.svg">
-      <PackagePath>Assets\Components\Detailed\Calendar_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Checklist_Icon.svg">
-      <PackagePath>Assets\Components\Detailed\Checklist_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Checkmark_Icon.svg">
-      <PackagePath>Assets\Components\Detailed\Checkmark_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Contact_Icon.svg">
-      <PackagePath>Assets\Components\Detailed\Contact_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Contact_Note_Selected_Icon.svg">
-      <PackagePath>Assets\Components\Detailed\Contact_Note_Selected_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Contact_Note_UnSelected_Icon.svg">
-      <PackagePath>Assets\Components\Detailed\Contact_Note_UnSelected_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Convo_Icon.svg">
-      <PackagePath>Assets\Components\Detailed\Convo_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Mail_Selected_Icon.svg">
-      <PackagePath>Assets\Components\Detailed\Mail_Selected_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Mail_UnSelected_Icon.svg">
-      <PackagePath>Assets\Components\Detailed\Mail_UnSelected_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Note_Icon.svg">
-      <PackagePath>Assets\Components\Detailed\Note_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Phone_Selected_Icon.svg">
-      <PackagePath>Assets\Components\Detailed\Phone_Selected_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Phone_UnSelected_Icon.svg">
-      <PackagePath>Assets\Components\Detailed\Phone_UnSelected_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\General\Blue_Plus_Icon.svg">
-      <PackagePath>Assets\Components\General\Blue_Plus_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\General\Dark_Plus_Icon.svg">
-      <PackagePath>Assets\Components\General\Dark_Plus_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\General\Add.svg">
-      <PackagePath>Assets\Components\General\Add.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\General\Search_Icon.svg">
-      <PackagePath>Assets\Components\General\Search_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Notes\Note_AttachFile_Icon.svg">
-      <PackagePath>Assets\Components\Notes\Note_AttachFile_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Notes\Note_Attachment_Icon.svg">
-      <PackagePath>Assets\Components\Notes\Note_Attachment_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Notes\Note_Bullet_Icon.svg">
-      <PackagePath>Assets\Components\Notes\Note_Bullet_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Notes\Note_Image_Icon.svg">
-      <PackagePath>Assets\Components\Notes\Note_Image_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Notes\Note_Number_Icon.svg">
-      <PackagePath>Assets\Components\Notes\Note_Number_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Stars\Star_Filled_Icon.svg">
-      <PackagePath>Assets\Components\Stars\Star_Filled_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Stars\Star_Green_Filled_Icon.svg">
-      <PackagePath>Assets\Components\Stars\Star_Green_Filled_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Stars\Star_Green_Unfilled_Icon.svg">
-      <PackagePath>Assets\Components\Stars\Star_Green_Unfilled_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Stars\Star_Unfilled_Icon.svg">
-      <PackagePath>Assets\Components\Stars\Star_Unfilled_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Stars\Star_Yellow_Filled_Icon.svg">
-      <PackagePath>Assets\Components\Stars\Star_Yellow_Filled_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Stars\Star_Yellow_Unfilled_Icon.svg">
-      <PackagePath>Assets\Components\Stars\Star_Yellow_Unfilled_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Navigations\Applications_Navigation_Selected_Icon.svg">
-      <PackagePath>Assets\Navigations\Applications_Navigation_Selected_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Navigations\Applications_Navigation_UnSelected_Icon.svg">
-      <PackagePath>Assets\Navigations\Applications_Navigation_UnSelected_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Navigations\Calendar_Navigation_Selected_Icon.svg">
-      <PackagePath>Assets\Navigations\Calendar_Navigation_Selected_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Navigations\Calendar_Navigation_UnSelected_Icon.svg">
-      <PackagePath>Assets\Navigations\Calendar_Navigation_UnSelected_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Navigations\Templates_Navigation_Selected_Icon.svg">
-      <PackagePath>Assets\Navigations\Templates_Navigation_Selected_Icon.svg</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Navigations\Templates_Navigation_UnSelected_Icon.svg">
-      <PackagePath>Assets\Navigations\Templates_Navigation_UnSelected_Icon.svg</PackagePath>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\BadgeLogo.scale-400.png">
+      <PackagePath>Assets\BadgeLogo.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\LargeTile.scale-100.png">
       <PackagePath>Assets\LargeTile.scale-100.png</PackagePath>
@@ -476,6 +382,120 @@
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Arrows\Arrow_Left_Icon.svg">
+      <PackagePath>Assets\Components\Arrows\Arrow_Left_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Arrows\Arrow_Right_Icon.svg">
+      <PackagePath>Assets\Components\Arrows\Arrow_Right_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Arrows\Dark_Arrow_Down_Icon.svg">
+      <PackagePath>Assets\Components\Arrows\Dark_Arrow_Down_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Arrows\Downward_Arrow_Gray_Icon.svg">
+      <PackagePath>Assets\Components\Arrows\Downward_Arrow_Gray_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Checklist\Check_Icon.svg">
+      <PackagePath>Assets\Components\Checklist\Check_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Calendar_Icon.svg">
+      <PackagePath>Assets\Components\Detailed\Calendar_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Checklist_Icon.svg">
+      <PackagePath>Assets\Components\Detailed\Checklist_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Checkmark_Icon.svg">
+      <PackagePath>Assets\Components\Detailed\Checkmark_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Contact_Icon.svg">
+      <PackagePath>Assets\Components\Detailed\Contact_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Contact_Note_Selected_Icon.svg">
+      <PackagePath>Assets\Components\Detailed\Contact_Note_Selected_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Contact_Note_UnSelected_Icon.svg">
+      <PackagePath>Assets\Components\Detailed\Contact_Note_UnSelected_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Convo_Icon.svg">
+      <PackagePath>Assets\Components\Detailed\Convo_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Mail_Selected_Icon.svg">
+      <PackagePath>Assets\Components\Detailed\Mail_Selected_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Mail_UnSelected_Icon.svg">
+      <PackagePath>Assets\Components\Detailed\Mail_UnSelected_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Note_Icon.svg">
+      <PackagePath>Assets\Components\Detailed\Note_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Phone_Selected_Icon.svg">
+      <PackagePath>Assets\Components\Detailed\Phone_Selected_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Detailed\Phone_UnSelected_Icon.svg">
+      <PackagePath>Assets\Components\Detailed\Phone_UnSelected_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\General\Blue_Plus_Icon.svg">
+      <PackagePath>Assets\Components\General\Blue_Plus_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\General\Dark_Plus_Icon.svg">
+      <PackagePath>Assets\Components\General\Dark_Plus_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\General\Add.svg">
+      <PackagePath>Assets\Components\General\Add.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\General\Search_Icon.svg">
+      <PackagePath>Assets\Components\General\Search_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Notes\Note_AttachFile_Icon.svg">
+      <PackagePath>Assets\Components\Notes\Note_AttachFile_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Notes\Note_Attachment_Icon.svg">
+      <PackagePath>Assets\Components\Notes\Note_Attachment_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Notes\Note_Bullet_Icon.svg">
+      <PackagePath>Assets\Components\Notes\Note_Bullet_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Notes\Note_Image_Icon.svg">
+      <PackagePath>Assets\Components\Notes\Note_Image_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Notes\Note_Number_Icon.svg">
+      <PackagePath>Assets\Components\Notes\Note_Number_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Stars\Star_Filled_Icon.svg">
+      <PackagePath>Assets\Components\Stars\Star_Filled_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Stars\Star_Green_Filled_Icon.svg">
+      <PackagePath>Assets\Components\Stars\Star_Green_Filled_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Stars\Star_Green_Unfilled_Icon.svg">
+      <PackagePath>Assets\Components\Stars\Star_Green_Unfilled_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Stars\Star_Unfilled_Icon.svg">
+      <PackagePath>Assets\Components\Stars\Star_Unfilled_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Stars\Star_Yellow_Filled_Icon.svg">
+      <PackagePath>Assets\Components\Stars\Star_Yellow_Filled_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Components\Stars\Star_Yellow_Unfilled_Icon.svg">
+      <PackagePath>Assets\Components\Stars\Star_Yellow_Unfilled_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Navigations\Applications_Navigation_Selected_Icon.svg">
+      <PackagePath>Assets\Navigations\Applications_Navigation_Selected_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Navigations\Applications_Navigation_UnSelected_Icon.svg">
+      <PackagePath>Assets\Navigations\Applications_Navigation_UnSelected_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Navigations\Calendar_Navigation_Selected_Icon.svg">
+      <PackagePath>Assets\Navigations\Calendar_Navigation_Selected_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Navigations\Calendar_Navigation_UnSelected_Icon.svg">
+      <PackagePath>Assets\Navigations\Calendar_Navigation_UnSelected_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Navigations\Templates_Navigation_Selected_Icon.svg">
+      <PackagePath>Assets\Navigations\Templates_Navigation_Selected_Icon.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Assets\Navigations\Templates_Navigation_UnSelected_Icon.svg">
+      <PackagePath>Assets\Navigations\Templates_Navigation_UnSelected_Icon.svg</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>

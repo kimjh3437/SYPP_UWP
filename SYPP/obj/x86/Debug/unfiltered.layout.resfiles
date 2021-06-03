@@ -1,4 +1,9 @@
 WinMetadata\Windows.winmd
+Assets\BadgeLogo.scale-100.png
+Assets\BadgeLogo.scale-125.png
+Assets\BadgeLogo.scale-150.png
+Assets\BadgeLogo.scale-200.png
+Assets\BadgeLogo.scale-400.png
 Assets\Components\Arrows\Arrow_Left_Icon.svg
 Assets\Components\Arrows\Arrow_Right_Icon.svg
 Assets\Components\Arrows\Dark_Arrow_Down_Icon.svg

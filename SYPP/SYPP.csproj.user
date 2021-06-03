@@ -1,13 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Source>C:\Users\kimjh\Downloads\SYPP Logo-03 1.png</Source>
-    <SmallTileSource>C:\Users\kimjh\Downloads\SYPP Logo-03 1.png</SmallTileSource>
-    <MediumTileSource>C:\Users\kimjh\Downloads\SYPP Logo-03 1.png</MediumTileSource>
-    <WideTileSource>C:\Users\kimjh\Downloads\SYPP Logo-03 1.png</WideTileSource>
-    <LargeTileSource>C:\Users\kimjh\Downloads\SYPP Logo-03 1.png</LargeTileSource>
-    <AppIconSource>C:\Users\kimjh\Downloads\SYPP Logo-03 1.png</AppIconSource>
-    <SplashScreenSource>C:\Users\kimjh\Downloads\SYPP Logo-03 1.png</SplashScreenSource>
-    <PackageLogoSource>C:\Users\kimjh\Downloads\SYPP Logo-03 1.png</PackageLogoSource>
+    <Source>C:\Users\kimjh\Downloads\SYPP Logo-04 1 %281%29.png</Source>
+    <SmallTileSource>C:\Users\kimjh\Downloads\SYPP Logo-04 1 %281%29.png</SmallTileSource>
+    <MediumTileSource>C:\Users\kimjh\Downloads\SYPP Logo-04 1 %281%29.png</MediumTileSource>
+    <WideTileSource>C:\Users\kimjh\Downloads\SYPP Logo-04 1 %281%29.png</WideTileSource>
+    <LargeTileSource>C:\Users\kimjh\Downloads\SYPP Logo-04 1 %281%29.png</LargeTileSource>
+    <AppIconSource>C:\Users\kimjh\Downloads\SYPP Logo-04 1 %281%29.png</AppIconSource>
+    <SplashScreenSource>C:\Users\kimjh\Downloads\SYPP Logo-04 1 %281%29.png</SplashScreenSource>
+    <PackageLogoSource>C:\Users\kimjh\Downloads\SYPP Logo-04 1 %281%29.png</PackageLogoSource>
+    <AppxShowAllApps>False</AppxShowAllApps>
+    <BadgeLogoSource>C:\Users\kimjh\Downloads\SYPP Logo-04 1 %281%29.png</BadgeLogoSource>
   </PropertyGroup>
 </Project>
