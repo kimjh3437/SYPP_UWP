@@ -1,0 +1,1264 @@
+﻿<Page
+    x:Class="SYPP.View.Application.NewApps.CreateApplicationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SYPP.View.Application.NewApps"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:General ="using:SYPP.Converter.General"
+    xmlns:Calendar ="using:SYPP.Converter.Calendar"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Calendar:DateTimeToMonthConverter x:Key="DateTimeToMonth"/>
+        <Calendar:DateTimeToYearConverter x:Key="DateTimeToYear"/>
+        <General:StringToColorConverter x:Key="StringToColor"/>
+        <SolidColorBrush x:Key="TextControlBackground" Color="Transparent"/>
+        <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="#363C46"/>
+        <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="#363C46"/>
+        <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#FFE9D6"/>
+        <SolidColorBrush x:Key="TextControlForeground" Color="#FFE9D6"/>
+        <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#FFE9D6"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="#99FFE9D6"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="#99FFE9D6"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#99FFE9D6"/>
+    </Page.Resources>
+    <Grid   
+        VerticalAlignment="Center"
+        Background="#1E2127">
+        <Grid
+            MinHeight="322"
+            MinWidth="322">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!--Grid.Row = 0 : Navigations-->
+            <GridView
+                HorizontalAlignment="Center"
+                SelectionMode="None"
+                Grid.Row="0"
+                ItemsSource="{Binding Navigations}">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Button
+                            BorderThickness="0"
+                            x:Name="Navigation_Circle_Button"
+                            Click="Navigation_Circle_Button_Click"
+                            Background="{Binding Background, Converter={StaticResource StringToColor}}"
+                            Height="10"
+                            Width="10"
+                            CornerRadius="5"
+                            Padding="0">
+                            <Button.Resources>
+                                <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#C2DBFF"/>
+                                <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#C2DBFF"/>
+                                <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding Background_Hover }"/>
+                                <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding Background_Pressed}"/>
+                            </Button.Resources>
+                        </Button>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="GridViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="Margin" Value="-5,0,-5,0"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                        </StackPanel>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+            </GridView>
+            
+            <!--Grid.Row = 1 : [Page 1] - Company Name and Position Title-->
+            <Grid
+                Margin="0,25,0,0"
+                RowSpacing="35"
+                HorizontalAlignment="Center"
+                Visibility="Visible"
+                x:Name="CreateApplicaiton_Content_One_Grid"
+                Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!--Grid.Row = 0 : Company Name-->
+                <StackPanel
+                    Spacing="10"
+                    Grid.Row="0"
+                    Orientation="Vertical">
+                    <TextBlock
+                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                        FontSize="13"
+                        Foreground="#FAFFFFFF"
+                        Text="What company are you applying for?"/>
+                    <Frame
+                        Height="26"
+                        Background="#363C46"
+                        CornerRadius="13"
+                        Width="165">
+                        <TextBox
+                            x:Name="Company_Name_TextBox"
+                            TextChanged="Company_Name_TextBox_TextChanged"
+                            FontSize="14"
+                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                            PlaceholderForeground="#99FFE9D6"
+                            PlaceholderText="Company Name"
+                            Foreground="#FFE9D6"
+                            TextAlignment="Center"
+                            Padding="0,4,0,0"
+                            Background="#363C46"
+                            BorderThickness="0"
+                            CornerRadius="13"
+                            Width="165"/>
+                    </Frame>
+                    
+                </StackPanel>
+
+                <!--Grid.Row = 1 : Position Title-->
+                <StackPanel
+                    Spacing="10"
+                    Grid.Row="1"
+                    Orientation="Vertical">
+                    <TextBlock
+                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                        FontSize="13"
+                        Foreground="#FAFFFFFF"
+                        Text="What position are you applying for?"/>
+                    <Frame
+                        Height="26"
+                        Background="#363C46"
+                        CornerRadius="13"
+                        Width="165">
+                        <TextBox
+                            x:Name="Position_Title_TextBox"
+                            TextChanged="Position_Title_TextBox_TextChanged"
+                            FontSize="14"
+                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                            PlaceholderForeground="#99FFE9D6"
+                            PlaceholderText="Position Name"
+                            Foreground="#FFE9D6"
+                            TextAlignment="Center"
+                            Padding="0,4,0,0"
+                            Background="#363C46"
+                            BorderThickness="0"
+                            CornerRadius="13"
+                            Width="165"/>
+                    </Frame>
+                    
+                </StackPanel>
+                
+                <!--Grid.Row = 2 : Next Button-->
+                <Button
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,0,20"
+                    Click="Page_One_Next_Button_Click"
+                    x:Name="Page_One_Next_Button"
+                    IsEnabled="False"
+                    BorderThickness="0"
+                    FontSize="14"
+                    FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"
+                    Foreground="#C2DBFF"
+                    Background="Transparent"
+                    Content="Next"
+                    Grid.Row="2"
+                    HorizontalAlignment="Center">
+                    <Button.Resources>
+                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#DBEAFF"/>
+                        <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#FAFFFFFF"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="Transparent"/>
+                        <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="#707E93"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="Transparent"/>
+                    </Button.Resources>
+                </Button>
+
+            </Grid>
+            
+            <!--Grid.Row = 1 : [Page 2] - Role and Location and Custom Categories-->
+            <Grid
+                Margin="0,25,0,0"
+                HorizontalAlignment="Center"
+                x:Name="CreateApplicaiton_Content_Two_Grid"
+                Grid.Row="1"
+                Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!--Grid.Row = 0 : Text - Header-->
+                <StackPanel
+                    Orientation="Vertical"
+                    Grid.Row="0">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        TextWrapping="Wrap"
+                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                        FontSize="13"
+                        Foreground="#FAFFFFFF"
+                        Text="Let's categorize this application!"/>
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        TextWrapping="Wrap"
+                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                        FontSize="12"
+                        Foreground="#FAFFFFFF"
+                        Text="Feel free to leave categories empty if desired"/>
+                </StackPanel>
+                
+                <!--Grid.Row = 1 : Role-->
+                <Grid
+                    Margin="0,15,0,15"
+                    Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="65"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!--Grid.Column = 0, Row = 0 : Role Header TextBlock-->
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                        FontSize="12"
+                        Foreground="#FAFFFFFF"
+                        Text="Role"/>
+                    
+                    <!--Grid.Column = 1, Row = 0 : "Type To Create New Role" TextBlock-->
+                    <Frame
+                        CornerRadius="13"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Width="165"
+                        Height="26"
+                        Background="#363C46">
+                        <TextBox  
+                            KeyDown="Create_NewRole_TextBox_KeyDown"
+                            TextChanged="Create_NewRole_TextBox_TextChanged"
+                            x:Name="Create_NewRole_TextBox"
+                            TextAlignment="Center"
+                            Padding="5,5,5,0"
+                            PlaceholderForeground="#99FFE9D6"
+                            PlaceholderText="Type to create new role"
+                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                            FontSize="12"
+                            VerticalAlignment="Center"
+                            CornerRadius="13"
+                            BorderThickness="0"
+                            Background="#363C46"/>
+                    </Frame>
+                    
+                    <!--Grid.Column = 1, Row = 1 : Created Roles GridView-->
+                    <GridView
+                        Margin="0,-5,0,-25"
+                        SelectionMode="None"
+                        ItemsSource="{Binding CreatedRoles}"
+                        Grid.Row="1"
+                        Grid.Column="1">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    Background="#525A68"
+                                    CornerRadius="9"
+                                    Height="18">
+                                    <StackPanel
+                                        Spacing="3"
+                                        Margin="8,2,8,2"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                            FontSize="10"
+                                            Foreground="#C2DBFF"
+                                            Text="{Binding Text}"/>
+                                        <Button
+                                            BorderThickness="0"
+                                            Background="Transparent"
+                                            Click="CreatedRole_Item_TriDots_Button_Click"
+                                            x:Name="CreatedRole_Item_TriDots_Button"
+                                            Padding="0">
+                                            <StackPanel
+                                                Spacing="1.5"
+                                                Orientation="Vertical">
+                                                <Frame
+                                                    Background="#C2DBFF"
+                                                    Height="2"
+                                                    Width="2"
+                                                    CornerRadius="1"/>
+                                                <Frame
+                                                    Background="#C2DBFF"
+                                                    Height="2"
+                                                    Width="2"
+                                                    CornerRadius="1"/>
+                                                <Frame
+                                                    Background="#C2DBFF"
+                                                    Height="2"
+                                                    Width="2"
+                                                    CornerRadius="1"/>
+                                            </StackPanel>
+                                        </Button>
+                                        
+                                        <!--PopUp For Edit-->
+                                        <Popup
+                                            IsLightDismissEnabled="True"
+                                            Closed="Popup_Closed"
+                                            VerticalOffset="-20"
+                                            IsOpen="{Binding PopUp_IsOpen}">
+                                            <Frame
+                                                CornerRadius="5"
+                                                Background="#1E2127"
+                                                BorderThickness="1.5"
+                                                BorderBrush="#2E323A"
+                                                Height="50"
+                                                Width="50">
+                                                <StackPanel
+                                                    Spacing="5"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center"
+                                                    Orientation="Vertical">
+                                                    
+                                                    <!--Edit Button--> 
+                                                    <Button
+                                                        x:Name="RoleCreated_Edit_Button"
+                                                        BorderThickness="0"
+                                                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                        FontSize="10"
+                                                        Padding="0"
+                                                        Foreground="#FAFFFFFF"
+                                                        Content="Edit"
+                                                        CornerRadius="4"
+                                                        Background="#525A68"
+                                                        Height="18"
+                                                        Width="38">
+                                                        <Button.Resources>
+                                                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#FAFFFFFF"/>
+                                                            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#FAFFFFFF"/>
+                                                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                                                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                                                        </Button.Resources>
+
+                                                    </Button>
+                                                    
+                                                    <!--Delete Button--> 
+                                                    <Button
+                                                        Click="RoleCreated_Delete_Button_Click"
+                                                        x:Name="RoleCreated_Delete_Button"
+                                                        BorderThickness="0"
+                                                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                        FontSize="10"
+                                                        Padding="0"
+                                                        Foreground="#FAFFFFFF"
+                                                        Content="Delete"
+                                                        CornerRadius="4"
+                                                        Background="#525A68"
+                                                        Height="18"
+                                                        Width="38">
+                                                        <Button.Resources>
+                                                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#FAFFFFFF"/>
+                                                            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#FAFFFFFF"/>
+                                                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                                                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                                                        </Button.Resources>
+
+                                                    </Button>
+                                                </StackPanel>
+                                                
+                                            </Frame>
+                                            
+                                        </Popup>
+                                    </StackPanel>
+                                </Frame>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="0,0,5,0"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel
+                                HorizontalAlignment="Left"
+                                Orientation="Horizontal">
+                                </StackPanel>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+
+                </Grid>
+
+                <!--Grid.Row = 2 : Location-->
+                <Grid
+                    Margin="0,0,0,0"
+                    Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="65"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Grid.Column = 0, Row = 0 : Location Header TextBlock-->
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                        FontSize="12"
+                        Foreground="#FAFFFFFF"
+                        Text="Location"/>
+
+                    <!--Grid.Column = 1, Row = 0 : "Type To Create New Location" TextBlock-->
+                    <Frame
+                        CornerRadius="13"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Width="165"
+                        Height="26"
+                        Background="#363C46">
+                        <TextBox  
+                            KeyDown="Create_Location_TextBox_KeyDown"
+                            TextChanged="Create_Location_TextBox_TextChanged"
+                            x:Name="Create_Location_TextBox"
+                            TextAlignment="Center"
+                            Padding="5,5,5,0"
+                            PlaceholderForeground="#99FFE9D6"
+                            PlaceholderText="Type to create new location"
+                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                            FontSize="12"
+                            VerticalAlignment="Center"
+                            CornerRadius="13"
+                            BorderThickness="0"
+                            Background="#363C46"/>
+                    </Frame>
+
+                    <!--Grid.Column = 1, Row = 2 : Created Locations GridView-->
+                    <GridView
+                        Margin="0,-5,0,-15"
+                        SelectionMode="None"
+                        ItemsSource="{Binding CreatedLocations}"
+                        Grid.Row="1"
+                        Grid.Column="1">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    Background="#525A68"
+                                    CornerRadius="9"
+                                    Height="18">
+                                    <StackPanel
+                                        Spacing="3"
+                                        Margin="8,2,8,2"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                            FontSize="10"
+                                            Foreground="#C2DBFF"
+                                            Text="{Binding Text}"/>
+                                        <Button
+                                            BorderThickness="0"
+                                            Background="Transparent"
+                                            Click="CreatedLocations_Item_TriDots_Button_Click"
+                                            x:Name="CreatedLocations_Item_TriDots_Button"
+                                            Padding="0">
+                                            <StackPanel
+                                                Spacing="1.5"
+                                                Orientation="Vertical">
+                                                <Frame
+                                                    Background="#C2DBFF"
+                                                    Height="2"
+                                                    Width="2"
+                                                    CornerRadius="1"/>
+                                                <Frame
+                                                    Background="#C2DBFF"
+                                                    Height="2"
+                                                    Width="2"
+                                                    CornerRadius="1"/>
+                                                <Frame
+                                                    Background="#C2DBFF"
+                                                    Height="2"
+                                                    Width="2"
+                                                    CornerRadius="1"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                        <!--PopUp For Edit-->
+                                        <Popup
+                                            x:Name="Locations_PopUp"
+                                            IsLightDismissEnabled="True"
+                                            Closed="Locations_PopUp_Closed"
+                                            VerticalOffset="-20"
+                                            IsOpen="{Binding PopUp_IsOpen}">
+                                            <Frame
+                                                CornerRadius="5"
+                                                Background="#1E2127"
+                                                BorderThickness="1.5"
+                                                BorderBrush="#2E323A"
+                                                Height="50"
+                                                Width="50">
+                                                <StackPanel
+                                                    Spacing="5"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center"
+                                                    Orientation="Vertical">
+
+                                                    <!--Edit Button-->
+                                                    <Button
+                                                        x:Name="LocationsCreated_Edit_Button"
+                                                        BorderThickness="0"
+                                                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                        FontSize="10"
+                                                        Padding="0"
+                                                        Foreground="#FAFFFFFF"
+                                                        Content="Edit"
+                                                        CornerRadius="4"
+                                                        Background="#525A68"
+                                                        Height="18"
+                                                        Width="38">
+                                                        <Button.Resources>
+                                                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#FAFFFFFF"/>
+                                                            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#FAFFFFFF"/>
+                                                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                                                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                                                        </Button.Resources>
+
+                                                    </Button>
+
+                                                    <!--Delete Button-->
+                                                    <Button
+                                                        Click="LocationsCreated_Delete_Button_Click"
+                                                        x:Name="LocationsCreated_Delete_Button"
+                                                        BorderThickness="0"
+                                                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                        FontSize="10"
+                                                        Padding="0"
+                                                        Foreground="#FAFFFFFF"
+                                                        Content="Delete"
+                                                        CornerRadius="4"
+                                                        Background="#525A68"
+                                                        Height="18"
+                                                        Width="38">
+                                                        <Button.Resources>
+                                                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#FAFFFFFF"/>
+                                                            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#FAFFFFFF"/>
+                                                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                                                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                                                        </Button.Resources>
+                                                    </Button>
+                                                </StackPanel>
+                                            </Frame>
+                                        </Popup>
+                                    </StackPanel>
+                                </Frame>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="0,0,5,0"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel
+                                HorizontalAlignment="Left"
+                                Orientation="Horizontal">
+                                </StackPanel>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                </Grid>
+                
+                <!--Grid.Row = 3 : Custom Category-->
+                <GridView
+                    Margin="0,7,0,0"
+                    SelectionMode="None"
+                    ItemsSource="{Binding CustomCategories}"
+                    Grid.Row="3">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="65"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                
+                                <!--Grid.Column = 0, Row = 0 : Custom Role Type Textbox-->
+                                <Frame
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Width="65"
+                                    Background="Transparent">
+                                    <TextBox
+                                        PlaceholderForeground="#B3FFFFFF"
+                                        PlaceholderText="Enter New"
+                                        IsSpellCheckEnabled="False"
+                                        VerticalAlignment="Center"
+                                        TextWrapping="Wrap"
+                                        HorizontalAlignment="Left"
+                                        Padding="0,7,0,0"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Grid.Column="0"
+                                        Grid.Row="0"
+                                        TextChanged="Custom_Role_TextBox_TextChanged"
+                                        FontSize="12"
+                                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                        Foreground="#FAFFFFFF"
+                                        x:Name="Custom_Role_TextBox">
+                                        <TextBox.Resources>
+                                            <SolidColorBrush x:Key="TextControlBackground" Color="Transparent"/>
+                                            <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="Transparent"/>
+                                            <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="Transparent"/>
+                                        </TextBox.Resources>
+                                    </TextBox>
+                                </Frame>
+
+                                <!--Grid.Column = 1, Row = 0 : "Type To Create New Custom Category" TextBlock-->
+                                <Frame
+                                    CornerRadius="13"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Width="165"
+                                    Height="26"
+                                    Background="#363C46">
+                                    <TextBox  
+                                        KeyDown="Create_CustomCategory_TextBox_KeyDown"
+                                        TextChanged="Create_CustomCategory_TextBox_TextChanged"
+                                        x:Name="Create_CustomCategory_TextBox"
+                                        TextAlignment="Center"
+                                        Padding="5,5,5,0"
+                                        PlaceholderForeground="#99FFE9D6"
+                                        PlaceholderText="{Binding Placeholder_Text}"
+                                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                        FontSize="12"
+                                        VerticalAlignment="Center"
+                                        CornerRadius="13"
+                                        BorderThickness="0"
+                                        Background="#363C46"/>
+                                </Frame>
+
+                                <!--Grid.Column = 1, Row = 2 : Created Custom Category GridView-->
+                                <GridView
+                                    Margin="0,-5,0,-15"
+                                    SelectionMode="None"
+                                    ItemsSource="{Binding Options}"
+                                    Grid.Row="1"
+                                    Grid.Column="1">
+                                    <GridView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame
+                                                Background="#525A68"
+                                                CornerRadius="9"
+                                                Height="18">
+                                                <StackPanel
+                                                    Spacing="3"
+                                                    Margin="8,2,8,2"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center"
+                                                    Orientation="Horizontal">
+                                                    <TextBlock
+                                                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                        FontSize="10"
+                                                        Foreground="#C2DBFF"
+                                                        Text="{Binding Text}"/>
+                                                    <Button
+                                                        BorderThickness="0"
+                                                        Background="Transparent"
+                                                        Click="CreatedCustomeCategory_Item_TriDots_Button_Click"
+                                                        x:Name="CreatedCustomeCategory_Item_TriDots_Button"
+                                                        Padding="0">
+                                                        <StackPanel
+                                                            Spacing="1.5"
+                                                            Orientation="Vertical">
+                                                            <Frame
+                                                                Background="#C2DBFF"
+                                                                Height="2"
+                                                                Width="2"
+                                                                CornerRadius="1"/>
+                                                            <Frame
+                                                                Background="#C2DBFF"
+                                                                Height="2"
+                                                                Width="2"
+                                                                CornerRadius="1"/>
+                                                            <Frame
+                                                                Background="#C2DBFF"
+                                                                Height="2"
+                                                                Width="2"
+                                                                CornerRadius="1"/>
+                                                        </StackPanel>
+                                                    </Button>
+
+                                                    <!--PopUp For Edit-->
+                                                    <Popup
+                                                        x:Name="Custom_Category_PopUp"
+                                                        IsLightDismissEnabled="True"
+                                                        Closed="Custom_Category_PopUp_Closed"
+                                                        VerticalOffset="-20"
+                                                        IsOpen="{Binding PopUp_IsOpen}">
+                                                        <Frame
+                                                            CornerRadius="5"
+                                                            Background="#1E2127"
+                                                            BorderThickness="1.5"
+                                                            BorderBrush="#2E323A"
+                                                            Height="50"
+                                                            Width="50">
+                                                            <StackPanel
+                                                                Spacing="5"
+                                                                VerticalAlignment="Center"
+                                                                HorizontalAlignment="Center"
+                                                                Orientation="Vertical">
+
+                                                                <!--Edit Button-->
+                                                                <Button
+                                                                    x:Name="CustomCategory_Created_Edit_Button"
+                                                                    BorderThickness="0"
+                                                                    FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                                    FontSize="10"
+                                                                    Padding="0"
+                                                                    Foreground="#FAFFFFFF"
+                                                                    Content="Edit"
+                                                                    CornerRadius="4"
+                                                                    Background="#525A68"
+                                                                    Height="18"
+                                                                    Width="38">
+                                                                    <Button.Resources>
+                                                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#FAFFFFFF"/>
+                                                                        <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#FAFFFFFF"/>
+                                                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                                                                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                                                                    </Button.Resources>
+
+                                                                </Button>
+
+                                                                <!--Delete Button-->
+                                                                <Button
+                                                                    Click="CustomCategory_Delete_Button_Click"
+                                                                    x:Name="CustomCategory_Delete_Button"
+                                                                    BorderThickness="0"
+                                                                    FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                                    FontSize="10"
+                                                                    Padding="0"
+                                                                    Foreground="#FAFFFFFF"
+                                                                    Content="Delete"
+                                                                    CornerRadius="4"
+                                                                    Background="#525A68"
+                                                                    Height="18"
+                                                                    Width="38">
+                                                                    <Button.Resources>
+                                                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#FAFFFFFF"/>
+                                                                        <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#FAFFFFFF"/>
+                                                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                                                                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                                                                    </Button.Resources>
+                                                                </Button>
+                                                            </StackPanel>
+                                                        </Frame>
+                                                    </Popup>
+                                                </StackPanel>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </GridView.ItemTemplate>
+                                    <GridView.ItemContainerStyle>
+                                        <Style TargetType="GridViewItem">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="Margin" Value="0,0,5,0"/>
+                                        </Style>
+                                    </GridView.ItemContainerStyle>
+                                    <GridView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel
+                                                HorizontalAlignment="Left"
+                                                Orientation="Horizontal">
+                                            </StackPanel>
+                                        </ItemsPanelTemplate>
+                                    </GridView.ItemsPanel>
+                                </GridView>
+
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Margin" Value="0,0,0,0"/>
+                        </Style>
+                    </GridView.ItemContainerStyle>
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                Orientation="Vertical">
+                            </StackPanel>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                </GridView>
+                
+                <!--Grid.Row = 4 : New Category Button-->
+                <Button  
+                    x:Name="New_Category_Button"
+                    Click="New_Category_Button_Click"
+                    Margin="0,10,0,0"
+                    Padding="0"
+                    BorderThickness="0"
+                    Background="Transparent"
+                    Grid.Row="4">
+                    <StackPanel
+                        Spacing="5"
+                        Orientation="Horizontal">
+                        <Image
+                            VerticalAlignment="Center"
+                            Height="10"
+                            Width="10"
+                            Source="/Assets/Components/General/Add.svg"/>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"
+                            Foreground="#C2DBFF"
+                            Text="New Category"/>
+
+                    </StackPanel>
+                    
+                </Button>
+
+                <!--Grid.Row = 5 : Next Button-->
+                <Button        
+                    Margin="0,0,0,20"
+                    VerticalAlignment="Bottom"
+                    Click="Page_Two_Next_Button_Click"
+                    x:Name="Page_Two_Next_Button"
+                    IsEnabled="True"
+                    BorderThickness="0"
+                    FontSize="14"
+                    FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"
+                    Foreground="#C2DBFF"
+                    Background="Transparent"
+                    Content="Next"
+                    Grid.Row="5"
+                    HorizontalAlignment="Center">
+                    <Button.Resources>
+                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#DBEAFF"/>
+                        <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#FAFFFFFF"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="Transparent"/>
+                        <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="#707E93"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="Transparent"/>
+                    </Button.Resources>
+                </Button>
+
+            </Grid>
+
+            <!--Grid.Row = 1 : [Page 3] - Applied and Dates-->
+            <Grid            
+                x:Name="CreateApplicaiton_Content_Three_Grid"
+                Grid.Row="1"
+                Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!--Grid.Row = 1 : Have You Applied Yet?-->
+                    <StackPanel
+                        Spacing="10"
+                        Margin="0,0,0,30"
+                        VerticalAlignment="Center"
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        Orientation="Vertical">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="12"
+                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                            Foreground="#C2DBFF"
+                            Text="Have you applied yet"/>
+                        <StackPanel
+                            HorizontalAlignment="Center"
+                            Spacing="20"
+                            Orientation="Horizontal">
+                            
+                            <!--Have You Applied Yes Button--> 
+                            <Button
+                                FontSize="12"
+                                Click="HaveYouApplied_Yes_Button_Click"
+                                x:Name="HaveYouApplied_Yes_Button"
+                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                Foreground="#C2DBFF"
+                                BorderThickness="0"
+                                Padding="0"
+                                Width="47"
+                                Height="26"
+                                CornerRadius="12"
+                                Background="#363C46"
+                                Content="Yes">
+                                <Button.Resources>
+                                    <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#C2DBFF"/>
+                                    <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#C2DBFF"/>
+                                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                                    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                                </Button.Resources>
+                            </Button>
+
+                            <!--Have You Applied No Button-->
+                            <Button
+                                FontSize="12"
+                                Click="HaveYouApplied_No_Button_Click"
+                                x:Name="HaveYouApplied_No_Button"
+                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                Foreground="#C2DBFF"
+                                BorderThickness="0"
+                                Padding="0"
+                                Width="47"
+                                Height="26"
+                                CornerRadius="12"
+                                Background="#363C46"
+                                Content="No">
+                                <Button.Resources>
+                                    <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#C2DBFF"/>
+                                    <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#C2DBFF"/>
+                                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                                    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                                </Button.Resources>
+                            </Button>
+
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <!--Grid.Row = 2 : Calendar View--> 
+                    <Grid
+                        Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <!--Grid.Row = 0 : When Did you Apply TextBlock-->
+                        <TextBlock
+                            Margin="0,0,0,13"
+                            Grid.Row="0"
+                            HorizontalAlignment="Center"
+                            FontSize="12"
+                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                            Foreground="#C2DBFF"
+                            Text="When did you apply?"/>
+                        
+                        <!--Grid.Row = 1 : Month and Year of Currently Selected Calendar-->
+                        <StackPanel
+                            Margin="0,0,0,9"
+                            Spacing="20"
+                            HorizontalAlignment="Center"
+                            Grid.Row="1"
+                            Orientation="Horizontal">
+                            
+                            <!--Month--> 
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                Spacing="5"
+                                Orientation="Horizontal">
+                                
+                                <!--Month Prev Button--> 
+                                <Button
+                                    Click="Month_Prev_Button_Click"
+                                    x:Name="Month_Prev_Button"
+                                    BorderThickness="0"
+                                    Background="Transparent"
+                                    Padding="0">
+                                    <Image
+                                        Height="10"
+                                        Width="10"
+                                        Source="/Assets/Components/Arrows/Arrow_Left_Icon.svg"/>
+                                </Button>
+                                
+                                <!--Main TextBlock--> 
+                                <TextBlock
+                                    Foreground="#FAFFFFFF"
+                                    FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                    FontSize="12"
+                                    Text="{Binding SelectedTime, Converter={StaticResource DateTimeToMonth}}"/>
+
+                                <!--Month Next Button--> 
+                                <Button
+                                    Click="Month_Next_Button_Click"
+                                    x:Name="Month_Next_Button"
+                                    BorderThickness="0"
+                                    Background="Transparent"
+                                    Padding="0">
+                                    <Image
+                                        Height="10"
+                                        Width="10"
+                                        Source="/Assets/Components/Arrows/Arrow_Right_Icon.svg"/>
+                                </Button>
+                                
+                            </StackPanel>
+
+                            <!--Year-->
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                Spacing="5"
+                                Orientation="Horizontal">
+                                
+                                <!--Year Prev Button--> 
+                                <Button
+                                    Click="Year_Prev_Button_Click"
+                                    x:Name="Year_Prev_Button"
+                                    BorderThickness="0"
+                                    Background="Transparent"
+                                    Padding="0">
+                                    <Image
+                                        Height="10"
+                                        Width="10"
+                                        Source="/Assets/Components/Arrows/Arrow_Left_Icon.svg"/>
+                                </Button>
+
+                                <!--Main Text Block--> 
+                                <TextBlock
+                                    Foreground="#FAFFFFFF"
+                                    FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                    FontSize="12"
+                                    Text="{Binding SelectedTime, Converter={StaticResource DateTimeToYear}}"/>
+
+                                <!--Year Next Button-->
+                                <Button
+                                    x:Name="Year_Next_Button"
+                                    Click="Year_Next_Button_Click"
+                                    BorderThickness="0"
+                                    Background="Transparent"
+                                    Padding="0">
+                                    <Image
+                                        Height="10"
+                                        Width="10"
+                                        Source="/Assets/Components/Arrows/Arrow_Right_Icon.svg"/>
+                                </Button>
+                                
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        <!--Grid.Row = 2 : Days List--> 
+                        <StackPanel
+                            Spacing="14"
+                            Grid.Row="2"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontSize="12"
+                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                Foreground="#C2DBFF"
+                                Text="Sun"/>
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontSize="12"
+                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                Foreground="#C2DBFF"
+                                Text="M"/>
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontSize="12"
+                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                Foreground="#C2DBFF"
+                                Text="Tu"/>
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontSize="12"
+                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                Foreground="#C2DBFF"
+                                Text="W"/>
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontSize="12"
+                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                Foreground="#C2DBFF"
+                                Text="Th"/>
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontSize="12"
+                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                Foreground="#C2DBFF"
+                                Text="F"/>
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontSize="12"
+                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                Foreground="#C2DBFF"
+                                Text="Sat"/>
+
+                        </StackPanel>
+                        
+                        <!--Grid.Row = 3 : Calnedar Days GridView-->
+                        <GridView
+                            SelectionMode="None"
+                            HorizontalAlignment="Center"
+                            Grid.Row="3"
+                            ItemsSource="{Binding EachMonth}">
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock 
+                                        x:Name="Day_TextBlock"
+                                        Tapped="Day_TextBlock_Tapped"
+                                        HorizontalAlignment="Center"
+                                        Visibility="{Binding Visibility}"
+                                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                        FontSize="12"
+                                        Foreground="{Binding Foreground}"
+                                        Text="{Binding Text}"/>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                            <GridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="-9,-3,-9,-5"/>
+                                </Style>
+                            </GridView.ItemContainerStyle>
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid                                     
+                                        HorizontalAlignment="Center"
+                                        MaximumRowsOrColumns="7"
+                                        Orientation="Horizontal">
+                                    </ItemsWrapGrid>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                        </GridView>
+
+                    </Grid>
+
+                    <!--Grid.Row = 3 : Display the date on timeline?-->
+                    <StackPanel
+                        x:Name="DisplayDate_StackPanel"
+                        Visibility="Visible"
+                        Spacing="10"
+                        Margin="0,0,0,0"
+                        VerticalAlignment="Center"
+                        Grid.Row="3"
+                        HorizontalAlignment="Center"
+                        Orientation="Vertical">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="12"
+                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                            Foreground="#C2DBFF"
+                            Text="Display this date on timeline?"/>
+                        <StackPanel
+                            HorizontalAlignment="Center"
+                            Spacing="20"
+                            Orientation="Horizontal">
+
+                            <!--Display this date Yes Button-->
+                            <Button
+                                FontSize="12"
+                                Click="DisplayThisDate_Yes_Button_Click"
+                                x:Name="DisplayThisDate_Yes_Button"
+                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                Foreground="#C2DBFF"
+                                BorderThickness="0"
+                                Padding="0"
+                                Width="47"
+                                Height="26"
+                                CornerRadius="12"
+                                Background="#363C46"
+                                Content="Yes">
+                                <Button.Resources>
+                                    <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#C2DBFF"/>
+                                    <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#C2DBFF"/>
+                                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                                    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                                </Button.Resources>
+                            </Button>
+
+                            <!--Display this date No Button-->
+                            <Button
+                                FontSize="12"
+                                Click="DisplayThisDate_No_Button_Click"
+                                x:Name="DisplayThisDate_No_Button"
+                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                Foreground="#C2DBFF"
+                                BorderThickness="0"
+                                Padding="0"
+                                Width="47"
+                                Height="26"
+                                CornerRadius="12"
+                                Background="#363C46"
+                                Content="No">
+                                <Button.Resources>
+                                    <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#C2DBFF"/>
+                                    <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#C2DBFF"/>
+                                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                                    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                                </Button.Resources>
+                            </Button>
+
+                        </StackPanel>
+
+                    </StackPanel>
+                    
+                    <!--Grid.Row = 4 : Save Button-->
+                    <Button    
+                        Margin="0,30,0,20"
+                        VerticalAlignment="Bottom"
+                        Click="Page_Three_Save_Button_Click"
+                        x:Name="Page_Three_Save_Button"
+                        IsEnabled="False"
+                        BorderThickness="0"
+                        FontSize="14"
+                        FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"
+                        Foreground="#C2DBFF"
+                        Background="Transparent"
+                        Content="Save"
+                        Grid.Row="4"
+                        HorizontalAlignment="Center">
+                        <Button.Resources>
+                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#DBEAFF"/>
+                            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#FAFFFFFF"/>
+                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
+                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="Transparent"/>
+                            <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="#707E93"/>
+                            <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="Transparent"/>
+                        </Button.Resources>
+                    </Button>
+
+                </Grid>
+
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</Page>

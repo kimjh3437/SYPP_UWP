@@ -1,0 +1,291 @@
+﻿<Page
+    x:Class="SYPP.View.Calendar.CalendarPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SYPP.View.Calendar"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:Calendar="using:SYPP.Converter.Calendar"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Calendar:CalendarHeaderConverter x:Key="CalendarHeader"/>
+    </Page.Resources>
+    <Grid>
+        <Grid
+            Background="#1A1C20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <!--Grid.Row = 0 : Calendar Header --> 
+            <StackPanel
+                Spacing="8"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal"
+                Grid.Row="0">
+                
+                <!--Left Arrow--> 
+                <Button
+                    Click="LeftArrow_Clicked"
+                    BorderThickness="0"
+                    BorderBrush="#121212"
+                    Background="Transparent">
+                    <Image
+                        Width="7.5"
+                        Height="12"
+                        VerticalAlignment="Center"
+                        Source="/Assets/Components/Arrows/Arrow_Left_Icon.svg"/>
+                </Button>
+                
+                <!--Center Header--> 
+                <TextBlock
+                    Margin="0,0,0,4"
+                    FontFamily="/Fonts/Assistant-Regular.ttf#Assistant"
+                    FontSize="20"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Foreground="White"
+                    Text="{Binding SelectedTime, Converter={StaticResource ResourceKey=CalendarHeader}}"/>
+                
+                <!--Right Arrow--> 
+                <Button
+                    Click="RightArrow_Clicked"
+                    BorderThickness="0"
+                    Background="Transparent">
+                    <Image
+                        Width="7.5"
+                        Height="12"
+                        VerticalAlignment="Center"
+                        Source="/Assets/Components/Arrows/Arrow_Right_Icon.svg"/>
+                </Button>
+            </StackPanel>
+            
+            <!--Grid.Row = 0 : Today Button-->
+            <Button
+                BorderThickness="0"
+                Click="Today_Clicked"
+                Grid.Row="0"
+                Height="20"
+                CornerRadius="8"
+                Width="70"
+                HorizontalAlignment="Right"
+                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                FontSize="11"
+                Padding="0"
+                Background="#363C46"
+                Foreground="#C2CBFF"
+                Content="Today">
+                <Button.Resources>
+                    <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#C2CBFF"/>
+                    <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#C2CBFF"/>
+                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                </Button.Resources>
+            </Button>
+            
+            <!--Grid.Row = 1 : Day Title--> 
+            <Grid
+                HorizontalAlignment="Stretch"
+                Margin="2.5,0,2.5,3"
+                x:Name="DayTitle"
+                Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                    FontSize="12"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    Foreground="#E6FFFFFF"
+                    Text="Sun"/>
+                <TextBlock
+                    FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                    FontSize="12"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    Foreground="#E6FFFFFF"
+                    Text="Mon"/>
+                <TextBlock
+                    FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                    FontSize="12"
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    Foreground="#E6FFFFFF"
+                    Text="Tue"/>
+                <TextBlock
+                    FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                    FontSize="12"
+                    Grid.Column="3"
+                    HorizontalAlignment="Center"
+                    Foreground="#E6FFFFFF"
+                    Text="Wed"/>
+                <TextBlock
+                    FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                    FontSize="12"
+                    Grid.Column="4"
+                    HorizontalAlignment="Center"
+                    Foreground="#E6FFFFFF"
+                    Text="Thu"/>
+                <TextBlock
+                    FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                    FontSize="12"
+                    Grid.Column="5"
+                    HorizontalAlignment="Center"
+                    Foreground="#E6FFFFFF"
+                    Text="Fri"/>
+                <TextBlock
+                    FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                    FontSize="12"
+                    Grid.Column="6"
+                    HorizontalAlignment="Center"
+                    Foreground="#E6FFFFFF"
+                    Text="Sat"/>
+            </Grid>
+            
+            <!--Grid.Row = 2 : Calendar Month GridView--> 
+            <GridView
+                x:Name="CalendarMonth"
+                SizeChanged="CalendarMonth_SizeChanged"
+                HorizontalContentAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Grid.Row="2"
+                ItemsSource="{Binding EachMonth}">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+                            BorderThickness="2"
+                            BorderBrush="{Binding BorderColor}"
+                            CornerRadius="15"
+                            Height="138"
+                            Padding="5"
+                            Margin="5,5,5,5"
+                            Background="#242931">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock 
+                                    Margin="0,2,2,0"
+                                    Grid.Row="0"
+                                    Foreground="{Binding Foreground}"
+                                    FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"
+                                    FontSize="12"
+                                    HorizontalAlignment="Right"
+                                    Text="{Binding Day}"/>
+                                <ScrollViewer
+                                    VerticalScrollMode="Enabled"
+                                    Grid.Row="1">
+                                    <ListView
+                                        SelectionMode="None"
+                                        x:Name="DailyTasksEvents"
+                                        ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                        ScrollViewer.VerticalScrollMode="Enabled"
+                                        ItemsSource="{Binding Events}"
+                                        Grid.Row="1">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid
+                                                    x:Name="Each_Calendar_Event"
+                                                    Tapped="Each_Calendar_Event_Tapped"                                                
+                                                    VerticalAlignment="Center"
+                                                    Padding="3"
+                                                    Margin="0,0,0,0"
+                                                    ColumnSpacing="5">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image 
+                                                        Height="14"
+                                                        Width="14"
+                                                        Grid.Row="0"
+                                                        Grid.Column="0"
+                                                        VerticalAlignment="Top"
+                                                        x:Name="Icon_Favorite"
+                                                        Tapped="Icon_Favorite_Tapped"
+                                                        Margin="0,2,0,0"
+                                                        Source="{Binding Status_Icon_Source}">
+                                                    </Image>
+                                                    <StackPanel
+                                                        Spacing="0"
+                                                        Padding="0"
+                                                        Grid.Row="0"
+                                                        Grid.Column="1"
+                                                        Orientation="Vertical">
+                                                        <StackPanel
+                                                            Spacing="-2"
+                                                            Orientation="Vertical">
+                                                            <TextBlock 
+                                                                FontFamily="/Assets/Fonts/Assistant-Regular.ttf#Assistant"
+                                                                FontSize="12"
+                                                                Foreground="#DEFFFFFF"
+                                                                VerticalAlignment="Top"
+                                                                TextAlignment="Start"
+                                                                Text="{Binding Detail.CompanyName}"/>
+                                                            <TextBlock 
+                                                                Margin="0,-13,0,0"
+                                                                FontFamily="/Assets/Fonts/Assistant-Regular.ttf#Assistant"
+                                                                FontSize="12"
+                                                                Foreground="#DEFFFFFF"
+                                                                VerticalAlignment="Top"
+                                                                TextAlignment="Start"
+                                                                Text="{Binding Task.Title}"/>
+                                                        </StackPanel>
+                                                        <TextBlock 
+                                                            FontFamily="/Assets/Fonts/Assistant-Regular.ttf#Assistant"
+                                                            FontSize="10"
+                                                            Foreground="#99FFFFFF"
+                                                            VerticalAlignment="Top"
+                                                            TextAlignment="Start"
+                                                            Text="{Binding Task.Type}"/>
+                                                    </StackPanel>
+                                                    <Frame
+                                                        VerticalAlignment="Top"
+                                                        Height="13"
+                                                        Width="13"
+                                                        Grid.Row="1"
+                                                        Grid.Column="0">
+                                                    </Frame>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </ScrollViewer>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="GridViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Margin" Value="0"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid 
+                            HorizontalAlignment="Stretch"
+                            MaximumRowsOrColumns="7"
+                            Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+            </GridView>
+        </Grid>
+
+    </Grid>
+</Page>

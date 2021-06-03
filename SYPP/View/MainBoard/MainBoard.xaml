@@ -1,0 +1,138 @@
+﻿<Page
+    x:Class="SYPP.View.Main.MainBoard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SYPP.View.Main"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:General ="using:SYPP.Converter.General"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"  
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <SolidColorBrush x:Key="TextControlBackground" Color="Transparent"/>
+        <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="Transparent"/>
+        <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="Transparent"/>
+        <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#FAFFFFFF"/>
+        <SolidColorBrush x:Key="TextControlForeground" Color="#FAFFFFFF"/>
+        <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#FAFFFFFF"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="#6D7888"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="#6D7888"/>
+        <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#6D7888"/>
+        <General:StringToColorConverter x:Key="StringToColor"/>
+    </Page.Resources>
+
+    <Grid
+        Background="#1A1C20">
+        <interactivity:Interaction.Behaviors>
+            <behaviors:Blur 
+                x:FieldModifier="public"
+                x:Name="BlurBehavior" 
+                Value="0" 
+                Delay="0" 
+                AutomaticallyStart="True"/>
+        </interactivity:Interaction.Behaviors>
+
+        <!--Blurring Background-->
+        <Popup
+            x:Name="BlurredBackground"
+            x:FieldModifier="public"
+            IsOpen="False"
+            Opacity="0.7"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            Width="10000"
+            Height="10000">
+            <Frame
+                Width="10000"
+                Height="10000"
+                Background="Black">
+            </Frame>
+        </Popup>
+
+        <Grid
+            
+            Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Image 
+                Grid.Row="1"
+                Height="30"
+                Width="30"
+                Source="/Assets/Navigations/Applications_Navigation_Selected_Icon.svg"/>
+
+            <!--Grid.Row = 0 : Navigations-->
+            <GridView
+                SelectionMode="None"
+                HorizontalAlignment="Left"
+                Grid.Row="0"
+                ItemsSource="{Binding Navigations}">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Button
+                            BorderThickness="0"
+                            Padding="10,4,11,3"
+                            CornerRadius="13"
+                            Height="26"
+                            Background="{Binding Background, Converter={StaticResource StringToColor}}"
+                            Click="Navigation_Button_Click"
+                            x:Name="Navigation_Button"
+                            Foreground="{Binding Foreground,Converter={StaticResource StringToColor}}"
+                            FontSize="12"
+                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant">
+                            <StackPanel
+                                Spacing="4"
+                                Orientation="Horizontal">
+                                <Image
+                                    Height="{Binding Icon_Height}"
+                                    Width="{Binding Icon_Width}"
+                                    Source="{Binding IconSource}"/>
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Text}"
+                                    Foreground="{Binding Foreground,Converter={StaticResource StringToColor}}"
+                                    FontSize="12"
+                                    FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"/>
+                            </StackPanel>
+                            <Button.Resources>
+                                <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{Binding Foreground}"/>
+                                <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{Binding Foreground}"/>
+                                <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding Background_Hover}"/>
+                                <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding Background_Pressed}"/>
+                            </Button.Resources>
+                        </Button>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="GridViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Margin" Value="0,0,10,0"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                        </StackPanel>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+            </GridView>
+            
+            <!--Grid.Row = 1 : Main Contents Frame-->
+            <Frame
+                HorizontalContentAlignment="Stretch"
+                Grid.Row="1"
+                x:FieldModifier="public"
+                x:Name="Main_Contents_Frame">
+                
+            </Frame>
+            
+        </Grid>
+
+    </Grid>
+</Page>

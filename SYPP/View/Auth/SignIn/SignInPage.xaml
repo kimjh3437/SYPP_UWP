@@ -1,0 +1,180 @@
+﻿<Page
+    x:Class="SYPP.View.Auth.SignIn.SignInPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SYPP.View.Auth.SignIn"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <SolidColorBrush x:Key="TextControlForeground" Color="White"/>
+        <SolidColorBrush x:Key="TextControlBackground" Color="#474F5C"/>
+        <SolidColorBrush x:Key="TextControlBorderBrush" Color="Transparent"/>
+        <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="#474F5C" />
+        <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="Transparent"/>
+        <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="#474F5C" />
+        <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#DEFFFFFF"/>
+        <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="Transparent" />
+        <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#DEFFFFFF"/>
+    </Page.Resources>
+
+    <Grid
+        Background="#1A1C20">
+        <Grid
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid
+                Width="250"
+                HorizontalAlignment="Center">
+                <StackPanel
+                    Spacing="20"
+                    Orientation="Vertical">
+                    <TextBlock
+                        Margin="0,0,0,5"
+                        FontFamily="/Fonts/Assistant-Bold.ttf#Assistant"
+                        Foreground="#C2DBFF"
+                        Text="Login"
+                        FontSize="30"
+                        HorizontalAlignment="Left"/>
+                    <StackPanel
+                        Spacing="2"
+                        Orientation="Vertical">
+                        <StackPanel
+                            Spacing="10"
+                            Orientation="Horizontal">
+                            <TextBlock
+                                FontFamily="/Fonts/Assistant-Regular.ttf#Assistant"
+                                Foreground="#E6FFE9D6"
+                                Text="Email Address:"                       
+                                FontSize="15"
+                                HorizontalAlignment="Left"/>
+                            <TextBlock
+                                FontFamily="/Fonts/Assistant-Regular.ttf#Assistant"
+                                Foreground="Red"
+                                Text="{Binding Email_Error_Text}"                       
+                                FontSize="15"
+                                HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <TextBox
+                            x:Name="Email_TextBox"
+                            TextChanged="Email_TextBox_TextChanged"
+                            BorderThickness="1"
+                            BorderBrush="{Binding Email_Borderline}"
+                            Height="32"
+                            Text="{Binding Email, Mode=TwoWay}"
+                            Padding="7,5,0,0"
+                            FontSize="12"
+                            PlaceholderText="Email Address"
+                            PlaceholderForeground="#80FFE9D6"
+                            Margin="-2,0,0,0"
+                            CornerRadius="5"/>
+                    </StackPanel>
+                    <StackPanel
+                        Spacing="2"
+                        Orientation="Vertical">
+                        <StackPanel
+                            Spacing="10"
+                            Orientation="Horizontal">
+                            <TextBlock
+                                FontFamily="/Fonts/Assistant-Regular.ttf#Assistant"
+                                Foreground="#E6FFE9D6"
+                                Text="Password:"                       
+                                FontSize="15"
+                                HorizontalAlignment="Left"/>
+                            <TextBlock
+                                FontFamily="/Fonts/Assistant-Regular.ttf#Assistant"
+                                Foreground="Red"
+                                Text="{Binding Password_Error_Text}"                       
+                                FontSize="15"
+                                HorizontalAlignment="Left"/>
+
+                        </StackPanel>
+
+                        <TextBox                          
+                            x:Name="Password_TextBox"
+                            TextChanged="Password_TextBox_TextChanged"
+                            BorderThickness="1"
+                            BorderBrush="{Binding Password_Borderline}"
+                            Height="32"
+                            Text="{Binding Password, Mode=TwoWay}"
+                            Padding="7,5,0,0"
+                            FontSize="12"
+                            PlaceholderText="Password"
+                            PlaceholderForeground="#80FFE9D6"
+                            Margin="-2,0,0,0"
+                            CornerRadius="5"/>
+                        <Button
+                            Background="Transparent"
+                            Click="Forgot_Password_Button_Click"
+                            x:Name="Forgot_Password_Button"
+                            BorderBrush='Transparent'
+                            BorderThickness="0"
+                            Padding="0">
+                            <TextBlock
+                                FontFamily="/Fonts/Assistant-Regular.ttf#Assistant"
+                                Foreground="#C2DBFF"
+                                Text="Forgot password?"                       
+                                FontSize="12"
+                                HorizontalAlignment="Left"/>
+                        </Button>
+                    </StackPanel>
+                    <Button
+                        x:Name="Login_Button"
+                        Click="Login_Button_Click"
+                        BorderThickness="0"
+                        CornerRadius="16"
+                        HorizontalAlignment="Center"
+                        Width="71"
+                        Height="32"
+                        Margin="0"
+                        Padding="0"
+                        Content="Login"
+                        FontSize="12"
+                        Foreground="#C2DBFF"
+                        FontFamily="/Fonts/Assistant-Regular.ttf#Assistant"
+                        Background="#5E6A7E">
+                        <Button.Resources>
+                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#C2DBFF"/>
+                            <SolidColorBrush x:Key="ButtonForegroundPointerPressed" Color="#C2DBFF"/>
+                        </Button.Resources>
+                    </Button>
+                    <StackPanel
+                        Spacing="5"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                        <TextBlock
+                            FontFamily="/Fonts/Assistant-Regular.ttf#Assistant"
+                            Foreground="#E6FFE9D6"
+                            Text="Don't have an account?"                       
+                            FontSize="12"
+                            HorizontalAlignment="Left"/>
+                        <Button
+                            Background="Transparent"
+                            Click="Create_Account_Button_Click"
+                            x:Name="Create_Account_Button"
+                            HorizontalAlignment="Center"
+                            BorderBrush='Transparent'
+                            BorderThickness="0"
+                            Padding="0">
+                            <TextBlock
+                                FontFamily="/Fonts/Assistant-Regular.ttf#Assistant"
+                                Foreground="#C2DBFF"
+                                Text="Create an account"                       
+                                FontSize="12"
+                                HorizontalAlignment="Left"/>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

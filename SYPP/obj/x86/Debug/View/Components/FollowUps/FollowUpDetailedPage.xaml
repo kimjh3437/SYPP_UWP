@@ -1,0 +1,385 @@
+﻿<Page
+    x:Class="SYPP.View.Components.FollowUps.FollowUpDetailedPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SYPP.View.Components.FollowUps"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:Calendar ="using:SYPP.Converter.Calendar"
+    xmlns:General ="using:SYPP.Converter.General"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <General:StringToColorConverter x:Key="StringToColor"/>
+        <Calendar:DateTimeToMonthConverter x:Key="DateTimeToMonth"/>
+        <Calendar:DateTimeToYearConverter x:Key="DateTimeToYear"/>
+    </Page.Resources>
+    <Grid
+        MinHeight="446"
+        Background="#1E2127">
+        <Grid
+            Margin="25,25,25,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!--Grid.Row = 0 : Contact Name & Title TextBlock-->
+            <StackPanel
+                Spacing="0"
+                Grid.Row="0"
+                Orientation="Vertical">
+                <Frame
+                    Background="Transparent">
+                    <!--Name-->
+                    <TextBox x:ConnectionId='12'
+                    x:Name="Name_TextBox"
+                                                          
+                    PlaceholderForeground="#B3FFFFFF"
+                    PlaceholderText="Enter Name"
+                    VerticalAlignment="Center"
+                    Padding="0,0,0,0"
+                    BorderThickness="0"
+                    Grid.Row="0"
+                    HorizontalAlignment="Left"
+                    Foreground="#FFE9D6"
+                    FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"
+                    FontSize="16"
+                    Text="{Binding Contact.Detail.Firstname}"/>
+                </Frame>
+
+                <!--Title-->
+                <Frame
+                    Margin="0,-5,0,0"
+                    Background="Transparent">
+                    <TextBox x:ConnectionId='11'
+                    x:Name="Title_TextBox"
+                                                           
+                    PlaceholderForeground="#B3FFFFFF"
+                    PlaceholderText="Enter Title"
+                    VerticalAlignment="Center"
+                    Padding="0,0,0,18"
+                    BorderThickness="0"
+                    Grid.Row="0"
+                    HorizontalAlignment="Left"
+                    Foreground="#FFE9D6"
+                    FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                    FontSize="14"
+                    Text="{Binding Contact.Detail.Title}"/>
+                </Frame>
+            </StackPanel>
+
+
+            <!--Grid.Row = 0 : Separator Line-->
+            <Frame
+                VerticalAlignment="Bottom"
+                Grid.Row="0"
+                Background="#363F4C"
+                Height="1"
+                Width="10000"/>
+
+            <!--Grid.Row = 1 : Calendar Control-->
+            <Grid
+                Margin="0,15,0,0"
+                Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition MinHeight="195" Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!--Grid.Row = 0 : Date Time TextBlock-->
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    FontFamily="/Assets/Fonts/Assistant-Regular.ttf#Assistant"
+                    FontSize="14"
+                    Foreground="#C2DBFF"
+                    Text="Conversation Date"/>
+
+                <!--Grid.Row = 1 : Calendar View-->
+                <Grid
+                    Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+
+                    <!--Grid.Row = 1 : Month and Year of Currently Selected Calendar-->
+                    <StackPanel
+                        Margin="0,0,0,9"
+                        Spacing="20"
+                        HorizontalAlignment="Center"
+                        Grid.Row="1"
+                        Orientation="Horizontal">
+
+                        <!--Month-->
+                        <StackPanel
+                            HorizontalAlignment="Center"
+                            Spacing="5"
+                            Orientation="Horizontal">
+
+                            <!--Month Prev Button-->
+                            <Button x:ConnectionId='9'
+                                                               
+                                x:Name="Month_Prev_Button"
+                                BorderThickness="0"
+                                Background="Transparent"
+                                Padding="0">
+                                <Image
+                                    Height="10"
+                                    Width="10"
+                                    Source="/Assets/Components/Arrows/Arrow_Left_Icon.svg"/>
+                            </Button>
+
+                            <!--Main TextBlock-->
+                            <TextBlock
+                                    Foreground="#FAFFFFFF"
+                                    FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                    FontSize="12"
+                                    Text="{Binding SelectedTime, Converter={StaticResource DateTimeToMonth}}"/>
+
+                            <!--Month Next Button-->
+                            <Button x:ConnectionId='10'
+                                                               
+                                x:Name="Month_Next_Button"
+                                BorderThickness="0"
+                                Background="Transparent"
+                                Padding="0">
+                                <Image
+                                    Height="10"
+                                    Width="10"
+                                    Source="/Assets/Components/Arrows/Arrow_Right_Icon.svg"/>
+                            </Button>
+
+                        </StackPanel>
+
+                        <!--Year-->
+                        <StackPanel
+                                HorizontalAlignment="Center"
+                                Spacing="5"
+                                Orientation="Horizontal">
+
+                            <!--Year Prev Button-->
+                            <Button x:ConnectionId='7'
+                                                              
+                                x:Name="Year_Prev_Button"
+                                BorderThickness="0"
+                                Background="Transparent"
+                                Padding="0">
+                                <Image
+                                    Height="10"
+                                    Width="10"
+                                    Source="/Assets/Components/Arrows/Arrow_Left_Icon.svg"/>
+                            </Button>
+
+                            <!--Main Text Block-->
+                            <TextBlock
+                                Foreground="#FAFFFFFF"
+                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                FontSize="12"
+                                Text="{Binding SelectedTime, Converter={StaticResource DateTimeToYear}}"/>
+
+                            <!--Year Next Button-->
+                            <Button x:ConnectionId='8'
+                                x:Name="Year_Next_Button"
+                                                              
+                                BorderThickness="0"
+                                Background="Transparent"
+                                Padding="0">
+                                <Image
+                                    Height="10"
+                                    Width="10"
+                                    Source="/Assets/Components/Arrows/Arrow_Right_Icon.svg"/>
+                            </Button>
+
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <!--Grid.Row = 2 : Days List-->
+                    <StackPanel
+                        Spacing="14"
+                        Grid.Row="2"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="12"
+                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                            Foreground="#C2DBFF"
+                            Text="Sun"/>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="12"
+                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                            Foreground="#C2DBFF"
+                            Text="M"/>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="12"
+                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                            Foreground="#C2DBFF"
+                            Text="Tu"/>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="12"
+                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                            Foreground="#C2DBFF"
+                            Text="W"/>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="12"
+                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                            Foreground="#C2DBFF"
+                            Text="Th"/>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="12"
+                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                            Foreground="#C2DBFF"
+                            Text="F"/>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="12"
+                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                            Foreground="#C2DBFF"
+                            Text="Sat"/>
+
+                    </StackPanel>
+
+                    <!--Grid.Row = 3 : Calnedar Days GridView-->
+                    <GridView
+                        SelectionMode="None"
+                        HorizontalAlignment="Center"
+                        Grid.Row="3"
+                        ItemsSource="{Binding EachMonth}">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock x:ConnectionId='6' 
+                                    x:Name="Day_TextBlock"
+                                                                 
+                                    HorizontalAlignment="Center"
+                                    Visibility="{Binding Visibility}"
+                                    FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                    FontSize="12"
+                                    Foreground="{Binding Foreground}"
+                                    Text="{Binding Text}"/>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="-9,-3,-9,-5"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid                                     
+                                    HorizontalAlignment="Center"
+                                    MaximumRowsOrColumns="7"
+                                    Orientation="Horizontal">
+                                </ItemsWrapGrid>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+
+                    <!--Grid.Row = 4 : [TODO] Time Statement-->
+                    <TextBlock
+                        Grid.Row="4"
+                        Text=""/>
+
+                </Grid>
+            </Grid>
+
+
+            <!--Grid.Row = 3 : User Control - Notes-->
+            <UserControl x:ConnectionId='2'
+                Grid.Row="3"
+                x:Name="UserControl"/>
+
+            <!--Grid.Row = 4 : Delete, Save, Cancel Button-->
+            <Grid
+                Margin="0,0,0,10"
+                Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Grid.Column = 0, Delete Button-->
+                <Button x:ConnectionId='3'
+                        x:Name="Delete_Button"
+                                                   
+                        HorizontalAlignment="Center"
+                        Grid.Column="0"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                        FontSize="12"
+                        Foreground="#DEB4B4"
+                        Content="Delete">
+                    <Button.Resources>
+                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#B3DEB4B4"/>
+                        <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#B3DEB4B4"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding Theme.Color_Primary_Hover}"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding Theme.Color_Primary_Pressed}"/>
+                    </Button.Resources>
+                </Button>
+
+                <!--Grid.Column = 1, Save Button-->
+                <Button x:ConnectionId='4'
+                                                 
+                        x:Name="Save_Button"
+                        HorizontalAlignment="Center"
+                        Grid.Column="1"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                        FontSize="12"
+                        Foreground="#80C2DBFF"
+                        Content="Save">
+                    <Button.Resources>
+                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#FAC2DBFF"/>
+                        <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#FAC2DBFF"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding Theme.Color_Primary_Hover}"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding Theme.Color_Primary_Pressed}"/>
+                    </Button.Resources>
+                </Button>
+
+                <!--Grid.Column = 2, Cancel Button-->
+                <Button x:ConnectionId='5'
+                                                   
+                        x:Name="Cancel_Button"
+                        HorizontalAlignment="Center"
+                        Grid.Column="2"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                        FontSize="12"
+                        Foreground="#B3ACACAC"
+                        Content="Cancel">
+                    <Button.Resources>
+                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#ACACAC"/>
+                        <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#ACACAC"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding Theme.Color_Primary_Hover}"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding Theme.Color_Primary_Pressed}"/>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+
+
+        </Grid>
+
+
+
+    </Grid>
+</Page>
+

@@ -1,0 +1,1097 @@
+﻿<Page
+    x:Class="SYPP.View.Company.Detail.CompanyDetailedPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SYPP.View.Company.Detail"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:General ="using:SYPP.Converter.General"
+    xmlns:ConvoHistories="using:SYPP.Converter.ConversationHistories"
+    xmlns:EVents="using:SYPP.Converter.Events" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <ConvoHistories:ConvoHistoryTimeConverter x:Key="ConvoHistoryTime"/>
+        <General:StringToColorConverter x:Key="StringToColor"/>
+        <EVents:EventTimeConverter x:Key="EventTime"/>
+    </Page.Resources>
+    <Grid
+        Background="#1E2127">
+
+        <!--Popup : Add Components Button-->
+        <Popup
+            HorizontalOffset="10"
+            VerticalOffset="-60"
+            VerticalAlignment="Bottom"
+            x:Name="Add_Components_Button_PopUp"
+            IsOpen="False"
+            IsLightDismissEnabled="False"
+            LightDismissOverlayMode="Off">
+            <Grid>
+                <!--Add Component Button-->
+                <Button
+                    BorderThickness="0"
+                    Background="#C2DBFF"
+                    Click="Add_Components_Button_Click"
+                    Height="44"
+                    Width="44"
+                    CornerRadius="22"
+                    Padding="0"
+                    x:Name="Add_Components_Button">
+                    <Image
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Height="16"
+                        Width="16"
+                        Source="/Assets/Components/General/Dark_Plus_Icon.svg"/>
+                    <Button.Resources>
+                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#FAFFFFFF"/>
+                        <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#FAFFFFFF"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#B3C2DBFF"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#B3C2DBFF"/>
+                    </Button.Resources>
+                </Button>
+
+                <!--Add Components GridView Popup-->
+                <Popup
+                    VerticalOffset="-135"
+                    HorizontalOffset="50"
+                    x:Name="AddComponents_GridView_Popup"
+                    IsLightDismissEnabled="True"
+                    IsOpen="False">
+                    <GridView
+                        SelectionMode="None"
+                        ItemsSource="{Binding AddComponentsOptions}">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Button
+                                    x:Name="Add_Components_Specific_Button"
+                                    Click="Add_Components_Specific_Button_Click"
+                                    Background="{Binding Background,Converter={StaticResource StringToColor}}"
+                                    BorderThickness="0"
+                                    Height="26"
+                                    CornerRadius="13"
+                                    Padding="0">
+                                    <StackPanel
+                                        Spacing="5"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Margin="10,5,10,5"
+                                        Orientation="Horizontal">
+                                        <Image
+                                            Source="{Binding IconSource}"/>
+                                        <TextBlock
+                                            Foreground="{Binding Foreground, Converter={StaticResource StringToColor}}"
+                                            FontSize="12"
+                                            FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                            Text="{Binding Text}"/>
+                                    </StackPanel>
+                                    <Button.Resources>
+                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{Binding Foreground}"/>
+                                        <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{Binding Foreground}"/>
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding Background_Hover}"/>
+                                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding Background_Hover}"/>
+                                    </Button.Resources>
+                                </Button>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="0,-3,0,-5"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel
+                                    HorizontalAlignment="Left"
+                                    Orientation="Vertical">
+                                </StackPanel>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+
+                </Popup>
+            </Grid>
+
+        </Popup>
+
+        <!--Popup : Application Components Add Popup-->
+        <Popup
+            x:FieldModifier="public"
+            IsLightDismissEnabled="False"
+            Closed="Company_Components_Popup_Closed"
+            VerticalOffset="-150"
+            VerticalAlignment="Top"
+            HorizontalOffset="-400"
+            HorizontalAlignment="Center"
+            IsOpen="False"
+            x:Name="Company_Components_Popup">
+            <Frame
+                MaxHeight="750"
+                Width="446"
+                CornerRadius="15"
+                Background="#343B46"
+                x:Name="Company_Components_Frame"/>
+        </Popup>
+
+        <Grid
+        Margin="20,10,20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--Grid.Row = 0 : [LEFT] Content Filters-->
+            <GridView
+            SelectionMode="None"
+            Grid.Row="0"
+            ItemsSource="{Binding ContentFilters}">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Button
+                        BorderThickness="0"
+                        Padding="10,4,11,3"
+                        CornerRadius="13"
+                        Height="26"
+                        Background="{Binding Background, Converter={StaticResource StringToColor}}"
+                        Click="Content_Filter_Button_Click"
+                        x:Name="Content_Filter_Button"
+                        Foreground="{Binding Foreground,Converter={StaticResource StringToColor}}"
+                        FontSize="12"
+                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant">
+                            <StackPanel
+                            Spacing="4"
+                            Orientation="Horizontal">
+                                <Image 
+                                Height="{Binding Icon_Height}"
+                                Width="{Binding Icon_Width}"
+                                Source="{Binding IconSource}"/>
+                                <TextBlock
+                                VerticalAlignment="Center"
+                                Text="{Binding Text}"
+                                Foreground="{Binding Foreground,Converter={StaticResource StringToColor}}"
+                                FontSize="12"
+                                FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"/>
+                            </StackPanel>
+                            <Button.Resources>
+                                <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{Binding Foreground}"/>
+                                <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{Binding Foreground}"/>
+                                <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding Background_Hover}"/>
+                                <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding Background_Pressed}"/>
+                            </Button.Resources>
+                        </Button>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="GridViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Margin" Value="0,0,10,0"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel
+                                HorizontalAlignment="Left"
+                                Orientation="Horizontal">
+                        </StackPanel>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+            </GridView>
+
+            <!--Grid.Row = 0 : [RIGHT] Search Bar-->
+            <Frame
+            Margin="0,-11,0,0"
+            Background="Transparent"
+            BorderThickness="2"
+            BorderBrush="#363C46"
+            CornerRadius="13"
+            Width="200"
+            Height="26"
+            HorizontalAlignment="Right"
+            Grid.Row="0">
+                <StackPanel
+                    Spacing="6"
+                    Margin="12,0,12,0"
+                    Orientation="Horizontal">
+                    <Image
+                        Height="11"
+                        Width="11"
+                        Source="/Assets/Components/General/Search_Icon.svg"/>
+                    <TextBox
+                        FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                        PlaceholderForeground="#6D7888"
+                        Foreground="#FAFFFFFF"
+                        VerticalContentAlignment="Center"
+                        FontSize="12"
+                        PlaceholderText="Search"
+                        Padding="0,2,0,0"
+                        BorderThickness="0"
+                        Background="Transparent"/>
+
+                </StackPanel>
+            </Frame>
+
+            <!--Grid.Row = 1 : Applicaiton Detail Contents-->
+            <controls:UniformGrid
+                ColumnSpacing="10"
+                x:Name="UniformGrid"
+                Grid.Row="1"
+                Columns="5"
+                Orientation="Horizontal">
+                <!--Events-->
+                <Grid
+                    RowSpacing="10"
+                    HorizontalAlignment="Stretch"
+                    x:Name="Events_Grid"
+                    Visibility="Visible">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Grid.Row = 0 : Header - Events-->
+                    <StackPanel
+                        Spacing="4"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal"
+                        Grid.Row="0">
+                        <Image
+                            Source="/Assets/Components/Detailed/Calendar_Icon.svg"
+                            Width="12"
+                            Height="13"/>
+                        <TextBlock
+                            FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"
+                            Foreground="#C2DBFF"
+                            FontSize="12"
+                            Text="Events"/>
+
+                    </StackPanel>
+
+                    <!--Grid.Row = 1 : Frame GridViews-->
+                    <GridView                  
+                        SelectionMode="None"
+                        HorizontalAlignment="Stretch"
+                        ItemsSource="{Binding Events}"
+                        Grid.Row="1">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    HorizontalAlignment="Stretch">
+                                    <Button      
+                                        x:Name="Events_Specific_Button"
+                                        Click="Events_Specific_Button_Click"
+                                        VerticalContentAlignment="Top"
+                                        HorizontalContentAlignment="Left"
+                                        HorizontalAlignment="Stretch"
+                                        BorderThickness="0"
+                                        Padding="10,5,10,5"
+                                        CornerRadius="5"                                     
+                                        Background="#242931"
+                                        MaxHeight="200">
+                                        <Grid
+                                            VerticalAlignment="Top"
+                                            HorizontalAlignment="Right">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <!--Grid.Row = 0 : Events Title-->
+                                            <TextBlock
+                                                TextWrapping="Wrap"
+                                                MaxHeight="32"
+                                                Grid.Row="0"
+                                                FontSize="12"
+                                                HorizontalAlignment="Left"
+                                                FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"
+                                                Foreground="#FFE9D6"
+                                                Text="{Binding Detail.Title}"/>
+
+                                            <!--Grid.Row = 1 : Events Time-->
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                FontSize="10"
+                                                HorizontalAlignment="Left"
+                                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                Foreground="#FFE9D6"
+                                                Text="{Binding Detail.Time,Converter={StaticResource EventTime}}"/>
+
+                                            <!--Grid.Row = 2 : Events Location-->
+                                            <TextBlock
+                                                Grid.Row="2"
+                                                FontSize="10"
+                                                HorizontalAlignment="Left"
+                                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                Foreground="#FFE9D6"
+                                                Text="{Binding Detail.Location}"/>
+
+                                            <!--Grid.Row = 3 : Note Contents-->
+                                            <GridView
+                                                VerticalAlignment="Top"
+                                                SelectionMode="None"
+                                                ItemsSource="{Binding Contents}"
+                                                Grid.Row="3">
+                                                <GridView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid
+                                                            Margin="{Binding Margin_Collapsed}">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="Auto"/>
+                                                            </Grid.RowDefinitions>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <!--Grid.Row = 0, Column = 0 : Bullet-->
+                                                            <TextBlock
+                                                                Visibility="{Binding Bullet_Visibility}"
+                                                                Margin="0,0,3,0"
+                                                                Grid.Row="0"
+                                                                Grid.Column="0"
+                                                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                                FontSize="11"
+                                                                Foreground="#FAFFFFFF"
+                                                                Text="•"/>
+
+                                                            <!--Grid.Row = 0, Column = 0 : Header-->
+                                                            <TextBlock
+                                                                x:Name="Note_Content_TextBlock"
+                                                                Padding="0"
+                                                                TextWrapping="Wrap"
+                                                                Width="140"
+                                                                Grid.Row="0"
+                                                                Grid.Column="1"
+                                                                FontFamily="/Assets/Fonts/Assistant-Regular.ttf#Assistant"
+                                                                FontSize="11"
+                                                                Foreground="#FAFFFFFF"
+                                                                Text="{Binding Content}"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </GridView.ItemTemplate>
+                                                <GridView.ItemContainerStyle>
+                                                    <Style TargetType="GridViewItem">
+                                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                                        <Setter Property="Margin" Value="0,-5,0,0"/>
+                                                    </Style>
+                                                </GridView.ItemContainerStyle>
+                                                <GridView.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel
+                                                            VerticalAlignment="Center"
+                                                            HorizontalAlignment="Left"
+                                                            Orientation="Vertical">
+                                                        </StackPanel>
+                                                    </ItemsPanelTemplate>
+                                                </GridView.ItemsPanel>
+                                            </GridView>
+                                        </Grid>
+                                        <Button.Resources>
+                                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#C2DBFF"/>
+                                            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#C2DBFF"/>
+                                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                                        </Button.Resources>
+                                    </Button>
+                                </Grid>
+
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="0,0,0,10"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel
+                                    HorizontalAlignment="Stretch"
+                                    Orientation="Vertical">
+                                </StackPanel>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+
+                </Grid>
+
+                <!--Notes-->
+                <Grid
+                    RowSpacing="10"
+                    Visibility="Visible"
+                    x:Name="Notes_Grid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Grid.Row = 0 : Header - Notes-->
+                    <StackPanel
+                        Spacing="4"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal"
+                        Grid.Row="0">
+                        <Image
+                            Source="/Assets/Components/Detailed/Note_Icon.svg"
+                            Width="12"
+                            Height="12"/>
+                        <TextBlock
+                            FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"
+                            Foreground="#C2DBFF"
+                            FontSize="12"
+                            Text="Notes"/>
+                    </StackPanel>
+
+                    <!--Grid.Row = 1 : Frame GridViews-->
+                    <GridView
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        SelectionMode="None"
+                        HorizontalAlignment="Stretch"
+                        ItemsSource="{Binding Notes}"
+                        Grid.Row="1">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    HorizontalAlignment="Stretch">
+                                    <Button  
+                                        Click="Notes_Specific_Button_Click"
+                                        x:Name="Notes_Specific_Button"
+                                        HorizontalContentAlignment="Left"
+                                        VerticalContentAlignment="Top"
+                                        HorizontalAlignment="Stretch"
+                                        BorderThickness="0"
+                                        Padding="10,5,10,5"
+                                        CornerRadius="5"                                   
+                                        Background="#242931"
+                                        MaxHeight="200">
+                                        <Grid
+                                            RowSpacing="15">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <!--Grid.Row = 0 : Notes Title TextBlock-->
+                                            <TextBlock
+                                                TextWrapping="Wrap"
+                                                MaxHeight="32"
+                                                Grid.Row="0"
+                                                FontSize="12"
+                                                HorizontalAlignment="Left"
+                                                FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"
+                                                Foreground="#FFE9D6"
+                                                Text="{Binding Detail.Title}"/>
+
+                                            <!--Grid.Row = 1 : Note Contents-->
+                                            <GridView
+                                                VerticalAlignment="Top"
+                                                SelectionMode="None"
+                                                ItemsSource="{Binding Contents}"
+                                                Grid.Row="1">
+                                                <GridView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid
+                                                            Margin="{Binding Margin_Collapsed}">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="Auto"/>
+                                                            </Grid.RowDefinitions>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <!--Grid.Row = 0, Column = 0 : Bullet-->
+                                                            <TextBlock
+                                                                Visibility="{Binding Bullet_Visibility}"
+                                                                Margin="0,0,3,0"
+                                                                Grid.Row="0"
+                                                                Grid.Column="0"
+                                                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                                FontSize="11"
+                                                                Foreground="#FAFFFFFF"
+                                                                Text="•"/>
+
+                                                            <!--Grid.Row = 0, Column = 0 : Header-->
+                                                            <TextBlock
+                                                                Padding="0"
+                                                                TextWrapping="Wrap"
+                                                                Width="140"
+                                                                Grid.Row="0"
+                                                                Grid.Column="1"
+                                                                FontFamily="/Assets/Fonts/Assistant-Regular.ttf#Assistant"
+                                                                FontSize="11"
+                                                                Foreground="#FAFFFFFF"
+                                                                Text="{Binding Content}"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </GridView.ItemTemplate>
+                                                <GridView.ItemContainerStyle>
+                                                    <Style TargetType="GridViewItem">
+                                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                                        <Setter Property="Margin" Value="0,-5,0,0"/>
+                                                    </Style>
+                                                </GridView.ItemContainerStyle>
+                                                <GridView.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel
+                                                            VerticalAlignment="Center"
+                                                            HorizontalAlignment="Left"
+                                                            Orientation="Vertical">
+                                                        </StackPanel>
+                                                    </ItemsPanelTemplate>
+                                                </GridView.ItemsPanel>
+                                            </GridView>
+                                        </Grid>
+                                        <Button.Resources>
+                                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#C2DBFF"/>
+                                            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#C2DBFF"/>
+                                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                                        </Button.Resources>
+                                    </Button>
+                                </Grid>
+
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="0,0,0,10"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel
+                                    HorizontalAlignment="Stretch"
+                                    Orientation="Vertical">
+                                </StackPanel>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                </Grid>
+
+                <!--Contacts-->
+                <Grid
+                    RowSpacing="10"
+                    Visibility="Visible"
+                    x:Name="Contacts_Grid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Grid.Row = 0 : Header - Contacts-->
+                    <StackPanel
+                        Spacing="4"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal"
+                        Grid.Row="0">
+                        <Image
+                            Source="/Assets/Components/Detailed/Contact_Icon.svg"
+                            Width="12"
+                            Height="12"/>
+                        <TextBlock
+                            FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"
+                            Foreground="#C2DBFF"
+                            FontSize="12"
+                            Text="Contacts"/>
+                    </StackPanel>
+
+                    <!--Grid.Row = 1 : Frame GridViews-->
+                    <GridView
+                        SelectionMode="None"
+                        HorizontalAlignment="Stretch"
+                        ItemsSource="{Binding Contacts}"
+                        Grid.Row="1">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    HorizontalAlignment="Stretch">
+                                    <Button     
+                                        Click="Contacts_Specific_Button_Click"
+                                        x:Name="Contacts_Specific_Button"
+                                        VerticalContentAlignment="Top"
+                                        HorizontalContentAlignment="Left"
+                                        HorizontalAlignment="Stretch"
+                                        BorderThickness="0"
+                                        Padding="10,5,10,5"
+                                        CornerRadius="5"
+                                        MinHeight="75"
+                                        Background="#242931"
+                                        MaxHeight="200">
+                                        <Grid
+                                            HorizontalAlignment="Stretch">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <!--Grid.Row = 0 : Contacts Name-->
+                                            <TextBlock
+                                                TextWrapping="Wrap"
+                                                MaxHeight="32"
+                                                Grid.Row="0"
+                                                FontSize="12"
+                                                HorizontalAlignment="Left"
+                                                FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"
+                                                Foreground="#FFE9D6"
+                                                Text="{Binding Detail.Firstname}"/>
+
+                                            <!--Grid.Row = 1 : Contacts Title-->
+                                            <TextBlock
+                                                TextWrapping="Wrap"
+                                                MaxHeight="32"
+                                                Grid.Row="1"
+                                                FontSize="10"
+                                                HorizontalAlignment="Left"
+                                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                Foreground="#FFE9D6"
+                                                Text="{Binding Detail.Title}"/>
+
+                                            <!--Grid.Row = 2 : Contacts Gridview-->
+                                            <GridView
+                                                Margin="0,-8,0,0"
+                                                SelectionMode="None"
+                                                ItemsSource="{Binding Contacts}"
+                                                Grid.Row="2">
+                                                <GridView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Button
+                                                            Click="Contact_Option_Button_Click"
+                                                            x:Name="Contact_Option_Button"
+                                                            BorderThickness="0"
+                                                            Padding="0"
+                                                            Height="17"
+                                                            Width="17"
+                                                            CornerRadius="8.5"
+                                                            Background="{Binding Background, Converter={StaticResource StringToColor}}">
+                                                            <Image  
+                                                                Margin="4"
+                                                                Source="{Binding IconSource}"/>
+                                                            <Button.Resources>
+                                                                <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#FAFFFFFF"/>
+                                                                <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#FAFFFFFF"/>
+                                                                <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding Background_Hover}"/>
+                                                                <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding Background_Pressed}"/>
+                                                            </Button.Resources>
+                                                        </Button>
+                                                    </DataTemplate>
+                                                </GridView.ItemTemplate>
+                                                <GridView.ItemContainerStyle>
+                                                    <Style TargetType="GridViewItem">
+                                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                                        <Setter Property="Margin" Value="0,0,-15,0"/>
+                                                    </Style>
+                                                </GridView.ItemContainerStyle>
+                                                <GridView.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel
+                                                            HorizontalAlignment="Left"
+                                                            Orientation="Horizontal">
+                                                        </StackPanel>
+                                                    </ItemsPanelTemplate>
+                                                </GridView.ItemsPanel>
+                                            </GridView>
+
+                                            <!--Grid.Row = 3 : Contacts Selected Contacts-->
+                                            <TextBlock
+                                                Margin="0,-17,0,0"
+                                                TextWrapping="Wrap"
+                                                MaxHeight="32"
+                                                Grid.Row="3"
+                                                FontSize="10"
+                                                HorizontalAlignment="Left"
+                                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                Foreground="#FFE9D6"
+                                                Text="{Binding Contacts_Selected.Text}"/>
+                                        </Grid>
+                                        <Button.Resources>
+                                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#C2DBFF"/>
+                                            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#C2DBFF"/>
+                                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                                        </Button.Resources>
+                                    </Button>
+                                </Grid>
+
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="0,0,0,10"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel
+                                    HorizontalAlignment="Stretch"
+                                    Orientation="Vertical">
+                                </StackPanel>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                </Grid>
+
+                <!--Convo Histories-->
+                <Grid
+                    RowSpacing="10"
+                    x:Name="ConvoHistory_Grid"
+                    Visibility="Visible">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Grid.Row = 0 : Header - Convos-->
+                    <StackPanel
+                        Spacing="4"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal"
+                        Grid.Row="0">
+                        <Image
+                            Source="/Assets/Components/Detailed/Convo_Icon.svg"
+                            Width="14"
+                            Height="12"/>
+                        <TextBlock
+                            FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"
+                            Foreground="#C2DBFF"
+                            FontSize="12"
+                            Text="Conversation Histories"/>
+
+                    </StackPanel>
+
+                    <!--Grid.Row = 1 : Frame GridViews-->
+                    <GridView
+                        SelectionMode="None"
+                        HorizontalAlignment="Stretch"
+                        ItemsSource="{Binding FollowUps}"
+                        Grid.Row="1">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    HorizontalAlignment="Stretch">
+                                    <Button  
+                                        Click="FollowUp_Specific_Button_Click"
+                                        x:Name="FollowUp_Specific_Button"
+                                        VerticalContentAlignment="Top"
+                                        HorizontalContentAlignment="Left"
+                                        HorizontalAlignment="Stretch"
+                                        BorderThickness="0"
+                                        Padding="10,5,10,5"
+                                        CornerRadius="5"
+                                        Background="#242931"
+                                        MaxHeight="200">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <!--Grid.Row = 0 : Convo History Name TextBlock-->
+                                            <TextBlock
+                                                TextWrapping="Wrap"
+                                                MaxHeight="32"
+                                                Grid.Row="0"
+                                                FontSize="12"
+                                                HorizontalAlignment="Left"
+                                                FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"
+                                                Foreground="#FFE9D6"
+                                                Text="{Binding Detail.Personnel.Firstname}"/>
+
+                                            <!--Grid.Row = 1 : Convo History Title TextBlock-->
+                                            <TextBlock
+                                                TextWrapping="Wrap"
+                                                MaxHeight="32"
+                                                Grid.Row="1"
+                                                FontSize="10"
+                                                HorizontalAlignment="Left"
+                                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                Foreground="#FAFFFFFF"
+                                                Text="{Binding Detail.Personnel.Title}"/>
+
+                                            <!--Grid.Row = 2 : Convo History Time TextBlock-->
+                                            <TextBlock
+                                                TextWrapping="Wrap"
+                                                MaxHeight="32"
+                                                Grid.Row="2"
+                                                FontSize="10"
+                                                HorizontalAlignment="Left"
+                                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                Foreground="#FFE9D6"
+                                                Text="{Binding Detail.Time, Converter={StaticResource ConvoHistoryTime}}"/>
+
+                                            <!--Grid.Row = 3 : Note Contents-->
+                                            <GridView
+                                                VerticalAlignment="Top"
+                                                SelectionMode="None"
+                                                ItemsSource="{Binding Description}"
+                                                Grid.Row="3">
+                                                <GridView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid
+                                                            Margin="{Binding Margin_Collapsed}">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="Auto"/>
+                                                            </Grid.RowDefinitions>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <!--Grid.Row = 0, Column = 0 : Bullet-->
+                                                            <TextBlock
+                                                                Visibility="{Binding Bullet_Visibility}"
+                                                                Margin="0,0,3,0"
+                                                                Grid.Row="0"
+                                                                Grid.Column="0"
+                                                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                                FontSize="11"
+                                                                Foreground="#FAFFFFFF"
+                                                                Text="•"/>
+
+                                                            <!--Grid.Row = 0, Column = 0 : Header-->
+                                                            <TextBlock
+                                                                x:Name="Note_Content_TextBlock"
+                                                                Padding="0"
+                                                                TextWrapping="Wrap"
+                                                                Width="140"
+                                                                Grid.Row="0"
+                                                                Grid.Column="1"
+                                                                FontFamily="/Assets/Fonts/Assistant-Regular.ttf#Assistant"
+                                                                FontSize="11"
+                                                                Foreground="#FAFFFFFF"
+                                                                Text="{Binding Content}"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </GridView.ItemTemplate>
+                                                <GridView.ItemContainerStyle>
+                                                    <Style TargetType="GridViewItem">
+                                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                                        <Setter Property="Margin" Value="0,-5,0,0"/>
+                                                    </Style>
+                                                </GridView.ItemContainerStyle>
+                                                <GridView.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel
+                                                            VerticalAlignment="Center"
+                                                            HorizontalAlignment="Left"
+                                                            Orientation="Vertical">
+                                                        </StackPanel>
+                                                    </ItemsPanelTemplate>
+                                                </GridView.ItemsPanel>
+                                            </GridView>
+                                        </Grid>
+                                        <Button.Resources>
+                                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#C2DBFF"/>
+                                            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#C2DBFF"/>
+                                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                                        </Button.Resources>
+                                    </Button>
+                                </Grid>
+
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="0,0,0,10"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel
+                                    HorizontalAlignment="Stretch"
+                                    Orientation="Vertical">
+                                </StackPanel>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                </Grid>
+
+                <!--Checklists-->
+                <Grid
+                    RowSpacing="10"
+                    x:Name="Checklists_Grid"
+                    Visibility="Visible">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Grid.Row = 0 : Header - Checklists-->
+                    <StackPanel
+                        Spacing="4"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal"
+                        Grid.Row="0">
+                        <Image
+                            Source="/Assets/Components/Detailed/Checklist_Icon.svg"
+                            Width="14"
+                            Height="12"/>
+                        <TextBlock
+                            FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"
+                            Foreground="#C2DBFF"
+                            FontSize="12"
+                            Text="Checklists"/>
+
+                    </StackPanel>
+
+                    <!--Grid.Row = 1 : Frame GridViews-->
+                    <GridView
+                        SelectionMode="None"
+                        HorizontalAlignment="Stretch"
+                        ItemsSource="{Binding Checklists}"
+                        Grid.Row="1">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid                            
+                                    HorizontalAlignment="Stretch">
+                                    <Button  
+                                        Click="Checklist_Specific_Button_Click"
+                                        x:Name="Checklist_Specific_Button"
+                                        VerticalAlignment="Top"
+                                        VerticalContentAlignment="Top"
+                                        HorizontalContentAlignment="Left"
+                                        HorizontalAlignment="Stretch"
+                                        BorderThickness="0"
+                                        Padding="10,5,10,8"
+                                        CornerRadius="5"
+                                        Background="#242931"
+                                        MaxHeight="200">
+                                        <Grid
+                                            HorizontalAlignment="Left"
+                                            RowSpacing="3">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <!--Grid.Row = 0 : Contacts Name-->
+                                            <TextBlock
+                                                TextWrapping="Wrap"
+                                                MaxHeight="32"
+                                                Grid.Row="0"
+                                                FontSize="12"
+                                                HorizontalAlignment="Left"
+                                                FontFamily="/Assets/Fonts/Assistant-Bold.ttf#Assistant"
+                                                Foreground="#FFE9D6"
+                                                Text="{Binding Type}"/>
+
+                                            <!--Grid.Row = 1 : Checklists Gridview-->
+                                            <GridView
+                                                SelectionMode="None"
+                                                Margin="0,-5,0,0"
+                                                ItemsSource="{Binding Options}"
+                                                Grid.Row="1">
+                                                <GridView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel
+                                                            Spacing="4"
+                                                            Orientation="Horizontal">
+                                                            <Frame
+                                                                Background="Transparent"
+                                                                Tapped="Checklist_Options_Frame_Tapped"
+                                                                x:Name="Checklist_Options_Frame"
+                                                                BorderThickness="1"
+                                                                BorderBrush="#FAFFFFFF"
+                                                                Height="11"
+                                                                Width="11">
+                                                                <Image
+                                                                    Visibility="{Binding Check_Visibility}"
+                                                                    VerticalAlignment="Center"
+                                                                    HorizontalAlignment="Center"
+                                                                    Source="/Assets/Components/Detailed/Checkmark_Icon.svg"/>
+                                                            </Frame>
+                                                            <TextBlock
+                                                                Margin="0,-2,0,0"
+                                                                VerticalAlignment="Center"
+                                                                TextWrapping="Wrap"
+                                                                MaxHeight="32"
+                                                                Grid.Row="0"
+                                                                FontSize="11"
+                                                                HorizontalAlignment="Left"
+                                                                FontFamily="/Assets/Fonts/Assistant-SemiBold.ttf#Assistant"
+                                                                Foreground="#FFE9D6"
+                                                                Text="{Binding Content}"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridView.ItemTemplate>
+
+                                                <GridView.ItemContainerStyle>
+                                                    <Style TargetType="GridViewItem">
+                                                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                                        <Setter Property="Margin" Value="0,-10,0,-10"/>
+
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="GridViewItem">
+                                                                    <GridViewItemPresenter
+                                                                        Height="30"
+                                                                        SelectionCheckMarkVisualEnabled="False"/>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </GridView.ItemContainerStyle>
+                                                <GridView.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel
+                                                            HorizontalAlignment="Left"
+                                                            Orientation="Vertical">
+                                                        </StackPanel>
+                                                    </ItemsPanelTemplate>
+                                                </GridView.ItemsPanel>
+                                            </GridView>
+                                        </Grid>
+                                        <Button.Resources>
+                                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#C2DBFF"/>
+                                            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#C2DBFF"/>
+                                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#7D8CA8"/>
+                                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#94A5C5"/>
+                                        </Button.Resources>
+                                    </Button>
+                                </Grid>
+
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="0,0,0,10"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Stretch"
+                                    Orientation="Vertical">
+                                </StackPanel>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                </Grid>
+
+            </controls:UniformGrid>
+
+        </Grid>
+    </Grid>
+    
+
+</Page>

@@ -1,0 +1,499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{FD4DC00A-604A-4B6A-98A3-CC4E690DC057}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SYPP</RootNamespace>
+    <AssemblyName>SYPP</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
+    <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converter\Calendar\CalendarHeaderConverter.cs" />
+    <Compile Include="Converter\Calendar\DateTimeToMonthConverter.cs" />
+    <Compile Include="Converter\Calendar\DateTimeToYearConverter.cs" />
+    <Compile Include="Converter\ColorConverter\StringToSolidColorBrushConverter.cs" />
+    <Compile Include="Converter\ConversationHistories\ConvoHistoryTimeConverter.cs" />
+    <Compile Include="Converter\Events\EventTimeConverter.cs" />
+    <Compile Include="Converter\General\StringToColorConverter.cs" />
+    <Compile Include="Model\BaseModel\BaseModel.cs" />
+    <Compile Include="Model\DB\Applications\Application.cs" />
+    <Compile Include="Model\DB\Applications\Application_Detail.cs" />
+    <Compile Include="Model\DB\Auth\Auth.cs" />
+    <Compile Include="Model\DB\Companies\Company.cs" />
+    <Compile Include="Model\DB\Companies\Company_Detail.cs" />
+    <Compile Include="Model\DB\Components\Categories\Category.cs" />
+    <Compile Include="Model\DB\Components\Categories\Category_Suggestion.cs" />
+    <Compile Include="Model\DB\Components\Categories\Preference.cs" />
+    <Compile Include="Model\DB\Components\Checklists\Checklist.cs" />
+    <Compile Include="Model\DB\Components\Checklists\Checklist_Option.cs" />
+    <Compile Include="Model\DB\Components\Contacts\Contact.cs" />
+    <Compile Include="Model\DB\Components\Contacts\Contact_Detail.cs" />
+    <Compile Include="Model\DB\Components\Contacts\Contact_Email.cs" />
+    <Compile Include="Model\DB\Components\Contacts\Contact_Phone.cs" />
+    <Compile Include="Model\DB\Components\Contacts\Contact_Type.cs" />
+    <Compile Include="Model\DB\Components\Contents\Contents_Sub.cs" />
+    <Compile Include="Model\DB\Components\Events\Event.cs" />
+    <Compile Include="Model\DB\Components\Events\Event_Detail.cs" />
+    <Compile Include="Model\DB\Components\File\File.cs" />
+    <Compile Include="Model\DB\Components\FollowUp\FollowUp.cs" />
+    <Compile Include="Model\DB\Components\FollowUp\FollowUp_Detail.cs" />
+    <Compile Include="Model\DB\Components\Location\Location.cs" />
+    <Compile Include="Model\DB\Components\Notes\Note.cs" />
+    <Compile Include="Model\DB\Components\Notes\Note_Detail.cs" />
+    <Compile Include="Model\DB\Components\Tasks\MidTask.cs" />
+    <Compile Include="Model\DB\Components\Texts\Contents_Text.cs" />
+    <Compile Include="Model\DB\Template\Template.cs" />
+    <Compile Include="Model\DB\Template\Template_Content.cs" />
+    <Compile Include="Model\DB\Template\Template_Detail.cs" />
+    <Compile Include="Model\DB\Users\User.cs" />
+    <Compile Include="Model\DB\Users\User_Personal.cs" />
+    <Compile Include="Model\DTO\Application\Application_Create_DTO.cs" />
+    <Compile Include="Model\DTO\Application\Application_IsFavorite_Update_DTO.cs" />
+    <Compile Include="Model\DTO\Auth\User_Authenticate_DTO.cs" />
+    <Compile Include="Model\DTO\Auth\User_Register_DTO.cs" />
+    <Compile Include="Model\DTO\Calendar\Calendar_Event_DTO.cs" />
+    <Compile Include="Model\DTO\Calendar\Daily_Tasks_DTO.cs" />
+    <Compile Include="Model\DTO\Company\Company_IsFavorite_Update_DTO.cs" />
+    <Compile Include="Model\DTO\General\Button\Text_Button_DTO.cs" />
+    <Compile Include="Model\DTO\General\Components\Category_DTO.cs" />
+    <Compile Include="Model\DTO\Primitives\StringClass.cs" />
+    <Compile Include="Model\DTO\Primitives\StringListClass.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Container\ServiceContainer.cs" />
+    <Compile Include="Service\Interfaces\IFileService.cs" />
+    <Compile Include="Service\Interfaces\ITemplateService.cs" />
+    <Compile Include="Service\Services\FileService.cs" />
+    <Compile Include="Service\Interfaces\IApplicationService.cs" />
+    <Compile Include="Service\Interfaces\IAuthService.cs" />
+    <Compile Include="Service\Interfaces\ICompanyService.cs" />
+    <Compile Include="Service\Interfaces\IMockDataService.cs" />
+    <Compile Include="Service\Interfaces\ISignalRSocketHubService.cs" />
+    <Compile Include="Service\Services\ApplicationService.cs" />
+    <Compile Include="Service\Services\AuthService.cs" />
+    <Compile Include="Service\Services\CompanyService.cs" />
+    <Compile Include="Service\Services\MockDataService.cs" />
+    <Compile Include="Service\Services\TemplateService.cs" />
+    <Compile Include="Service\Socket\SignalRSocketHubService.cs" />
+    <Compile Include="Utilities\Configurations\Configuration.cs" />
+    <Compile Include="Utilities\HubConnection\Hubs.cs" />
+    <Compile Include="Utilities\Storage\LocalStorage.cs" />
+    <Compile Include="ViewModel\ApplicationVM\ApplicationDetailViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationVM\ApplicationViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationVM\NewAppsVM\CreateApplicationViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationVM\NewTaskVM\CreateNewTaskViewModel.cs" />
+    <Compile Include="ViewModel\AuthVM\SignInViewModel.cs" />
+    <Compile Include="ViewModel\AuthVM\SignUpViewModel.cs" />
+    <Compile Include="ViewModel\BaseVM\BaseViewModel.cs" />
+    <Compile Include="ViewModel\CalendarVM\CalendarViewModel.cs" />
+    <Compile Include="ViewModel\CompanyVM\CompanyDetailViewModel.cs" />
+    <Compile Include="ViewModel\CompanyVM\CompanyViewModel.cs" />
+    <Compile Include="ViewModel\ComponentsVM\Checklist\ChecklistDetailedViewModel.cs" />
+    <Compile Include="ViewModel\ComponentsVM\Contact\ContactDetailedViewModel.cs" />
+    <Compile Include="ViewModel\ComponentsVM\Event\EventDetailedViewModel.cs" />
+    <Compile Include="ViewModel\ComponentsVM\FollowUp\FollowUpDetailedViewModel.cs" />
+    <Compile Include="ViewModel\ComponentsVM\Note\NoteDetailedViewModel.cs" />
+    <Compile Include="ViewModel\MainBoardVM\MainBoardViewModel.cs" />
+    <Compile Include="ViewModel\TemplateVM\TemplateDetailViewModel.cs" />
+    <Compile Include="ViewModel\TemplateVM\TemplateViewModel.cs" />
+    <Compile Include="View\Application\ApplicationsPage.xaml.cs">
+      <DependentUpon>ApplicationsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Application\Detail\ApplicationDetailPage.xaml.cs">
+      <DependentUpon>ApplicationDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Application\NewApps\CreateApplicationPage.xaml.cs">
+      <DependentUpon>CreateApplicationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Application\NewTask\NewTaskPage.xaml.cs">
+      <DependentUpon>NewTaskPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Auth\SignIn\SignInPage.xaml.cs">
+      <DependentUpon>SignInPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Auth\SignUp\SignUpPage.xaml.cs">
+      <DependentUpon>SignUpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Calendar\CalendarPage.xaml.cs">
+      <DependentUpon>CalendarPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Company\CompaniesPage.xaml.cs">
+      <DependentUpon>CompaniesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Company\Detail\CompanyDetailedPage.xaml.cs">
+      <DependentUpon>CompanyDetailedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\Checklists\ChecklistDetailedPage.xaml.cs">
+      <DependentUpon>ChecklistDetailedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\Contacts\ContactDetailedPage.xaml.cs">
+      <DependentUpon>ContactDetailedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\Events\EventDetailedPage.xaml.cs">
+      <DependentUpon>EventDetailedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\FollowUps\FollowUpDetailedPage.xaml.cs">
+      <DependentUpon>FollowUpDetailedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\Notes\NoteDetailedPage.xaml.cs">
+      <DependentUpon>NoteDetailedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\UserControls\NotesUserControl.xaml.cs">
+      <DependentUpon>NotesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\UserControlsVM\NoteUserControlViewModel.cs" />
+    <Compile Include="View\MainBoard\MainBoard.xaml.cs">
+      <DependentUpon>MainBoard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Template\Detail\TemplateDetailedPage.xaml.cs">
+      <DependentUpon>TemplateDetailedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Template\TemplatePage.xaml.cs">
+      <DependentUpon>TemplatePage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Components\Arrows\Arrow_Left_Icon.svg" />
+    <Content Include="Assets\Components\Arrows\Arrow_Right_Icon.svg" />
+    <Content Include="Assets\Components\Arrows\Dark_Arrow_Down_Icon.svg" />
+    <Content Include="Assets\Components\Arrows\Downward_Arrow_Gray_Icon.svg" />
+    <Content Include="Assets\Components\Checklist\Check_Icon.svg" />
+    <Content Include="Assets\Components\Detailed\Calendar_Icon.svg" />
+    <Content Include="Assets\Components\Detailed\Checklist_Icon.svg" />
+    <Content Include="Assets\Components\Detailed\Checkmark_Icon.svg" />
+    <Content Include="Assets\Components\Detailed\Contact_Icon.svg" />
+    <Content Include="Assets\Components\Detailed\Contact_Note_Selected_Icon.svg" />
+    <Content Include="Assets\Components\Detailed\Contact_Note_UnSelected_Icon.svg" />
+    <Content Include="Assets\Components\Detailed\Convo_Icon.svg" />
+    <Content Include="Assets\Components\Detailed\Mail_Selected_Icon.svg" />
+    <Content Include="Assets\Components\Detailed\Mail_UnSelected_Icon.svg" />
+    <Content Include="Assets\Components\Detailed\Note_Icon.svg" />
+    <Content Include="Assets\Components\Detailed\Phone_Selected_Icon.svg" />
+    <Content Include="Assets\Components\Detailed\Phone_UnSelected_Icon.svg" />
+    <Content Include="Assets\Components\General\Blue_Plus_Icon.svg" />
+    <Content Include="Assets\Components\General\Dark_Plus_Icon.svg" />
+    <Content Include="Assets\Components\General\Add.svg" />
+    <Content Include="Assets\Components\General\Search_Icon.svg" />
+    <Content Include="Assets\Components\Notes\Note_AttachFile_Icon.svg" />
+    <Content Include="Assets\Components\Notes\Note_Attachment_Icon.svg" />
+    <Content Include="Assets\Components\Notes\Note_Bullet_Icon.svg" />
+    <Content Include="Assets\Components\Notes\Note_Image_Icon.svg" />
+    <Content Include="Assets\Components\Notes\Note_Number_Icon.svg" />
+    <Content Include="Assets\Components\Stars\Star_Filled_Icon.svg" />
+    <Content Include="Assets\Components\Stars\Star_Green_Filled_Icon.svg" />
+    <Content Include="Assets\Components\Stars\Star_Green_Unfilled_Icon.svg" />
+    <Content Include="Assets\Components\Stars\Star_Unfilled_Icon.svg" />
+    <Content Include="Assets\Components\Stars\Star_Yellow_Filled_Icon.svg" />
+    <Content Include="Assets\Components\Stars\Star_Yellow_Unfilled_Icon.svg" />
+    <Content Include="Assets\LargeTile.scale-100.png" />
+    <Content Include="Assets\LargeTile.scale-125.png" />
+    <Content Include="Assets\LargeTile.scale-150.png" />
+    <Content Include="Assets\LargeTile.scale-200.png" />
+    <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\Navigations\Applications_Navigation_Selected_Icon.svg" />
+    <Content Include="Assets\Navigations\Applications_Navigation_UnSelected_Icon.svg" />
+    <Content Include="Assets\Navigations\Calendar_Navigation_Selected_Icon.svg" />
+    <Content Include="Assets\Navigations\Calendar_Navigation_UnSelected_Icon.svg" />
+    <Content Include="Assets\Navigations\Templates_Navigation_Selected_Icon.svg" />
+    <Content Include="Assets\Navigations\Templates_Navigation_UnSelected_Icon.svg" />
+    <Content Include="Assets\SmallTile.scale-100.png" />
+    <Content Include="Assets\SmallTile.scale-125.png" />
+    <Content Include="Assets\SmallTile.scale-150.png" />
+    <Content Include="Assets\SmallTile.scale-200.png" />
+    <Content Include="Assets\SmallTile.scale-400.png" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Square44x44Logo.scale-150.png" />
+    <Content Include="Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-125.png" />
+    <Content Include="Assets\StoreLogo.scale-150.png" />
+    <Content Include="Assets\StoreLogo.scale-200.png" />
+    <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-150.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="View\Application\ApplicationsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Application\Detail\ApplicationDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Application\NewApps\CreateApplicationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Application\NewTask\NewTaskPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Auth\SignIn\SignInPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Auth\SignUp\SignUpPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Calendar\CalendarPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Company\CompaniesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Company\Detail\CompanyDetailedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Components\Checklists\ChecklistDetailedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Components\Contacts\ContactDetailedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Components\Events\EventDetailedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Components\FollowUps\FollowUpDetailedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Components\Notes\NoteDetailedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Components\UserControls\NotesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainBoard\MainBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Template\Detail\TemplateDetailedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Template\TemplatePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client">
+      <Version>5.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.10</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp">
+      <Version>6.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Animations">
+      <Version>6.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>6.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="MongoDB.Bson">
+      <Version>2.10.4</Version>
+    </PackageReference>
+    <PackageReference Include="MongoDB.Driver">
+      <Version>2.10.4</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1-beta2</Version>
+    </PackageReference>
+    <PackageReference Include="WindowsAzure.Messaging.Managed">
+      <Version>0.1.7.9</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Assistant-Bold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Assistant-ExtraBold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Assistant-ExtraLight.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Assistant-Light.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Assistant-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Assistant-SemiBold.ttf" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
