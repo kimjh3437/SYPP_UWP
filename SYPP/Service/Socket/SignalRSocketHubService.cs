@@ -518,7 +518,7 @@ namespace SYPP.Service.Socket
             try
             {
                 await UpdateConnectionID_Init();
-                await Hubs.Connection.SendAsync("Company_FollowUpws_Update", LocalStorage.User.uID, companyID, followUpID);
+                await Hubs.Connection.SendAsync("Company_FollowUps_Update", LocalStorage.User.uID, companyID, followUpID);
             }
             catch (Exception ex)
             {
@@ -1787,35 +1787,6 @@ namespace SYPP.Service.Socket
                 {
                     LocalStorage.Companies.Add(company);
                 }
-
-                var frame = Window.Current.Content as Frame;
-                if (frame == null)
-                {
-                    frame = Window.Current.Content as Frame;
-                }
-                var main = frame.Content as MainBoard;
-                if (main == null)
-                {
-                    main = frame.Content as MainBoard;
-                }
-
-
-                //When user is on Companies Page 
-                if (LocalStorage.Coordinate >= 30 && LocalStorage.Coordinate < 40)
-                {
-                    var content = main.Main_Contents_Frame.Content as CompaniesPage;
-                    if (content != null)
-                    {
-                        var contentVM = (CompanyViewModel)content.DataContext;
-                        if (contentVM != null)
-                        {
-                            if(!contentVM.Companies.Where(x => x.companyID == company.companyID).Any())
-                            {
-                                contentVM.Companies.Insert(0, company);
-                            }
-                        }
-                    }
-                }
             }
             catch (Exception ex)
             {
@@ -1831,37 +1802,6 @@ namespace SYPP.Service.Socket
                 {
                     company.Detail.IsFavorite = IsFavorite;
                     company.UpdateFavoriteStatus();
-                }
-
-                var frame = Window.Current.Content as Frame;
-                if (frame == null)
-                {
-                    frame = Window.Current.Content as Frame;
-                }
-                var main = frame.Content as MainBoard;
-                if (main == null)
-                {
-                    main = frame.Content as MainBoard;
-                }
-
-
-                //When user is on Companies Page 
-                if (LocalStorage.Coordinate >= 30 && LocalStorage.Coordinate < 40)
-                {
-                    var content = main.Main_Contents_Frame.Content as CompaniesPage;
-                    if (content != null)
-                    {
-                        var contentVM = (CompanyViewModel)content.DataContext;
-                        if (contentVM != null)
-                        {
-                            var item = contentVM.Companies.Where(x => x.companyID == company.companyID).FirstOrDefault();
-                            if (item != null)
-                            {
-                                item.Detail.IsFavorite = IsFavorite;
-                                item.UpdateFavoriteStatus();
-                            }
-                        }
-                    }
                 }
             }
             catch (Exception ex)
@@ -1898,73 +1838,6 @@ namespace SYPP.Service.Socket
                         company.Events.Add(company_event);
                     }
                 }
-                var frame = Window.Current.Content as Frame;
-                if (frame == null)
-                {
-                    frame = Window.Current.Content as Frame;
-                }
-                var main = frame.Content as MainBoard;
-                if (main == null)
-                {
-                    main = frame.Content as MainBoard;
-                }
-
-
-                //When user is on Companies Page 
-                if (LocalStorage.Coordinate >= 30 && LocalStorage.Coordinate < 40)
-                {
-                    var content = main.Main_Contents_Frame.Content as CompaniesPage;
-                    if (content != null)
-                    {
-                        var contentVM = (CompanyViewModel)content.DataContext;
-                        if (contentVM != null)
-                        {
-                            if (contentVM.Companies.Where(x => x.companyID == companyID).Any())
-                            {
-                                var item = contentVM.Companies.Where(x => x.companyID == companyID).FirstOrDefault();
-                                var item_event = item.Events.Where(x => x.Detail.eventID == eventID).FirstOrDefault();
-                                var index = item.Events.IndexOf(item_event);
-                                item.Events.RemoveAt(index);
-                                item.Events.Insert(index, company_event);
-                            }
-                            else
-                            {
-                                var item = contentVM.Companies.Where(x => x.companyID == companyID).FirstOrDefault();
-                                item.Events.Add(company_event);
-                            }
-
-                            //Check if currently open detailed page is corresponding application 
-                            if (contentVM.Company_Selected != null && contentVM.Company_Selected.companyID == companyID)
-                            {
-                                var detail = content.Company_Detail_Frame.Content as CompanyDetailedPage;
-                                if (detail != null)
-                                {
-                                    var detailVM = (CompanyDetailViewModel)detail.DataContext;
-                                    if (detailVM != null)
-                                    {
-                                        var item_event = detailVM.Events.Where(x => x.Detail.eventID == eventID).FirstOrDefault();
-                                        if (item_event != null)
-                                        {
-                                            var index = detailVM.Events.IndexOf(item_event);
-                                            detailVM.Events.RemoveAt(index);
-                                            detailVM.Events.Insert(index, company_event);
-                                        }
-                                        else
-                                        {
-                                            detailVM.Events.Insert(0, company_event);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                //When user is on Templates Page 
-                if (LocalStorage.Coordinate >= 40 && LocalStorage.Coordinate < 50)
-                {
-
-                }
             }
             catch (Exception ex)
             {
@@ -1979,58 +1852,6 @@ namespace SYPP.Service.Socket
                 if (app != null)
                 {
                     app.Events.Remove(app.Events.Where(x => x.Detail.eventID == eventID).FirstOrDefault());
-                }
-
-                var frame = Window.Current.Content as Frame;
-                if (frame == null)
-                {
-                    frame = Window.Current.Content as Frame;
-                }
-                var main = frame.Content as MainBoard;
-                if (main == null)
-                {
-                    main = frame.Content as MainBoard;
-                }
-
-
-                //When user is on Companies Page 
-                if (LocalStorage.Coordinate >= 30 && LocalStorage.Coordinate < 40)
-                {
-                    var content = main.Main_Contents_Frame.Content as CompaniesPage;
-                    if (content != null)
-                    {
-                        var contentVM = (CompanyViewModel)content.DataContext;
-                        if (contentVM != null)
-                        {
-                            if (contentVM.Companies.Where(x => x.companyID == companyID).Any())
-                            {
-                                var item = contentVM.Companies.Where(x => x.companyID == companyID).FirstOrDefault();
-                                var item_event = item.Events.Where(x => x.Detail.eventID == eventID).FirstOrDefault();
-                                if(item_event != null)
-                                {
-                                    item.Events.Remove(item_event);
-                                }
-                            }
-
-                            //Check if currently open detailed page is corresponding company 
-                            if (contentVM.Company_Selected != null && contentVM.Company_Selected.companyID == companyID)
-                            {
-                                var detail = content.Company_Detail_Frame.Content as CompanyDetailedPage;
-                                if (detail != null)
-                                {
-                                    var detailVM = (CompanyDetailViewModel)detail.DataContext;
-                                    if (detailVM != null)
-                                    {
-                                        var item_event = detailVM.Events.Where(x => x.Detail.eventID == eventID).FirstOrDefault();
-                                        if (item_event != null)
-                                        {
-                                            detailVM.Events.Remove(item_event);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
                 }
             }
             catch (Exception ex)
@@ -2067,68 +1888,6 @@ namespace SYPP.Service.Socket
                         company.Notes.Add(company_note);
                     }
                 }
-
-                var frame = Window.Current.Content as Frame;
-                if (frame == null)
-                {
-                    frame = Window.Current.Content as Frame;
-                }
-                var main = frame.Content as MainBoard;
-                if (main == null)
-                {
-                    main = frame.Content as MainBoard;
-                }
-
-
-                //When user is on Companies Page 
-                if (LocalStorage.Coordinate >= 30 && LocalStorage.Coordinate < 40)
-                {
-                    var content = main.Main_Contents_Frame.Content as CompaniesPage;
-                    if (content != null)
-                    {
-                        var contentVM = (CompanyViewModel)content.DataContext;
-                        if (contentVM != null)
-                        {
-                            if (contentVM.Companies.Where(x => x.companyID == companyID).Any())
-                            {
-                                var item = contentVM.Companies.Where(x => x.companyID == companyID).FirstOrDefault();
-                                var item_event = item.Notes.Where(x => x.Detail.noteID == noteID).FirstOrDefault();
-                                var index = item.Notes.IndexOf(item_event);
-                                item.Notes.RemoveAt(index);
-                                item.Notes.Insert(index, company_note);
-                            }
-                            else
-                            {
-                                var item = contentVM.Companies.Where(x => x.companyID == companyID).FirstOrDefault();
-                                item.Notes.Add(company_note);
-                            }
-
-                            //Check if currently open detailed page is corresponding application 
-                            if (contentVM.Company_Selected != null && contentVM.Company_Selected.companyID == companyID)
-                            {
-                                var detail = content.Company_Detail_Frame.Content as CompanyDetailedPage;
-                                if (detail != null)
-                                {
-                                    var detailVM = (CompanyDetailViewModel)detail.DataContext;
-                                    if (detailVM != null)
-                                    {
-                                        var item = detailVM.Notes.Where(x => x.Detail.noteID == noteID).FirstOrDefault();
-                                        if (item!= null)
-                                        {
-                                            var index = detailVM.Notes.IndexOf(item);
-                                            detailVM.Notes.RemoveAt(index);
-                                            detailVM.Notes.Insert(index, company_note);
-                                        }
-                                        else
-                                        {
-                                            detailVM.Notes.Insert(0, company_note);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             }
             catch (Exception ex)
             {
@@ -2143,58 +1902,6 @@ namespace SYPP.Service.Socket
                 if (app != null)
                 {
                     app.Notes.Remove(app.Notes.Where(x => x.Detail.noteID == noteID).FirstOrDefault());
-                }
-
-                var frame = Window.Current.Content as Frame;
-                if (frame == null)
-                {
-                    frame = Window.Current.Content as Frame;
-                }
-                var main = frame.Content as MainBoard;
-                if (main == null)
-                {
-                    main = frame.Content as MainBoard;
-                }
-
-
-                //When user is on Companies Page 
-                if (LocalStorage.Coordinate >= 30 && LocalStorage.Coordinate < 40)
-                {
-                    var content = main.Main_Contents_Frame.Content as CompaniesPage;
-                    if (content != null)
-                    {
-                        var contentVM = (CompanyViewModel)content.DataContext;
-                        if (contentVM != null)
-                        {
-                            if (contentVM.Companies.Where(x => x.companyID == companyID).Any())
-                            {
-                                var item = contentVM.Companies.Where(x => x.companyID == companyID).FirstOrDefault();
-                                var item_delete = item.Notes.Where(x => x.Detail.noteID == noteID).FirstOrDefault();
-                                if (item_delete != null)
-                                {
-                                    item.Notes.Remove(item_delete);
-                                }
-                            }
-
-                            //Check if currently open detailed page is corresponding company 
-                            if (contentVM.Company_Selected != null && contentVM.Company_Selected.companyID == companyID)
-                            {
-                                var detail = content.Company_Detail_Frame.Content as CompanyDetailedPage;
-                                if (detail != null)
-                                {
-                                    var detailVM = (CompanyDetailViewModel)detail.DataContext;
-                                    if (detailVM != null)
-                                    {
-                                        var item_event = detailVM.Notes.Where(x => x.Detail.noteID == noteID).FirstOrDefault();
-                                        if (item_event != null)
-                                        {
-                                            detailVM.Notes.Remove(item_event);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
                 }
             }
             catch (Exception ex)
@@ -2231,68 +1938,6 @@ namespace SYPP.Service.Socket
                         company.Contacts.Add(company_contact);
                     }
                 }
-
-                var frame = Window.Current.Content as Frame;
-                if (frame == null)
-                {
-                    frame = Window.Current.Content as Frame;
-                }
-                var main = frame.Content as MainBoard;
-                if (main == null)
-                {
-                    main = frame.Content as MainBoard;
-                }
-
-
-                //When user is on Companies Page 
-                if (LocalStorage.Coordinate >= 30 && LocalStorage.Coordinate < 40)
-                {
-                    var content = main.Main_Contents_Frame.Content as CompaniesPage;
-                    if (content != null)
-                    {
-                        var contentVM = (CompanyViewModel)content.DataContext;
-                        if (contentVM != null)
-                        {
-                            if (contentVM.Companies.Where(x => x.companyID == companyID).Any())
-                            {
-                                var item = contentVM.Companies.Where(x => x.companyID == companyID).FirstOrDefault();
-                                var item_event = item.Contacts.Where(x => x.Detail.contactID == contactID).FirstOrDefault();
-                                var index = item.Contacts.IndexOf(item_event);
-                                item.Contacts.RemoveAt(index);
-                                item.Contacts.Insert(index, company_contact);
-                            }
-                            else
-                            {
-                                var item = contentVM.Companies.Where(x => x.companyID == companyID).FirstOrDefault();
-                                item.Contacts.Add(company_contact);
-                            }
-
-                            //Check if currently open detailed page is corresponding application 
-                            if (contentVM.Company_Selected != null && contentVM.Company_Selected.companyID == companyID)
-                            {
-                                var detail = content.Company_Detail_Frame.Content as CompanyDetailedPage;
-                                if (detail != null)
-                                {
-                                    var detailVM = (CompanyDetailViewModel)detail.DataContext;
-                                    if (detailVM != null)
-                                    {
-                                        var item = detailVM.Contacts.Where(x => x.Detail.contactID == contactID).FirstOrDefault();
-                                        if (item != null)
-                                        {
-                                            var index = detailVM.Contacts.IndexOf(item);
-                                            detailVM.Contacts.RemoveAt(index);
-                                            detailVM.Contacts.Insert(index, company_contact);
-                                        }
-                                        else
-                                        {
-                                            detailVM.Contacts.Insert(0, company_contact);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             }
             catch (Exception ex)
             {
@@ -2307,59 +1952,7 @@ namespace SYPP.Service.Socket
                 if (app != null)
                 {
                     app.Contacts.Remove(app.Contacts.Where(x => x.Detail.contactID == contactID).FirstOrDefault());
-                }
-
-                var frame = Window.Current.Content as Frame;
-                if (frame == null)
-                {
-                    frame = Window.Current.Content as Frame;
-                }
-                var main = frame.Content as MainBoard;
-                if (main == null)
-                {
-                    main = frame.Content as MainBoard;
-                }
-
-
-                //When user is on Companies Page 
-                if (LocalStorage.Coordinate >= 30 && LocalStorage.Coordinate < 40)
-                {
-                    var content = main.Main_Contents_Frame.Content as CompaniesPage;
-                    if (content != null)
-                    {
-                        var contentVM = (CompanyViewModel)content.DataContext;
-                        if (contentVM != null)
-                        {
-                            if (contentVM.Companies.Where(x => x.companyID == companyID).Any())
-                            {
-                                var item = contentVM.Companies.Where(x => x.companyID == companyID).FirstOrDefault();
-                                var item_delete = item.Contacts.Where(x => x.Detail.contactID == contactID).FirstOrDefault();
-                                if (item_delete != null)
-                                {
-                                    item.Contacts.Remove(item_delete);
-                                }
-                            }
-
-                            //Check if currently open detailed page is corresponding company 
-                            if (contentVM.Company_Selected != null && contentVM.Company_Selected.companyID == companyID)
-                            {
-                                var detail = content.Company_Detail_Frame.Content as CompanyDetailedPage;
-                                if (detail != null)
-                                {
-                                    var detailVM = (CompanyDetailViewModel)detail.DataContext;
-                                    if (detailVM != null)
-                                    {
-                                        var item_delete= detailVM.Contacts.Where(x => x.Detail.contactID == contactID).FirstOrDefault();
-                                        if (item_delete != null)
-                                        {
-                                            detailVM.Contacts.Remove(item_delete);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                }             
             }
             catch (Exception ex)
             {
@@ -2394,69 +1987,7 @@ namespace SYPP.Service.Socket
                     {
                         company.FollowUps.Add(company_followup);
                     }
-                }
-
-                var frame = Window.Current.Content as Frame;
-                if (frame == null)
-                {
-                    frame = Window.Current.Content as Frame;
-                }
-                var main = frame.Content as MainBoard;
-                if (main == null)
-                {
-                    main = frame.Content as MainBoard;
-                }
-
-
-                //When user is on Companies Page 
-                if (LocalStorage.Coordinate >= 30 && LocalStorage.Coordinate < 40)
-                {
-                    var content = main.Main_Contents_Frame.Content as CompaniesPage;
-                    if (content != null)
-                    {
-                        var contentVM = (CompanyViewModel)content.DataContext;
-                        if (contentVM != null)
-                        {
-                            if (contentVM.Companies.Where(x => x.companyID == companyID).Any())
-                            {
-                                var item = contentVM.Companies.Where(x => x.companyID == companyID).FirstOrDefault();
-                                var item_event = item.FollowUps.Where(x => x.Detail.followUpID == followUpID).FirstOrDefault();
-                                var index = item.FollowUps.IndexOf(item_event);
-                                item.FollowUps.RemoveAt(index);
-                                item.FollowUps.Insert(index, company_followup);
-                            }
-                            else
-                            {
-                                var item = contentVM.Companies.Where(x => x.companyID == companyID).FirstOrDefault();
-                                item.FollowUps.Add(company_followup);
-                            }
-
-                            //Check if currently open detailed page is corresponding application 
-                            if (contentVM.Company_Selected != null && contentVM.Company_Selected.companyID == companyID)
-                            {
-                                var detail = content.Company_Detail_Frame.Content as CompanyDetailedPage;
-                                if (detail != null)
-                                {
-                                    var detailVM = (CompanyDetailViewModel)detail.DataContext;
-                                    if (detailVM != null)
-                                    {
-                                        var item = detailVM.FollowUps.Where(x => x.Detail.followUpID == followUpID).FirstOrDefault();
-                                        if (item != null)
-                                        {
-                                            var index = detailVM.FollowUps.IndexOf(item);
-                                            detailVM.FollowUps.RemoveAt(index);
-                                            detailVM.FollowUps.Insert(index, company_followup);
-                                        }
-                                        else
-                                        {
-                                            detailVM.FollowUps.Insert(0, company_followup);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                }       
             }
             catch (Exception ex)
             {
@@ -2471,58 +2002,6 @@ namespace SYPP.Service.Socket
                 if (app != null)
                 {
                     app.FollowUps.Remove(app.FollowUps.Where(x => x.Detail.followUpID == followUpID).FirstOrDefault());
-                }
-
-                var frame = Window.Current.Content as Frame;
-                if (frame == null)
-                {
-                    frame = Window.Current.Content as Frame;
-                }
-                var main = frame.Content as MainBoard;
-                if (main == null)
-                {
-                    main = frame.Content as MainBoard;
-                }
-
-
-                //When user is on Companies Page 
-                if (LocalStorage.Coordinate >= 30 && LocalStorage.Coordinate < 40)
-                {
-                    var content = main.Main_Contents_Frame.Content as CompaniesPage;
-                    if (content != null)
-                    {
-                        var contentVM = (CompanyViewModel)content.DataContext;
-                        if (contentVM != null)
-                        {
-                            if (contentVM.Companies.Where(x => x.companyID == companyID).Any())
-                            {
-                                var item = contentVM.Companies.Where(x => x.companyID == companyID).FirstOrDefault();
-                                var item_delete = item.FollowUps.Where(x => x.Detail.followUpID == followUpID).FirstOrDefault();
-                                if (item_delete != null)
-                                {
-                                    item.FollowUps.Remove(item_delete);
-                                }
-                            }
-
-                            //Check if currently open detailed page is corresponding company 
-                            if (contentVM.Company_Selected != null && contentVM.Company_Selected.companyID == companyID)
-                            {
-                                var detail = content.Company_Detail_Frame.Content as CompanyDetailedPage;
-                                if (detail != null)
-                                {
-                                    var detailVM = (CompanyDetailViewModel)detail.DataContext;
-                                    if (detailVM != null)
-                                    {
-                                        var item_delete = detailVM.FollowUps.Where(x => x.Detail.followUpID == followUpID).FirstOrDefault();
-                                        if (item_delete != null)
-                                        {
-                                            detailVM.FollowUps.Remove(item_delete);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
                 }
             }
             catch (Exception ex)
@@ -2559,68 +2038,6 @@ namespace SYPP.Service.Socket
                         company.Checklists.Add(company_checklist);
                     }
                 }
-
-                var frame = Window.Current.Content as Frame;
-                if (frame == null)
-                {
-                    frame = Window.Current.Content as Frame;
-                }
-                var main = frame.Content as MainBoard;
-                if (main == null)
-                {
-                    main = frame.Content as MainBoard;
-                }
-
-
-                //When user is on Companies Page 
-                if (LocalStorage.Coordinate >= 30 && LocalStorage.Coordinate < 40)
-                {
-                    var content = main.Main_Contents_Frame.Content as CompaniesPage;
-                    if (content != null)
-                    {
-                        var contentVM = (CompanyViewModel)content.DataContext;
-                        if (contentVM != null)
-                        {
-                            if (contentVM.Companies.Where(x => x.companyID == companyID).Any())
-                            {
-                                var item = contentVM.Companies.Where(x => x.companyID == companyID).FirstOrDefault();
-                                var item_event = item.Checklists.Where(x => x.checklistID == checklistID).FirstOrDefault();
-                                var index = item.Checklists.IndexOf(item_event);
-                                item.Checklists.RemoveAt(index);
-                                item.Checklists.Insert(index, company_checklist);
-                            }
-                            else
-                            {
-                                var item = contentVM.Companies.Where(x => x.companyID == companyID).FirstOrDefault();
-                                item.Checklists.Add(company_checklist);
-                            }
-
-                            //Check if currently open detailed page is corresponding application 
-                            if (contentVM.Company_Selected != null && contentVM.Company_Selected.companyID == companyID)
-                            {
-                                var detail = content.Company_Detail_Frame.Content as CompanyDetailedPage;
-                                if (detail != null)
-                                {
-                                    var detailVM = (CompanyDetailViewModel)detail.DataContext;
-                                    if (detailVM != null)
-                                    {
-                                        var item = detailVM.Checklists.Where(x => x.checklistID == checklistID).FirstOrDefault();
-                                        if (item != null)
-                                        {
-                                            var index = detailVM.Checklists.IndexOf(item);
-                                            detailVM.Checklists.RemoveAt(index);
-                                            detailVM.Checklists.Insert(index, company_checklist);
-                                        }
-                                        else
-                                        {
-                                            detailVM.Checklists.Insert(0, company_checklist);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             }
             catch (Exception ex)
             {
@@ -2635,58 +2052,6 @@ namespace SYPP.Service.Socket
                 if (app != null)
                 {
                     app.Checklists.Remove(app.Checklists.Where(x => x.checklistID == checklistID).FirstOrDefault());
-                }
-
-                var frame = Window.Current.Content as Frame;
-                if (frame == null)
-                {
-                    frame = Window.Current.Content as Frame;
-                }
-                var main = frame.Content as MainBoard;
-                if (main == null)
-                {
-                    main = frame.Content as MainBoard;
-                }
-
-
-                //When user is on Companies Page 
-                if (LocalStorage.Coordinate >= 30 && LocalStorage.Coordinate < 40)
-                {
-                    var content = main.Main_Contents_Frame.Content as CompaniesPage;
-                    if (content != null)
-                    {
-                        var contentVM = (CompanyViewModel)content.DataContext;
-                        if (contentVM != null)
-                        {
-                            if (contentVM.Companies.Where(x => x.companyID == companyID).Any())
-                            {
-                                var item = contentVM.Companies.Where(x => x.companyID == companyID).FirstOrDefault();
-                                var item_delete = item.Checklists.Where(x => x.checklistID == checklistID).FirstOrDefault();
-                                if (item_delete != null)
-                                {
-                                    item.Checklists.Remove(item_delete);
-                                }
-                            }
-
-                            //Check if currently open detailed page is corresponding company 
-                            if (contentVM.Company_Selected != null && contentVM.Company_Selected.companyID == companyID)
-                            {
-                                var detail = content.Company_Detail_Frame.Content as CompanyDetailedPage;
-                                if (detail != null)
-                                {
-                                    var detailVM = (CompanyDetailViewModel)detail.DataContext;
-                                    if (detailVM != null)
-                                    {
-                                        var item_delete = detailVM.Checklists.Where(x => x.checklistID == checklistID).FirstOrDefault();
-                                        if (item_delete != null)
-                                        {
-                                            detailVM.Checklists.Remove(item_delete);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
                 }
             }
             catch (Exception ex)

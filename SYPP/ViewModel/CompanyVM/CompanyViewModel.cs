@@ -8,6 +8,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR.Client;
+using SYPP.Utilities.HubConnection;
 
 namespace SYPP.ViewModel.CompanyVM
 {
@@ -15,7 +17,15 @@ namespace SYPP.ViewModel.CompanyVM
     {
         public CompanyViewModel()
         {
+            //___________________________________________________________________________________
+            //
+            // Company Related Related Listeners- Below 
+            //___________________________________________________________________________________
+            Hubs.Connection.On<string>("Company_Add_Update_Received", (companyID) => Company_Add_Update_EventHandler?.Invoke(companyID));
+            Hubs.Connection.On<string, bool>("Company_IsFavorite_Update_Received", (companyID, IsFavorite) => Company_IsFavorite_Update_EventHandler?.Invoke(companyID, IsFavorite));
 
+            Company_Add_Update_EventHandler += Company_Add_Update_Received;
+            Company_IsFavorite_Update_EventHandler += Company_IsFavorite_Update_Received;
         }
 
         public async Task LoadData()
@@ -188,5 +198,50 @@ namespace SYPP.ViewModel.CompanyVM
         //___________________________________________________________________________________
         public ObservableCollection<Company> Companies { get; set; }
         public ObservableCollection<Daily_Tasks_DTO> WeeklyCalendar { get; set; }
+
+        //___________________________________________________________________________________
+        //
+        // Company Related Related Listeners- Below 
+        //___________________________________________________________________________________
+        public async void Company_Add_Update_Received(string companyID)
+        {
+            try
+            {
+                var company = await _company.GetCompany(companyID);
+                if (company == null)
+                    return;
+
+                Companies.Add(company);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        public async void Company_IsFavorite_Update_Received(string companyID, bool IsFavorite)
+        {
+            try
+            {
+                var company = Companies.Where(x => x.companyID == companyID).FirstOrDefault();
+                if (company == null)
+                    return;
+                company.Detail.IsFavorite = IsFavorite;
+                company.UpdateFavoriteStatus();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        //___________________________________________________________________________________
+        // /////////////////////////////////////////////////////////////////////////////////
+        // Event Handlers BELOW 
+        // /////////////////////////////////////////////////////////////////////////////////
+        //___________________________________________________________________________________
+        //company related below 
+        public event Action<string> Company_Add_Update_EventHandler;
+        public event Action<string, bool> Company_IsFavorite_Update_EventHandler;
+
     }
 }

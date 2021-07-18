@@ -6,6 +6,7 @@ using SYPP.Model.DB.Components.FollowUp;
 using SYPP.Model.DB.Components.Notes;
 using SYPP.Model.DB.Components.Texts;
 using SYPP.Model.DTO.General.Button;
+using SYPP.Utilities.HubConnection;
 using SYPP.ViewModel.BaseVM;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace SYPP.ViewModel.ApplicationVM
 {
@@ -20,6 +22,7 @@ namespace SYPP.ViewModel.ApplicationVM
     {
         public ApplicationDetailViewModel()
         {
+            
 
         }
 
@@ -391,5 +394,9 @@ namespace SYPP.ViewModel.ApplicationVM
         public ObservableCollection<FollowUp> FollowUps { get; set; }
         public ObservableCollection<Checklist> Checklists { get; set; }
         public ObservableCollection<Text_Button_DTO> AddComponentsOptions { get; set; }
+
+
+
+        
     }
 }

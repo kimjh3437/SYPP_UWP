@@ -1,0 +1,2 @@
+MainPackage=C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Release\Upload\SYPP_1.1.18.0_x86.appx
+SymbolPackage=C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\x86\Release\Upload\SYPP_1.1.18.0\SYPP_1.1.18.0_x86.appxsym

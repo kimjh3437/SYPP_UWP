@@ -7,15 +7,15 @@
 
     For more information on package manifest files, see http://go.microsoft.com/fwlink/?LinkID=241727
   -->
-  <Identity Name="e50b4a14-f8ba-4045-9585-fcd2ac470b22" Publisher="CN=kimjh" Version="1.0.0.0" ProcessorArchitecture="x86" />
-  <mp:PhoneIdentity PhoneProductId="e50b4a14-f8ba-4045-9585-fcd2ac470b22" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="41903SaveYourApp.SaveYourApp" Publisher="CN=584C1875-2417-4AFB-8DBA-E9C42BBE3505" Version="1.1.18.0" ProcessorArchitecture="x86" />
+  <mp:PhoneIdentity PhoneProductId="96c2a170-162f-4eb7-b2bc-77545b61fbac" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>SYPP</DisplayName>
-    <PublisherDisplayName>kimjh</PublisherDisplayName>
+    <DisplayName>Save Your App</DisplayName>
+    <PublisherDisplayName>Amity_Foresight</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17763.0" MaxVersionTested="10.0.18362.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17134.0" MaxVersionTested="10.0.18362.0" />
     <PackageDependency Name="Microsoft.NET.CoreRuntime.2.2" MinVersion="2.2.27902.3" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
     <PackageDependency Name="Microsoft.NET.CoreFramework.Debug.2.2" MinVersion="2.2.28529.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
   </Dependencies>
@@ -24,7 +24,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="SYPP.exe" EntryPoint="SYPP.App">
-      <uap:VisualElements DisplayName="SYPP" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="SYPP" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="Save Your App" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="SYPP" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png" />
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>

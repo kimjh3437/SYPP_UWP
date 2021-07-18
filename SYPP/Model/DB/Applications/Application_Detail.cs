@@ -174,7 +174,10 @@ namespace SYPP.Model.DB
             {
                 if (this.Status != null)
                 {
-                    _HasResult_Date = Status[1].Time.ToString("MMM d");
+                    if (Status.Count > 1)
+                        _HasResult_Date = Status[1].Time.Date.ToString("MMM d");
+                    else
+                        _HasResult_Date = "Error";
                 }
                 else
                     _HasResult_Date = "Error";

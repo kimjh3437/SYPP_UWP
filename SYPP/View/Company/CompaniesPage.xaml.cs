@@ -1,4 +1,5 @@
 ﻿using SYPP.Model.DTO.Calendar;
+using SYPP.Utilities.Storage;
 using SYPP.View.Company.Detail;
 using SYPP.View.Main;
 using SYPP.ViewModel.CompanyVM;
@@ -215,7 +216,7 @@ namespace SYPP.View.Company
                     }
                     MainVM.Company_Selected_Prev = model;
                     MainVM.Company_Selected = model;
-                    var company = MainVM.Companies.Where(x => x.companyID == model.companyID).FirstOrDefault();
+                    var company = LocalStorage.Companies.Where(x => x.companyID == model.companyID).FirstOrDefault();
                     company.IsSelected = true;
                     company.UpdateUI();
                     var detailVM = new CompanyDetailViewModel();

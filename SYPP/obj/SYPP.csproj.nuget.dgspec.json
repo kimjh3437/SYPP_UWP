@@ -26,24 +26,28 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "uap10.0.17763"
+          "uap10.0.17134"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "uap10.0.17763": {
+          "uap10.0.17134": {
             "projectReferences": {}
           }
         }
       },
       "frameworks": {
-        "uap10.0.17763": {
+        "uap10.0.17134": {
           "dependencies": {
             "Microsoft.AspNetCore.SignalR.Client": {
               "target": "Package",
               "version": "[5.0.3, )"
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[3.1.17, )"
             },
             "Microsoft.NETCore.UniversalWindowsPlatform": {
               "target": "Package",

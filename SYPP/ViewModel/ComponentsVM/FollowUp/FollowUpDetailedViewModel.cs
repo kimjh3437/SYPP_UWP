@@ -168,7 +168,7 @@ namespace SYPP.ViewModel.ComponentsVM.FollowUp
 
                         FollowUp.Description = NoteVM.Contents.ToList();
                         FollowUp.Files = NoteVM.Files.ToList();
-                        FollowUp.Detail.applicationID = applicationID;
+                        FollowUp.Detail.companyID = companyID;
                         FollowUp.Detail.Time = SelectedTime;
                         var output = await _company.CreateCompanyFollowUp(FollowUp);
                         if (output != null)
@@ -180,7 +180,7 @@ namespace SYPP.ViewModel.ComponentsVM.FollowUp
                     {
                         FollowUp.Description = NoteVM.Contents.ToList();
                         FollowUp.Files = NoteVM.Files.ToList();
-                        FollowUp.Detail.applicationID = applicationID;
+                        FollowUp.Detail.companyID = companyID;
                         var output = await _company.UpdateCompanyFollowUp(FollowUp);
                         if (output != null)
                         {

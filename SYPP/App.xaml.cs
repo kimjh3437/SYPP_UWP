@@ -69,6 +69,8 @@ namespace SYPP
                 .WithUrl(Configuration.SignalRURL)
                 .WithAutomaticReconnect()
                 .Build();
+
+                
             }
             catch(Exception ex)
             {

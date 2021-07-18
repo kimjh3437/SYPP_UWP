@@ -193,7 +193,7 @@ namespace SYPP.View.Application
             }
         }
 
-        private void IsFavorite_Star_Image_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void IsFavorite_Star_Image_Tapped(object sender, TappedRoutedEventArgs e)
         {
             try
             {
@@ -201,8 +201,9 @@ namespace SYPP.View.Application
                 var model = (SYPP.Model.DB.Application)obj.DataContext;
                 if(model != null)
                 {
-                    model.Detail.IsFavorite = !model.Detail.IsFavorite;
-                    model.UpdateFavoriteStatus();
+                    //model.Detail.IsFavorite = !model.Detail.IsFavorite;
+                    //model.UpdateFavoriteStatus();
+                    await MainVM.UpdateApplicationFavoriteStatus(model.applicationID, model.Detail.IsFavorite);
                 }
             }
             catch(Exception ex)

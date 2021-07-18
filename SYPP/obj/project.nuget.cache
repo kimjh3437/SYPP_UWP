@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MiX7uvZqyCZd0xk2WuY5RdUvHiYTB1bbx8Yf8nbDmCPfKqlQ81BFfgyRgK+j8/27KlQYeWVFPMwlrCR6TdOq1g==",
+  "dgSpecHash": "bNfxo7mrkqpfnalXE41PJTFU15HtN4tZ/CvPqONhn6G2RIkVBzxb9wG7IN268KYx4+cH0wfV04kFI1TCGba80g==",
   "success": true,
   "projectFilePath": "C:\\Users\\kimjh\\Desktop\\SYPP\\SYPP\\SYPP\\SYPP.csproj",
   "expectedPackageFiles": [
@@ -16,9 +16,12 @@
     "C:\\Users\\kimjh\\.nuget\\packages\\microsoft.aspnetcore.signalr.common\\5.0.3\\microsoft.aspnetcore.signalr.common.5.0.3.nupkg.sha512",
     "C:\\Users\\kimjh\\.nuget\\packages\\microsoft.aspnetcore.signalr.protocols.json\\5.0.3\\microsoft.aspnetcore.signalr.protocols.json.5.0.3.nupkg.sha512",
     "C:\\Users\\kimjh\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
+    "C:\\Users\\kimjh\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.17\\microsoft.extensions.configuration.3.1.17.nupkg.sha512",
+    "C:\\Users\\kimjh\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\3.1.17\\microsoft.extensions.configuration.abstractions.3.1.17.nupkg.sha512",
+    "C:\\Users\\kimjh\\.nuget\\packages\\microsoft.extensions.configuration.binder\\3.1.17\\microsoft.extensions.configuration.binder.3.1.17.nupkg.sha512",
     "C:\\Users\\kimjh\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.1\\microsoft.extensions.dependencyinjection.5.0.1.nupkg.sha512",
     "C:\\Users\\kimjh\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
-    "C:\\Users\\kimjh\\.nuget\\packages\\microsoft.extensions.logging\\5.0.0\\microsoft.extensions.logging.5.0.0.nupkg.sha512",
+    "C:\\Users\\kimjh\\.nuget\\packages\\microsoft.extensions.logging\\3.1.17\\microsoft.extensions.logging.3.1.17.nupkg.sha512",
     "C:\\Users\\kimjh\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\kimjh\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
     "C:\\Users\\kimjh\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
@@ -102,7 +105,6 @@
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\system.diagnostics.contracts\\4.0.1\\system.diagnostics.contracts.4.0.1.nupkg.sha512",
     "C:\\Users\\kimjh\\.nuget\\packages\\system.diagnostics.contracts\\4.3.0\\system.diagnostics.contracts.4.3.0.nupkg.sha512",
     "C:\\Users\\kimjh\\.nuget\\packages\\system.diagnostics.debug\\4.3.0\\system.diagnostics.debug.4.3.0.nupkg.sha512",
-    "C:\\Users\\kimjh\\.nuget\\packages\\system.diagnostics.diagnosticsource\\5.0.0\\system.diagnostics.diagnosticsource.5.0.0.nupkg.sha512",
     "C:\\Users\\kimjh\\.nuget\\packages\\system.diagnostics.process\\4.1.0\\system.diagnostics.process.4.1.0.nupkg.sha512",
     "C:\\Users\\kimjh\\.nuget\\packages\\system.diagnostics.textwritertracelistener\\4.0.0\\system.diagnostics.textwritertracelistener.4.0.0.nupkg.sha512",
     "C:\\Users\\kimjh\\.nuget\\packages\\system.diagnostics.tracesource\\4.3.0\\system.diagnostics.tracesource.4.3.0.nupkg.sha512",
@@ -154,5 +156,23 @@
     "C:\\Users\\kimjh\\.nuget\\packages\\win2d.uwp\\1.25.0\\win2d.uwp.1.25.0.nupkg.sha512",
     "C:\\Users\\kimjh\\.nuget\\packages\\windowsazure.messaging.managed\\0.1.7.9\\windowsazure.messaging.managed.0.1.7.9.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package downgrade: Microsoft.Extensions.Logging from 5.0.0 to 3.1.17. Reference the package directly from the project to select a different version. \r\n SYPP -> Microsoft.AspNetCore.SignalR.Client 5.0.3 -> Microsoft.AspNetCore.SignalR.Client.Core 5.0.3 -> Microsoft.Extensions.Logging (>= 5.0.0) \r\n SYPP -> Microsoft.Extensions.Logging (>= 3.1.17)",
+      "libraryId": "Microsoft.Extensions.Logging",
+      "targetGraphs": [
+        "UAP,Version=v10.0.17134",
+        "UAP,Version=v10.0.17134/win10-arm",
+        "UAP,Version=v10.0.17134/win10-arm-aot",
+        "UAP,Version=v10.0.17134/win10-arm64-aot",
+        "UAP,Version=v10.0.17134/win10-x64",
+        "UAP,Version=v10.0.17134/win10-x64-aot",
+        "UAP,Version=v10.0.17134/win10-x86",
+        "UAP,Version=v10.0.17134/win10-x86-aot"
+      ]
+    }
+  ]
 }

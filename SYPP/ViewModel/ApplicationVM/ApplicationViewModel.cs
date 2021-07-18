@@ -46,6 +46,17 @@ namespace SYPP.ViewModel.ApplicationVM
         //
         // Event Handlers - Below
         //___________________________________________________________________________________
+        public async Task UpdateApplicationFavoriteStatus(string applicationID, bool IsFavorite)
+        {
+            try
+            {
+                await _socket.Application_IsFavorite_Update_Init(applicationID, IsFavorite);
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }
         public async Task PopulateWeeklySchedule()
         {
             try

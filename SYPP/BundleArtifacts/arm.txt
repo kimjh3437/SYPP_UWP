@@ -1,0 +1,6 @@
+MainPackage=C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\ARM\Release\SYPP_1.1.18.0_ARM.appx
+SymbolPackage=C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\obj\ARM\Release\Symbols\SYPP_1.1.18.0_ARM.appxsym
+ResourcePack=C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\ARM\Release\SYPP_1.1.18.0_scale-100.appx
+ResourcePack=C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\ARM\Release\SYPP_1.1.18.0_scale-125.appx
+ResourcePack=C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\ARM\Release\SYPP_1.1.18.0_scale-150.appx
+ResourcePack=C:\Users\kimjh\Desktop\SYPP\SYPP\SYPP\bin\ARM\Release\SYPP_1.1.18.0_scale-400.appx
