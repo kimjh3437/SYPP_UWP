@@ -113,27 +113,1484 @@ namespace SYPP.SYPP_XamlTypeInfo
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     internal partial class XamlTypeInfoProvider
     {
-        private global::Microsoft.UI.Xaml.Markup.ReflectionXamlMetadataProvider _Provider;
-        private global::Microsoft.UI.Xaml.Markup.ReflectionXamlMetadataProvider Provider
-        {
-            get
-            {
-                if (_Provider == null)
-                {
-                    _Provider = new global::Microsoft.UI.Xaml.Markup.ReflectionXamlMetadataProvider();
-                }
-                return _Provider;
-            }
-        }
-
         public global::Windows.UI.Xaml.Markup.IXamlType GetXamlTypeByType(global::System.Type type)
         {
-            return Provider.GetXamlType(type);
+            global::Windows.UI.Xaml.Markup.IXamlType xamlType;
+            lock (_xamlTypeCacheByType) 
+            { 
+                if (_xamlTypeCacheByType.TryGetValue(type, out xamlType))
+                {
+                    return xamlType;
+                }
+                int typeIndex = LookupTypeIndexByType(type);
+                if(typeIndex != -1)
+                {
+                    xamlType = CreateXamlType(typeIndex);
+                }
+                var userXamlType = xamlType as global::SYPP.SYPP_XamlTypeInfo.XamlUserType;
+                if(xamlType == null || (userXamlType != null && userXamlType.IsReturnTypeStub && !userXamlType.IsLocalType))
+                {
+                    global::Windows.UI.Xaml.Markup.IXamlType libXamlType = CheckOtherMetadataProvidersForType(type);
+                    if (libXamlType != null)
+                    {
+                        if(libXamlType.IsConstructible || xamlType == null)
+                        {
+                            xamlType = libXamlType;
+                        }
+                    }
+                }
+                if (xamlType != null)
+                {
+                    _xamlTypeCacheByName.Add(xamlType.FullName, xamlType);
+                    _xamlTypeCacheByType.Add(xamlType.UnderlyingType, xamlType);
+                }
+            }
+            return xamlType;
         }
 
         public global::Windows.UI.Xaml.Markup.IXamlType GetXamlTypeByName(string typeName)
         {
-            return Provider.GetXamlType(typeName);
+            if (string.IsNullOrEmpty(typeName))
+            {
+                return null;
+            }
+            global::Windows.UI.Xaml.Markup.IXamlType xamlType;
+            lock (_xamlTypeCacheByType)
+            {
+                if (_xamlTypeCacheByName.TryGetValue(typeName, out xamlType))
+                {
+                    return xamlType;
+                }
+                int typeIndex = LookupTypeIndexByName(typeName);
+                if(typeIndex != -1)
+                {
+                    xamlType = CreateXamlType(typeIndex);
+                }
+                var userXamlType = xamlType as global::SYPP.SYPP_XamlTypeInfo.XamlUserType;
+                if(xamlType == null || (userXamlType != null && userXamlType.IsReturnTypeStub && !userXamlType.IsLocalType))
+                {
+                    global::Windows.UI.Xaml.Markup.IXamlType libXamlType = CheckOtherMetadataProvidersForName(typeName);
+                    if (libXamlType != null)
+                    {
+                        if(libXamlType.IsConstructible || xamlType == null)
+                        {
+                            xamlType = libXamlType;
+                        }
+                    }
+                }
+                if (xamlType != null)
+                {
+                    _xamlTypeCacheByName.Add(xamlType.FullName, xamlType);
+                    _xamlTypeCacheByType.Add(xamlType.UnderlyingType, xamlType);
+                }
+            }
+            return xamlType;
+        }
+
+        public global::Windows.UI.Xaml.Markup.IXamlMember GetMemberByLongName(string longMemberName)
+        {
+            if (string.IsNullOrEmpty(longMemberName))
+            {
+                return null;
+            }
+            global::Windows.UI.Xaml.Markup.IXamlMember xamlMember;
+            lock (_xamlMembers)
+            {
+                if (_xamlMembers.TryGetValue(longMemberName, out xamlMember))
+                {
+                    return xamlMember;
+                }
+                xamlMember = CreateXamlMember(longMemberName);
+                if (xamlMember != null)
+                {
+                    _xamlMembers.Add(longMemberName, xamlMember);
+                }
+            }
+            return xamlMember;
+        }
+
+        global::System.Collections.Generic.Dictionary<string, global::Windows.UI.Xaml.Markup.IXamlType>
+                _xamlTypeCacheByName = new global::System.Collections.Generic.Dictionary<string, global::Windows.UI.Xaml.Markup.IXamlType>();
+
+        global::System.Collections.Generic.Dictionary<global::System.Type, global::Windows.UI.Xaml.Markup.IXamlType>
+                _xamlTypeCacheByType = new global::System.Collections.Generic.Dictionary<global::System.Type, global::Windows.UI.Xaml.Markup.IXamlType>();
+
+        global::System.Collections.Generic.Dictionary<string, global::Windows.UI.Xaml.Markup.IXamlMember>
+                _xamlMembers = new global::System.Collections.Generic.Dictionary<string, global::Windows.UI.Xaml.Markup.IXamlMember>();
+
+        string[] _typeNameTable = null;
+        global::System.Type[] _typeTable = null;
+
+        private void InitTypeTables()
+        {
+            _typeNameTable = new string[54];
+            _typeNameTable[0] = "SYPP.Converter.General.StringToColorConverter";
+            _typeNameTable[1] = "Object";
+            _typeNameTable[2] = "Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid";
+            _typeNameTable[3] = "Windows.UI.Xaml.Controls.Grid";
+            _typeNameTable[4] = "Windows.UI.Xaml.Controls.Panel";
+            _typeNameTable[5] = "Int32";
+            _typeNameTable[6] = "Windows.UI.Xaml.Controls.Orientation";
+            _typeNameTable[7] = "System.Nullable`1<Boolean>";
+            _typeNameTable[8] = "System.ValueType";
+            _typeNameTable[9] = "Boolean";
+            _typeNameTable[10] = "Windows.UI.Xaml.FrameworkElement";
+            _typeNameTable[11] = "SYPP.View.Application.ApplicationsPage";
+            _typeNameTable[12] = "Windows.UI.Xaml.Controls.Page";
+            _typeNameTable[13] = "Windows.UI.Xaml.Controls.UserControl";
+            _typeNameTable[14] = "SYPP.Converter.ConversationHistories.ConvoHistoryTimeConverter";
+            _typeNameTable[15] = "SYPP.Converter.Events.EventTimeConverter";
+            _typeNameTable[16] = "SYPP.View.Application.Detail.ApplicationDetailPage";
+            _typeNameTable[17] = "SYPP.Converter.Calendar.DateTimeToMonthConverter";
+            _typeNameTable[18] = "SYPP.Converter.Calendar.DateTimeToYearConverter";
+            _typeNameTable[19] = "SYPP.View.Application.NewApps.CreateApplicationPage";
+            _typeNameTable[20] = "SYPP.View.Application.NewTask.NewTaskPage";
+            _typeNameTable[21] = "SYPP.View.Auth.SignIn.SignInPage";
+            _typeNameTable[22] = "SYPP.View.Auth.SignUp.SignUpPage";
+            _typeNameTable[23] = "SYPP.Converter.Calendar.CalendarHeaderConverter";
+            _typeNameTable[24] = "SYPP.View.Calendar.CalendarPage";
+            _typeNameTable[25] = "SYPP.View.Company.CompaniesPage";
+            _typeNameTable[26] = "SYPP.View.Company.Detail.CompanyDetailedPage";
+            _typeNameTable[27] = "SYPP.View.Components.Checklists.ChecklistDetailedPage";
+            _typeNameTable[28] = "SYPP.View.Components.Contacts.ContactDetailedPage";
+            _typeNameTable[29] = "SYPP.View.Components.Events.EventDetailedPage";
+            _typeNameTable[30] = "SYPP.View.Components.FollowUps.FollowUpDetailedPage";
+            _typeNameTable[31] = "SYPP.View.Components.Notes.NoteDetailedPage";
+            _typeNameTable[32] = "SYPP.View.Components.UserControls.NotesUserControl";
+            _typeNameTable[33] = "Microsoft.Xaml.Interactivity.Interaction";
+            _typeNameTable[34] = "Microsoft.Xaml.Interactivity.BehaviorCollection";
+            _typeNameTable[35] = "Windows.UI.Xaml.DependencyObjectCollection";
+            _typeNameTable[36] = "Windows.UI.Xaml.DependencyObject";
+            _typeNameTable[37] = "Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.Blur";
+            _typeNameTable[38] = "Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase`1<Windows.UI.Xaml.FrameworkElement>";
+            _typeNameTable[39] = "Microsoft.Toolkit.Uwp.UI.Behaviors.BehaviorBase`1<Windows.UI.Xaml.FrameworkElement>";
+            _typeNameTable[40] = "Microsoft.Xaml.Interactivity.Behavior`1<Windows.UI.Xaml.FrameworkElement>";
+            _typeNameTable[41] = "Microsoft.Xaml.Interactivity.Behavior";
+            _typeNameTable[42] = "Double";
+            _typeNameTable[43] = "Microsoft.Toolkit.Uwp.UI.Animations.EasingType";
+            _typeNameTable[44] = "System.Enum";
+            _typeNameTable[45] = "Windows.UI.Xaml.Media.Animation.EasingMode";
+            _typeNameTable[46] = "SYPP.View.Main.MainBoard";
+            _typeNameTable[47] = "SYPP.View.Template.TemplateDetailedPage";
+            _typeNameTable[48] = "SYPP.View.Template.TemplatePage";
+            _typeNameTable[49] = "Microsoft.Toolkit.Uwp.UI.Extensions.NullableBool";
+            _typeNameTable[50] = "Windows.UI.Xaml.Markup.MarkupExtension";
+            _typeNameTable[51] = "Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice";
+            _typeNameTable[52] = "Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter";
+            _typeNameTable[53] = "Microsoft.Toolkit.Uwp.UI.Converters.DoubleToVisibilityConverter";
+
+            _typeTable = new global::System.Type[54];
+            _typeTable[0] = typeof(global::SYPP.Converter.General.StringToColorConverter);
+            _typeTable[1] = typeof(global::System.Object);
+            _typeTable[2] = typeof(global::Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid);
+            _typeTable[3] = typeof(global::Windows.UI.Xaml.Controls.Grid);
+            _typeTable[4] = typeof(global::Windows.UI.Xaml.Controls.Panel);
+            _typeTable[5] = typeof(global::System.Int32);
+            _typeTable[6] = typeof(global::Windows.UI.Xaml.Controls.Orientation);
+            _typeTable[7] = typeof(global::System.Nullable<global::System.Boolean>);
+            _typeTable[8] = typeof(global::System.ValueType);
+            _typeTable[9] = typeof(global::System.Boolean);
+            _typeTable[10] = typeof(global::Windows.UI.Xaml.FrameworkElement);
+            _typeTable[11] = typeof(global::SYPP.View.Application.ApplicationsPage);
+            _typeTable[12] = typeof(global::Windows.UI.Xaml.Controls.Page);
+            _typeTable[13] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
+            _typeTable[14] = typeof(global::SYPP.Converter.ConversationHistories.ConvoHistoryTimeConverter);
+            _typeTable[15] = typeof(global::SYPP.Converter.Events.EventTimeConverter);
+            _typeTable[16] = typeof(global::SYPP.View.Application.Detail.ApplicationDetailPage);
+            _typeTable[17] = typeof(global::SYPP.Converter.Calendar.DateTimeToMonthConverter);
+            _typeTable[18] = typeof(global::SYPP.Converter.Calendar.DateTimeToYearConverter);
+            _typeTable[19] = typeof(global::SYPP.View.Application.NewApps.CreateApplicationPage);
+            _typeTable[20] = typeof(global::SYPP.View.Application.NewTask.NewTaskPage);
+            _typeTable[21] = typeof(global::SYPP.View.Auth.SignIn.SignInPage);
+            _typeTable[22] = typeof(global::SYPP.View.Auth.SignUp.SignUpPage);
+            _typeTable[23] = typeof(global::SYPP.Converter.Calendar.CalendarHeaderConverter);
+            _typeTable[24] = typeof(global::SYPP.View.Calendar.CalendarPage);
+            _typeTable[25] = typeof(global::SYPP.View.Company.CompaniesPage);
+            _typeTable[26] = typeof(global::SYPP.View.Company.Detail.CompanyDetailedPage);
+            _typeTable[27] = typeof(global::SYPP.View.Components.Checklists.ChecklistDetailedPage);
+            _typeTable[28] = typeof(global::SYPP.View.Components.Contacts.ContactDetailedPage);
+            _typeTable[29] = typeof(global::SYPP.View.Components.Events.EventDetailedPage);
+            _typeTable[30] = typeof(global::SYPP.View.Components.FollowUps.FollowUpDetailedPage);
+            _typeTable[31] = typeof(global::SYPP.View.Components.Notes.NoteDetailedPage);
+            _typeTable[32] = typeof(global::SYPP.View.Components.UserControls.NotesUserControl);
+            _typeTable[33] = typeof(global::Microsoft.Xaml.Interactivity.Interaction);
+            _typeTable[34] = typeof(global::Microsoft.Xaml.Interactivity.BehaviorCollection);
+            _typeTable[35] = typeof(global::Windows.UI.Xaml.DependencyObjectCollection);
+            _typeTable[36] = typeof(global::Windows.UI.Xaml.DependencyObject);
+            _typeTable[37] = typeof(global::Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.Blur);
+            _typeTable[38] = typeof(global::Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase<global::Windows.UI.Xaml.FrameworkElement>);
+            _typeTable[39] = typeof(global::Microsoft.Toolkit.Uwp.UI.Behaviors.BehaviorBase<global::Windows.UI.Xaml.FrameworkElement>);
+            _typeTable[40] = typeof(global::Microsoft.Xaml.Interactivity.Behavior<global::Windows.UI.Xaml.FrameworkElement>);
+            _typeTable[41] = typeof(global::Microsoft.Xaml.Interactivity.Behavior);
+            _typeTable[42] = typeof(global::System.Double);
+            _typeTable[43] = typeof(global::Microsoft.Toolkit.Uwp.UI.Animations.EasingType);
+            _typeTable[44] = typeof(global::System.Enum);
+            _typeTable[45] = typeof(global::Windows.UI.Xaml.Media.Animation.EasingMode);
+            _typeTable[46] = typeof(global::SYPP.View.Main.MainBoard);
+            _typeTable[47] = typeof(global::SYPP.View.Template.TemplateDetailedPage);
+            _typeTable[48] = typeof(global::SYPP.View.Template.TemplatePage);
+            _typeTable[49] = typeof(global::Microsoft.Toolkit.Uwp.UI.Extensions.NullableBool);
+            _typeTable[50] = typeof(global::Windows.UI.Xaml.Markup.MarkupExtension);
+            _typeTable[51] = typeof(global::Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice);
+            _typeTable[52] = typeof(global::Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter);
+            _typeTable[53] = typeof(global::Microsoft.Toolkit.Uwp.UI.Converters.DoubleToVisibilityConverter);
+        }
+
+        private int LookupTypeIndexByName(string typeName)
+        {
+            if (_typeNameTable == null)
+            {
+                InitTypeTables();
+            }
+            for (int i=0; i<_typeNameTable.Length; i++)
+            {
+                if(0 == string.CompareOrdinal(_typeNameTable[i], typeName))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        private int LookupTypeIndexByType(global::System.Type type)
+        {
+            if (_typeTable == null)
+            {
+                InitTypeTables();
+            }
+            for(int i=0; i<_typeTable.Length; i++)
+            {
+                if(type == _typeTable[i])
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        private object Activate_0_StringToColorConverter() { return new global::SYPP.Converter.General.StringToColorConverter(); }
+        private object Activate_2_UniformGrid() { return new global::Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid(); }
+        private object Activate_11_ApplicationsPage() { return new global::SYPP.View.Application.ApplicationsPage(); }
+        private object Activate_14_ConvoHistoryTimeConverter() { return new global::SYPP.Converter.ConversationHistories.ConvoHistoryTimeConverter(); }
+        private object Activate_15_EventTimeConverter() { return new global::SYPP.Converter.Events.EventTimeConverter(); }
+        private object Activate_16_ApplicationDetailPage() { return new global::SYPP.View.Application.Detail.ApplicationDetailPage(); }
+        private object Activate_17_DateTimeToMonthConverter() { return new global::SYPP.Converter.Calendar.DateTimeToMonthConverter(); }
+        private object Activate_18_DateTimeToYearConverter() { return new global::SYPP.Converter.Calendar.DateTimeToYearConverter(); }
+        private object Activate_19_CreateApplicationPage() { return new global::SYPP.View.Application.NewApps.CreateApplicationPage(); }
+        private object Activate_20_NewTaskPage() { return new global::SYPP.View.Application.NewTask.NewTaskPage(); }
+        private object Activate_21_SignInPage() { return new global::SYPP.View.Auth.SignIn.SignInPage(); }
+        private object Activate_22_SignUpPage() { return new global::SYPP.View.Auth.SignUp.SignUpPage(); }
+        private object Activate_23_CalendarHeaderConverter() { return new global::SYPP.Converter.Calendar.CalendarHeaderConverter(); }
+        private object Activate_24_CalendarPage() { return new global::SYPP.View.Calendar.CalendarPage(); }
+        private object Activate_25_CompaniesPage() { return new global::SYPP.View.Company.CompaniesPage(); }
+        private object Activate_26_CompanyDetailedPage() { return new global::SYPP.View.Company.Detail.CompanyDetailedPage(); }
+        private object Activate_27_ChecklistDetailedPage() { return new global::SYPP.View.Components.Checklists.ChecklistDetailedPage(); }
+        private object Activate_28_ContactDetailedPage() { return new global::SYPP.View.Components.Contacts.ContactDetailedPage(); }
+        private object Activate_29_EventDetailedPage() { return new global::SYPP.View.Components.Events.EventDetailedPage(); }
+        private object Activate_30_FollowUpDetailedPage() { return new global::SYPP.View.Components.FollowUps.FollowUpDetailedPage(); }
+        private object Activate_31_NoteDetailedPage() { return new global::SYPP.View.Components.Notes.NoteDetailedPage(); }
+        private object Activate_32_NotesUserControl() { return new global::SYPP.View.Components.UserControls.NotesUserControl(); }
+        private object Activate_34_BehaviorCollection() { return new global::Microsoft.Xaml.Interactivity.BehaviorCollection(); }
+        private object Activate_37_Blur() { return new global::Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.Blur(); }
+        private object Activate_46_MainBoard() { return new global::SYPP.View.Main.MainBoard(); }
+        private object Activate_47_TemplateDetailedPage() { return new global::SYPP.View.Template.TemplateDetailedPage(); }
+        private object Activate_48_TemplatePage() { return new global::SYPP.View.Template.TemplatePage(); }
+        private object Activate_49_NullableBool() { return new global::Microsoft.Toolkit.Uwp.UI.Extensions.NullableBool(); }
+        private object Activate_51_OnDevice() { return new global::Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice(); }
+        private object Activate_52_DoubleToObjectConverter() { return new global::Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter(); }
+        private object Activate_53_DoubleToVisibilityConverter() { return new global::Microsoft.Toolkit.Uwp.UI.Converters.DoubleToVisibilityConverter(); }
+        private void VectorAdd_34_BehaviorCollection(object instance, object item)
+        {
+            var collection = (global::System.Collections.Generic.ICollection<global::Windows.UI.Xaml.DependencyObject>)instance;
+            var newItem = (global::Windows.UI.Xaml.DependencyObject)item;
+            collection.Add(newItem);
+        }
+
+        private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
+        {
+            global::SYPP.SYPP_XamlTypeInfo.XamlSystemBaseType xamlType = null;
+            global::SYPP.SYPP_XamlTypeInfo.XamlUserType userType;
+            string typeName = _typeNameTable[typeIndex];
+            global::System.Type type = _typeTable[typeIndex];
+
+            switch (typeIndex)
+            {
+
+            case 0:   //  SYPP.Converter.General.StringToColorConverter
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_0_StringToColorConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 1:   //  Object
+                xamlType = new global::SYPP.SYPP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 2:   //  Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Grid"));
+                userType.Activator = Activate_2_UniformGrid;
+                userType.AddMemberName("Columns");
+                userType.AddMemberName("Orientation");
+                userType.AddMemberName("FirstColumn");
+                userType.AddMemberName("Rows");
+                userType.AddMemberName("AutoLayout");
+                userType.SetIsBindable();
+                xamlType = userType;
+                break;
+
+            case 3:   //  Windows.UI.Xaml.Controls.Grid
+                xamlType = new global::SYPP.SYPP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 4:   //  Windows.UI.Xaml.Controls.Panel
+                xamlType = new global::SYPP.SYPP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 5:   //  Int32
+                xamlType = new global::SYPP.SYPP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 6:   //  Windows.UI.Xaml.Controls.Orientation
+                xamlType = new global::SYPP.SYPP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 7:   //  System.Nullable`1<Boolean>
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
+                userType.SetIsReturnTypeStub();
+                xamlType = userType;
+                break;
+
+            case 8:   //  System.ValueType
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                xamlType = userType;
+                break;
+
+            case 9:   //  Boolean
+                xamlType = new global::SYPP.SYPP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 10:   //  Windows.UI.Xaml.FrameworkElement
+                xamlType = new global::SYPP.SYPP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 11:   //  SYPP.View.Application.ApplicationsPage
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_11_ApplicationsPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 12:   //  Windows.UI.Xaml.Controls.Page
+                xamlType = new global::SYPP.SYPP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 13:   //  Windows.UI.Xaml.Controls.UserControl
+                xamlType = new global::SYPP.SYPP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 14:   //  SYPP.Converter.ConversationHistories.ConvoHistoryTimeConverter
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_14_ConvoHistoryTimeConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 15:   //  SYPP.Converter.Events.EventTimeConverter
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_15_EventTimeConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 16:   //  SYPP.View.Application.Detail.ApplicationDetailPage
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_16_ApplicationDetailPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 17:   //  SYPP.Converter.Calendar.DateTimeToMonthConverter
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_17_DateTimeToMonthConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 18:   //  SYPP.Converter.Calendar.DateTimeToYearConverter
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_18_DateTimeToYearConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 19:   //  SYPP.View.Application.NewApps.CreateApplicationPage
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_19_CreateApplicationPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 20:   //  SYPP.View.Application.NewTask.NewTaskPage
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_20_NewTaskPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 21:   //  SYPP.View.Auth.SignIn.SignInPage
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_21_SignInPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 22:   //  SYPP.View.Auth.SignUp.SignUpPage
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_22_SignUpPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 23:   //  SYPP.Converter.Calendar.CalendarHeaderConverter
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_23_CalendarHeaderConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 24:   //  SYPP.View.Calendar.CalendarPage
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_24_CalendarPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 25:   //  SYPP.View.Company.CompaniesPage
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_25_CompaniesPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 26:   //  SYPP.View.Company.Detail.CompanyDetailedPage
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_26_CompanyDetailedPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 27:   //  SYPP.View.Components.Checklists.ChecklistDetailedPage
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_27_ChecklistDetailedPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 28:   //  SYPP.View.Components.Contacts.ContactDetailedPage
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_28_ContactDetailedPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 29:   //  SYPP.View.Components.Events.EventDetailedPage
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_29_EventDetailedPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 30:   //  SYPP.View.Components.FollowUps.FollowUpDetailedPage
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_30_FollowUpDetailedPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 31:   //  SYPP.View.Components.Notes.NoteDetailedPage
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_31_NoteDetailedPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 32:   //  SYPP.View.Components.UserControls.NotesUserControl
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
+                userType.Activator = Activate_32_NotesUserControl;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 33:   //  Microsoft.Xaml.Interactivity.Interaction
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.AddMemberName("Behaviors");
+                xamlType = userType;
+                break;
+
+            case 34:   //  Microsoft.Xaml.Interactivity.BehaviorCollection
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObjectCollection"));
+                userType.CollectionAdd = VectorAdd_34_BehaviorCollection;
+                userType.SetIsReturnTypeStub();
+                xamlType = userType;
+                break;
+
+            case 35:   //  Windows.UI.Xaml.DependencyObjectCollection
+                xamlType = new global::SYPP.SYPP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 36:   //  Windows.UI.Xaml.DependencyObject
+                xamlType = new global::SYPP.SYPP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 37:   //  Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.Blur
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase`1<Windows.UI.Xaml.FrameworkElement>"));
+                userType.Activator = Activate_37_Blur;
+                userType.AddMemberName("Value");
+                xamlType = userType;
+                break;
+
+            case 38:   //  Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase`1<Windows.UI.Xaml.FrameworkElement>
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Behaviors.BehaviorBase`1<Windows.UI.Xaml.FrameworkElement>"));
+                userType.AddMemberName("Delay");
+                userType.AddMemberName("AutomaticallyStart");
+                userType.AddMemberName("Duration");
+                userType.AddMemberName("EasingType");
+                userType.AddMemberName("EasingMode");
+                xamlType = userType;
+                break;
+
+            case 39:   //  Microsoft.Toolkit.Uwp.UI.Behaviors.BehaviorBase`1<Windows.UI.Xaml.FrameworkElement>
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Microsoft.Xaml.Interactivity.Behavior`1<Windows.UI.Xaml.FrameworkElement>"));
+                xamlType = userType;
+                break;
+
+            case 40:   //  Microsoft.Xaml.Interactivity.Behavior`1<Windows.UI.Xaml.FrameworkElement>
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Microsoft.Xaml.Interactivity.Behavior"));
+                userType.AddMemberName("AssociatedObject");
+                xamlType = userType;
+                break;
+
+            case 41:   //  Microsoft.Xaml.Interactivity.Behavior
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
+                xamlType = userType;
+                break;
+
+            case 42:   //  Double
+                xamlType = new global::SYPP.SYPP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 43:   //  Microsoft.Toolkit.Uwp.UI.Animations.EasingType
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
+                userType.AddEnumValue("Default", global::Microsoft.Toolkit.Uwp.UI.Animations.EasingType.Default);
+                userType.AddEnumValue("Linear", global::Microsoft.Toolkit.Uwp.UI.Animations.EasingType.Linear);
+                userType.AddEnumValue("Cubic", global::Microsoft.Toolkit.Uwp.UI.Animations.EasingType.Cubic);
+                userType.AddEnumValue("Back", global::Microsoft.Toolkit.Uwp.UI.Animations.EasingType.Back);
+                userType.AddEnumValue("Bounce", global::Microsoft.Toolkit.Uwp.UI.Animations.EasingType.Bounce);
+                userType.AddEnumValue("Elastic", global::Microsoft.Toolkit.Uwp.UI.Animations.EasingType.Elastic);
+                userType.AddEnumValue("Circle", global::Microsoft.Toolkit.Uwp.UI.Animations.EasingType.Circle);
+                userType.AddEnumValue("Quadratic", global::Microsoft.Toolkit.Uwp.UI.Animations.EasingType.Quadratic);
+                userType.AddEnumValue("Quartic", global::Microsoft.Toolkit.Uwp.UI.Animations.EasingType.Quartic);
+                userType.AddEnumValue("Quintic", global::Microsoft.Toolkit.Uwp.UI.Animations.EasingType.Quintic);
+                userType.AddEnumValue("Sine", global::Microsoft.Toolkit.Uwp.UI.Animations.EasingType.Sine);
+                xamlType = userType;
+                break;
+
+            case 44:   //  System.Enum
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
+                xamlType = userType;
+                break;
+
+            case 45:   //  Windows.UI.Xaml.Media.Animation.EasingMode
+                xamlType = new global::SYPP.SYPP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 46:   //  SYPP.View.Main.MainBoard
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_46_MainBoard;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 47:   //  SYPP.View.Template.TemplateDetailedPage
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_47_TemplateDetailedPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 48:   //  SYPP.View.Template.TemplatePage
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_48_TemplatePage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 49:   //  Microsoft.Toolkit.Uwp.UI.Extensions.NullableBool
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Markup.MarkupExtension"));
+                userType.Activator = Activate_49_NullableBool;
+                userType.AddMemberName("Value");
+                userType.AddMemberName("IsNull");
+                userType.SetIsBindable();
+                userType.SetIsMarkupExtension();
+                xamlType = userType;
+                break;
+
+            case 50:   //  Windows.UI.Xaml.Markup.MarkupExtension
+                xamlType = new global::SYPP.SYPP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 51:   //  Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Markup.MarkupExtension"));
+                userType.Activator = Activate_51_OnDevice;
+                userType.AddMemberName("Default");
+                userType.AddMemberName("Desktop");
+                userType.AddMemberName("Holographic");
+                userType.AddMemberName("IoT");
+                userType.AddMemberName("Team");
+                userType.AddMemberName("Xbox");
+                userType.SetIsBindable();
+                userType.SetIsMarkupExtension();
+                xamlType = userType;
+                break;
+
+            case 52:   //  Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
+                userType.Activator = Activate_52_DoubleToObjectConverter;
+                userType.AddMemberName("TrueValue");
+                userType.AddMemberName("FalseValue");
+                userType.AddMemberName("NullValue");
+                userType.AddMemberName("GreaterThan");
+                userType.AddMemberName("LessThan");
+                userType.SetIsBindable();
+                xamlType = userType;
+                break;
+
+            case 53:   //  Microsoft.Toolkit.Uwp.UI.Converters.DoubleToVisibilityConverter
+                userType = new global::SYPP.SYPP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter"));
+                userType.Activator = Activate_53_DoubleToVisibilityConverter;
+                userType.SetIsBindable();
+                xamlType = userType;
+                break;
+            }
+            return xamlType;
+        }
+
+        private global::System.Collections.Generic.List<global::Windows.UI.Xaml.Markup.IXamlMetadataProvider> _otherProviders;
+        private global::System.Collections.Generic.List<global::Windows.UI.Xaml.Markup.IXamlMetadataProvider> OtherProviders
+        {
+            get
+            {
+                if(_otherProviders == null)
+                {
+                    var otherProviders = new global::System.Collections.Generic.List<global::Windows.UI.Xaml.Markup.IXamlMetadataProvider>();
+                    global::Windows.UI.Xaml.Markup.IXamlMetadataProvider provider;
+                    provider = new global::Microsoft.Toolkit.Uwp.UI.Controls.Microsoft_Toolkit_Uwp_UI_Controls_XamlTypeInfo.XamlMetaDataProvider() as global::Windows.UI.Xaml.Markup.IXamlMetadataProvider;
+                    otherProviders.Add(provider); 
+                    _otherProviders = otherProviders;
+                }
+                return _otherProviders;
+            }
+        }
+
+        private global::Windows.UI.Xaml.Markup.IXamlType CheckOtherMetadataProvidersForName(string typeName)
+        {
+            global::Windows.UI.Xaml.Markup.IXamlType xamlType = null;
+            global::Windows.UI.Xaml.Markup.IXamlType foundXamlType = null;
+            foreach(global::Windows.UI.Xaml.Markup.IXamlMetadataProvider xmp in OtherProviders)
+            {
+                xamlType = xmp.GetXamlType(typeName);
+                if(xamlType != null)
+                {
+                    if(xamlType.IsConstructible)    // not Constructible means it might be a Return Type Stub
+                    {
+                        return xamlType;
+                    }
+                    foundXamlType = xamlType;
+                }
+            }
+            return foundXamlType;
+        }
+
+        private global::Windows.UI.Xaml.Markup.IXamlType CheckOtherMetadataProvidersForType(global::System.Type type)
+        {
+            global::Windows.UI.Xaml.Markup.IXamlType xamlType = null;
+            global::Windows.UI.Xaml.Markup.IXamlType foundXamlType = null;
+            foreach(global::Windows.UI.Xaml.Markup.IXamlMetadataProvider xmp in OtherProviders)
+            {
+                xamlType = xmp.GetXamlType(type);
+                if(xamlType != null)
+                {
+                    if(xamlType.IsConstructible)    // not Constructible means it might be a Return Type Stub
+                    {
+                        return xamlType;
+                    }
+                    foundXamlType = xamlType;
+                }
+            }
+            return foundXamlType;
+        }
+
+        private object get_0_UniformGrid_Columns(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid)instance;
+            return that.Columns;
+        }
+        private void set_0_UniformGrid_Columns(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid)instance;
+            that.Columns = (global::System.Int32)Value;
+        }
+        private object get_1_UniformGrid_Orientation(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid)instance;
+            return that.Orientation;
+        }
+        private void set_1_UniformGrid_Orientation(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid)instance;
+            that.Orientation = (global::Windows.UI.Xaml.Controls.Orientation)Value;
+        }
+        private object get_2_UniformGrid_FirstColumn(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid)instance;
+            return that.FirstColumn;
+        }
+        private void set_2_UniformGrid_FirstColumn(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid)instance;
+            that.FirstColumn = (global::System.Int32)Value;
+        }
+        private object get_3_UniformGrid_Rows(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid)instance;
+            return that.Rows;
+        }
+        private void set_3_UniformGrid_Rows(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid)instance;
+            that.Rows = (global::System.Int32)Value;
+        }
+        private object get_4_UniformGrid_AutoLayout(object instance)
+        {
+            return global::Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid.GetAutoLayout((global::Windows.UI.Xaml.FrameworkElement)instance);
+        }
+        private void set_4_UniformGrid_AutoLayout(object instance, object Value)
+        {
+            global::Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid.SetAutoLayout((global::Windows.UI.Xaml.FrameworkElement)instance, (global::System.Nullable<global::System.Boolean>)Value);
+        }
+        private object get_5_Interaction_Behaviors(object instance)
+        {
+            return global::Microsoft.Xaml.Interactivity.Interaction.GetBehaviors((global::Windows.UI.Xaml.DependencyObject)instance);
+        }
+        private void set_5_Interaction_Behaviors(object instance, object Value)
+        {
+            global::Microsoft.Xaml.Interactivity.Interaction.SetBehaviors((global::Windows.UI.Xaml.DependencyObject)instance, (global::Microsoft.Xaml.Interactivity.BehaviorCollection)Value);
+        }
+        private object get_6_Blur_Value(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.Blur)instance;
+            return that.Value;
+        }
+        private void set_6_Blur_Value(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.Blur)instance;
+            that.Value = (global::System.Double)Value;
+        }
+        private object get_7_CompositionBehaviorBase_Delay(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase<global::Windows.UI.Xaml.FrameworkElement>)instance;
+            return that.Delay;
+        }
+        private void set_7_CompositionBehaviorBase_Delay(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase<global::Windows.UI.Xaml.FrameworkElement>)instance;
+            that.Delay = (global::System.Double)Value;
+        }
+        private object get_8_CompositionBehaviorBase_AutomaticallyStart(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase<global::Windows.UI.Xaml.FrameworkElement>)instance;
+            return that.AutomaticallyStart;
+        }
+        private void set_8_CompositionBehaviorBase_AutomaticallyStart(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase<global::Windows.UI.Xaml.FrameworkElement>)instance;
+            that.AutomaticallyStart = (global::System.Boolean)Value;
+        }
+        private object get_9_CompositionBehaviorBase_Duration(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase<global::Windows.UI.Xaml.FrameworkElement>)instance;
+            return that.Duration;
+        }
+        private void set_9_CompositionBehaviorBase_Duration(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase<global::Windows.UI.Xaml.FrameworkElement>)instance;
+            that.Duration = (global::System.Double)Value;
+        }
+        private object get_10_CompositionBehaviorBase_EasingType(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase<global::Windows.UI.Xaml.FrameworkElement>)instance;
+            return that.EasingType;
+        }
+        private void set_10_CompositionBehaviorBase_EasingType(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase<global::Windows.UI.Xaml.FrameworkElement>)instance;
+            that.EasingType = (global::Microsoft.Toolkit.Uwp.UI.Animations.EasingType)Value;
+        }
+        private object get_11_CompositionBehaviorBase_EasingMode(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase<global::Windows.UI.Xaml.FrameworkElement>)instance;
+            return that.EasingMode;
+        }
+        private void set_11_CompositionBehaviorBase_EasingMode(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase<global::Windows.UI.Xaml.FrameworkElement>)instance;
+            that.EasingMode = (global::Windows.UI.Xaml.Media.Animation.EasingMode)Value;
+        }
+        private object get_12_Behavior_AssociatedObject(object instance)
+        {
+            var that = (global::Microsoft.Xaml.Interactivity.Behavior<global::Windows.UI.Xaml.FrameworkElement>)instance;
+            return that.AssociatedObject;
+        }
+        private object get_13_NullableBool_Value(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Extensions.NullableBool)instance;
+            return that.Value;
+        }
+        private void set_13_NullableBool_Value(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Extensions.NullableBool)instance;
+            that.Value = (global::System.Boolean)Value;
+        }
+        private object get_14_NullableBool_IsNull(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Extensions.NullableBool)instance;
+            return that.IsNull;
+        }
+        private void set_14_NullableBool_IsNull(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Extensions.NullableBool)instance;
+            that.IsNull = (global::System.Boolean)Value;
+        }
+        private object get_15_OnDevice_Default(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice)instance;
+            return that.Default;
+        }
+        private void set_15_OnDevice_Default(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice)instance;
+            that.Default = (global::System.Object)Value;
+        }
+        private object get_16_OnDevice_Desktop(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice)instance;
+            return that.Desktop;
+        }
+        private void set_16_OnDevice_Desktop(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice)instance;
+            that.Desktop = (global::System.Object)Value;
+        }
+        private object get_17_OnDevice_Holographic(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice)instance;
+            return that.Holographic;
+        }
+        private void set_17_OnDevice_Holographic(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice)instance;
+            that.Holographic = (global::System.Object)Value;
+        }
+        private object get_18_OnDevice_IoT(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice)instance;
+            return that.IoT;
+        }
+        private void set_18_OnDevice_IoT(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice)instance;
+            that.IoT = (global::System.Object)Value;
+        }
+        private object get_19_OnDevice_Team(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice)instance;
+            return that.Team;
+        }
+        private void set_19_OnDevice_Team(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice)instance;
+            that.Team = (global::System.Object)Value;
+        }
+        private object get_20_OnDevice_Xbox(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice)instance;
+            return that.Xbox;
+        }
+        private void set_20_OnDevice_Xbox(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice)instance;
+            that.Xbox = (global::System.Object)Value;
+        }
+        private object get_21_DoubleToObjectConverter_TrueValue(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter)instance;
+            return that.TrueValue;
+        }
+        private void set_21_DoubleToObjectConverter_TrueValue(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter)instance;
+            that.TrueValue = (global::System.Object)Value;
+        }
+        private object get_22_DoubleToObjectConverter_FalseValue(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter)instance;
+            return that.FalseValue;
+        }
+        private void set_22_DoubleToObjectConverter_FalseValue(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter)instance;
+            that.FalseValue = (global::System.Object)Value;
+        }
+        private object get_23_DoubleToObjectConverter_NullValue(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter)instance;
+            return that.NullValue;
+        }
+        private void set_23_DoubleToObjectConverter_NullValue(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter)instance;
+            that.NullValue = (global::System.Object)Value;
+        }
+        private object get_24_DoubleToObjectConverter_GreaterThan(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter)instance;
+            return that.GreaterThan;
+        }
+        private void set_24_DoubleToObjectConverter_GreaterThan(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter)instance;
+            that.GreaterThan = (global::System.Double)Value;
+        }
+        private object get_25_DoubleToObjectConverter_LessThan(object instance)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter)instance;
+            return that.LessThan;
+        }
+        private void set_25_DoubleToObjectConverter_LessThan(object instance, object Value)
+        {
+            var that = (global::Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter)instance;
+            that.LessThan = (global::System.Double)Value;
+        }
+
+        private global::Windows.UI.Xaml.Markup.IXamlMember CreateXamlMember(string longMemberName)
+        {
+            global::SYPP.SYPP_XamlTypeInfo.XamlMember xamlMember = null;
+            global::SYPP.SYPP_XamlTypeInfo.XamlUserType userType;
+
+            switch (longMemberName)
+            {
+            case "Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid.Columns":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "Columns", "Int32");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_0_UniformGrid_Columns;
+                xamlMember.Setter = set_0_UniformGrid_Columns;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid.Orientation":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "Orientation", "Windows.UI.Xaml.Controls.Orientation");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_1_UniformGrid_Orientation;
+                xamlMember.Setter = set_1_UniformGrid_Orientation;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid.FirstColumn":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "FirstColumn", "Int32");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_2_UniformGrid_FirstColumn;
+                xamlMember.Setter = set_2_UniformGrid_FirstColumn;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid.Rows":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "Rows", "Int32");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_3_UniformGrid_Rows;
+                xamlMember.Setter = set_3_UniformGrid_Rows;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid.AutoLayout":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Controls.UniformGrid");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "AutoLayout", "System.Nullable`1<Boolean>");
+                xamlMember.SetTargetTypeName("Windows.UI.Xaml.FrameworkElement");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.SetIsAttachable();
+                xamlMember.Getter = get_4_UniformGrid_AutoLayout;
+                xamlMember.Setter = set_4_UniformGrid_AutoLayout;
+                break;
+            case "Microsoft.Xaml.Interactivity.Interaction.Behaviors":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactivity.Interaction");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "Behaviors", "Microsoft.Xaml.Interactivity.BehaviorCollection");
+                xamlMember.SetTargetTypeName("Windows.UI.Xaml.DependencyObject");
+                xamlMember.SetIsAttachable();
+                xamlMember.Getter = get_5_Interaction_Behaviors;
+                xamlMember.Setter = set_5_Interaction_Behaviors;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.Blur.Value":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.Blur");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "Value", "Double");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_6_Blur_Value;
+                xamlMember.Setter = set_6_Blur_Value;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase`1<Windows.UI.Xaml.FrameworkElement>.Delay":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase`1<Windows.UI.Xaml.FrameworkElement>");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "Delay", "Double");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_7_CompositionBehaviorBase_Delay;
+                xamlMember.Setter = set_7_CompositionBehaviorBase_Delay;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase`1<Windows.UI.Xaml.FrameworkElement>.AutomaticallyStart":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase`1<Windows.UI.Xaml.FrameworkElement>");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "AutomaticallyStart", "Boolean");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_8_CompositionBehaviorBase_AutomaticallyStart;
+                xamlMember.Setter = set_8_CompositionBehaviorBase_AutomaticallyStart;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase`1<Windows.UI.Xaml.FrameworkElement>.Duration":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase`1<Windows.UI.Xaml.FrameworkElement>");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "Duration", "Double");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_9_CompositionBehaviorBase_Duration;
+                xamlMember.Setter = set_9_CompositionBehaviorBase_Duration;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase`1<Windows.UI.Xaml.FrameworkElement>.EasingType":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase`1<Windows.UI.Xaml.FrameworkElement>");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "EasingType", "Microsoft.Toolkit.Uwp.UI.Animations.EasingType");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_10_CompositionBehaviorBase_EasingType;
+                xamlMember.Setter = set_10_CompositionBehaviorBase_EasingType;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase`1<Windows.UI.Xaml.FrameworkElement>.EasingMode":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Animations.Behaviors.CompositionBehaviorBase`1<Windows.UI.Xaml.FrameworkElement>");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "EasingMode", "Windows.UI.Xaml.Media.Animation.EasingMode");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_11_CompositionBehaviorBase_EasingMode;
+                xamlMember.Setter = set_11_CompositionBehaviorBase_EasingMode;
+                break;
+            case "Microsoft.Xaml.Interactivity.Behavior`1<Windows.UI.Xaml.FrameworkElement>.AssociatedObject":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactivity.Behavior`1<Windows.UI.Xaml.FrameworkElement>");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "AssociatedObject", "Windows.UI.Xaml.FrameworkElement");
+                xamlMember.Getter = get_12_Behavior_AssociatedObject;
+                xamlMember.SetIsReadOnly();
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Extensions.NullableBool.Value":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Extensions.NullableBool");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "Value", "Boolean");
+                xamlMember.Getter = get_13_NullableBool_Value;
+                xamlMember.Setter = set_13_NullableBool_Value;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Extensions.NullableBool.IsNull":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Extensions.NullableBool");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "IsNull", "Boolean");
+                xamlMember.Getter = get_14_NullableBool_IsNull;
+                xamlMember.Setter = set_14_NullableBool_IsNull;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice.Default":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "Default", "Object");
+                xamlMember.Getter = get_15_OnDevice_Default;
+                xamlMember.Setter = set_15_OnDevice_Default;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice.Desktop":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "Desktop", "Object");
+                xamlMember.Getter = get_16_OnDevice_Desktop;
+                xamlMember.Setter = set_16_OnDevice_Desktop;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice.Holographic":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "Holographic", "Object");
+                xamlMember.Getter = get_17_OnDevice_Holographic;
+                xamlMember.Setter = set_17_OnDevice_Holographic;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice.IoT":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "IoT", "Object");
+                xamlMember.Getter = get_18_OnDevice_IoT;
+                xamlMember.Setter = set_18_OnDevice_IoT;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice.Team":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "Team", "Object");
+                xamlMember.Getter = get_19_OnDevice_Team;
+                xamlMember.Setter = set_19_OnDevice_Team;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice.Xbox":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Extensions.Markup.OnDevice");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "Xbox", "Object");
+                xamlMember.Getter = get_20_OnDevice_Xbox;
+                xamlMember.Setter = set_20_OnDevice_Xbox;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter.TrueValue":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "TrueValue", "Object");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_21_DoubleToObjectConverter_TrueValue;
+                xamlMember.Setter = set_21_DoubleToObjectConverter_TrueValue;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter.FalseValue":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "FalseValue", "Object");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_22_DoubleToObjectConverter_FalseValue;
+                xamlMember.Setter = set_22_DoubleToObjectConverter_FalseValue;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter.NullValue":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "NullValue", "Object");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_23_DoubleToObjectConverter_NullValue;
+                xamlMember.Setter = set_23_DoubleToObjectConverter_NullValue;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter.GreaterThan":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "GreaterThan", "Double");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_24_DoubleToObjectConverter_GreaterThan;
+                xamlMember.Setter = set_24_DoubleToObjectConverter_GreaterThan;
+                break;
+            case "Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter.LessThan":
+                userType = (global::SYPP.SYPP_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Toolkit.Uwp.UI.Converters.DoubleToObjectConverter");
+                xamlMember = new global::SYPP.SYPP_XamlTypeInfo.XamlMember(this, "LessThan", "Double");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_25_DoubleToObjectConverter_LessThan;
+                xamlMember.Setter = set_25_DoubleToObjectConverter_LessThan;
+                break;
+            }
+            return xamlMember;
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 10.0.18362.1")]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class XamlSystemBaseType : global::Windows.UI.Xaml.Markup.IXamlType
+    {
+        string _fullName;
+        global::System.Type _underlyingType;
+
+        public XamlSystemBaseType(string fullName, global::System.Type underlyingType)
+        {
+            _fullName = fullName;
+            _underlyingType = underlyingType;
+        }
+
+        public string FullName { get { return _fullName; } }
+
+        public global::System.Type UnderlyingType
+        {
+            get
+            {
+                return _underlyingType;
+            }
+        }
+
+        virtual public global::Windows.UI.Xaml.Markup.IXamlType BaseType { get { throw new global::System.NotImplementedException(); } }
+        virtual public global::Windows.UI.Xaml.Markup.IXamlMember ContentProperty { get { throw new global::System.NotImplementedException(); } }
+        virtual public global::Windows.UI.Xaml.Markup.IXamlMember GetMember(string name) { throw new global::System.NotImplementedException(); }
+        virtual public bool IsArray { get { throw new global::System.NotImplementedException(); } }
+        virtual public bool IsCollection { get { throw new global::System.NotImplementedException(); } }
+        virtual public bool IsConstructible { get { throw new global::System.NotImplementedException(); } }
+        virtual public bool IsDictionary { get { throw new global::System.NotImplementedException(); } }
+        virtual public bool IsMarkupExtension { get { throw new global::System.NotImplementedException(); } }
+        virtual public bool IsBindable { get { throw new global::System.NotImplementedException(); } }
+        virtual public bool IsReturnTypeStub { get { throw new global::System.NotImplementedException(); } }
+        virtual public bool IsLocalType { get { throw new global::System.NotImplementedException(); } }
+        virtual public global::Windows.UI.Xaml.Markup.IXamlType ItemType { get { throw new global::System.NotImplementedException(); } }
+        virtual public global::Windows.UI.Xaml.Markup.IXamlType KeyType { get { throw new global::System.NotImplementedException(); } }
+        virtual public object ActivateInstance() { throw new global::System.NotImplementedException(); }
+        virtual public void AddToMap(object instance, object key, object item)  { throw new global::System.NotImplementedException(); }
+        virtual public void AddToVector(object instance, object item)  { throw new global::System.NotImplementedException(); }
+        virtual public void RunInitializer()   { throw new global::System.NotImplementedException(); }
+        virtual public object CreateFromString(string input)   { throw new global::System.NotImplementedException(); }
+    }
+    
+    internal delegate object Activator();
+    internal delegate void AddToCollection(object instance, object item);
+    internal delegate void AddToDictionary(object instance, object key, object item);
+    internal delegate object CreateFromStringMethod(string args);
+
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 10.0.18362.1")]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class XamlUserType : global::SYPP.SYPP_XamlTypeInfo.XamlSystemBaseType
+    {
+        global::SYPP.SYPP_XamlTypeInfo.XamlTypeInfoProvider _provider;
+        global::Windows.UI.Xaml.Markup.IXamlType _baseType;
+        bool _isArray;
+        bool _isMarkupExtension;
+        bool _isBindable;
+        bool _isReturnTypeStub;
+        bool _isLocalType;
+
+        string _contentPropertyName;
+        string _itemTypeName;
+        string _keyTypeName;
+        global::System.Collections.Generic.Dictionary<string, string> _memberNames;
+        global::System.Collections.Generic.Dictionary<string, object> _enumValues;
+
+        public XamlUserType(global::SYPP.SYPP_XamlTypeInfo.XamlTypeInfoProvider provider, string fullName, global::System.Type fullType, global::Windows.UI.Xaml.Markup.IXamlType baseType)
+            :base(fullName, fullType)
+        {
+            _provider = provider;
+            _baseType = baseType;
+        }
+
+        // --- Interface methods ----
+
+        override public global::Windows.UI.Xaml.Markup.IXamlType BaseType { get { return _baseType; } }
+        override public bool IsArray { get { return _isArray; } }
+        override public bool IsCollection { get { return (CollectionAdd != null); } }
+        override public bool IsConstructible { get { return (Activator != null); } }
+        override public bool IsDictionary { get { return (DictionaryAdd != null); } }
+        override public bool IsMarkupExtension { get { return _isMarkupExtension; } }
+        override public bool IsBindable { get { return _isBindable; } }
+        override public bool IsReturnTypeStub { get { return _isReturnTypeStub; } }
+        override public bool IsLocalType { get { return _isLocalType; } }
+
+        override public global::Windows.UI.Xaml.Markup.IXamlMember ContentProperty
+        {
+            get { return _provider.GetMemberByLongName(_contentPropertyName); }
+        }
+
+        override public global::Windows.UI.Xaml.Markup.IXamlType ItemType
+        {
+            get { return _provider.GetXamlTypeByName(_itemTypeName); }
+        }
+
+        override public global::Windows.UI.Xaml.Markup.IXamlType KeyType
+        {
+            get { return _provider.GetXamlTypeByName(_keyTypeName); }
+        }
+
+        override public global::Windows.UI.Xaml.Markup.IXamlMember GetMember(string name)
+        {
+            if (_memberNames == null)
+            {
+                return null;
+            }
+            string longName;
+            if (_memberNames.TryGetValue(name, out longName))
+            {
+                return _provider.GetMemberByLongName(longName);
+            }
+            return null;
+        }
+
+        override public object ActivateInstance()
+        {
+            return Activator(); 
+        }
+
+        override public void AddToMap(object instance, object key, object item) 
+        {
+            DictionaryAdd(instance, key, item);
+        }
+
+        override public void AddToVector(object instance, object item)
+        {
+            CollectionAdd(instance, item);
+        }
+
+        override public void RunInitializer() 
+        {
+            global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(UnderlyingType.TypeHandle);
+        }
+
+        override public object CreateFromString(string input)
+        {
+            if (CreateFromStringMethod != null)
+            {
+                return this.CreateFromStringMethod(input);
+            }
+            else if (_enumValues != null)
+            {
+                int value = 0;
+
+                string[] valueParts = input.Split(',');
+
+                foreach (string valuePart in valueParts) 
+                {
+                    object partValue;
+                    int enumFieldValue = 0;
+                    try
+                    {
+                        if (_enumValues.TryGetValue(valuePart.Trim(), out partValue))
+                        {
+                            enumFieldValue = global::System.Convert.ToInt32(partValue);
+                        }
+                        else
+                        {
+                            try
+                            {
+                                enumFieldValue = global::System.Convert.ToInt32(valuePart.Trim());
+                            }
+                            catch( global::System.FormatException )
+                            {
+                                foreach( string key in _enumValues.Keys )
+                                {
+                                    if( string.Compare(valuePart.Trim(), key, global::System.StringComparison.OrdinalIgnoreCase) == 0 )
+                                    {
+                                        if( _enumValues.TryGetValue(key.Trim(), out partValue) )
+                                        {
+                                            enumFieldValue = global::System.Convert.ToInt32(partValue);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        value |= enumFieldValue; 
+                    }
+                    catch( global::System.FormatException )
+                    {
+                        throw new global::System.ArgumentException(input, FullName);
+                    }
+                }
+
+                return value; 
+            }
+            throw new global::System.ArgumentException(input, FullName);
+        }
+
+        // --- End of Interface methods
+
+        public Activator Activator { get; set; }
+        public AddToCollection CollectionAdd { get; set; }
+        public AddToDictionary DictionaryAdd { get; set; }
+        public CreateFromStringMethod CreateFromStringMethod {get; set; }
+
+        public void SetContentPropertyName(string contentPropertyName)
+        {
+            _contentPropertyName = contentPropertyName;
+        }
+
+        public void SetIsArray()
+        {
+            _isArray = true; 
+        }
+
+        public void SetIsMarkupExtension()
+        {
+            _isMarkupExtension = true;
+        }
+
+        public void SetIsBindable()
+        {
+            _isBindable = true;
+        }
+
+        public void SetIsReturnTypeStub()
+        {
+            _isReturnTypeStub = true;
+        }
+
+        public void SetIsLocalType()
+        {
+            _isLocalType = true;
+        }
+
+        public void SetItemTypeName(string itemTypeName)
+        {
+            _itemTypeName = itemTypeName;
+        }
+
+        public void SetKeyTypeName(string keyTypeName)
+        {
+            _keyTypeName = keyTypeName;
+        }
+
+        public void AddMemberName(string shortName)
+        {
+            if(_memberNames == null)
+            {
+                _memberNames =  new global::System.Collections.Generic.Dictionary<string,string>();
+            }
+            _memberNames.Add(shortName, FullName + "." + shortName);
+        }
+
+        public void AddEnumValue(string name, object value)
+        {
+            if (_enumValues == null)
+            {
+                _enumValues = new global::System.Collections.Generic.Dictionary<string, object>();
+            }
+            _enumValues.Add(name, value);
+        }
+    }
+
+    internal delegate object Getter(object instance);
+    internal delegate void Setter(object instance, object value);
+
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 10.0.18362.1")]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class XamlMember : global::Windows.UI.Xaml.Markup.IXamlMember
+    {
+        global::SYPP.SYPP_XamlTypeInfo.XamlTypeInfoProvider _provider;
+        string _name;
+        bool _isAttachable;
+        bool _isDependencyProperty;
+        bool _isReadOnly;
+
+        string _typeName;
+        string _targetTypeName;
+
+        public XamlMember(global::SYPP.SYPP_XamlTypeInfo.XamlTypeInfoProvider provider, string name, string typeName)
+        {
+            _name = name;
+            _typeName = typeName;
+            _provider = provider;
+        }
+
+        public string Name { get { return _name; } }
+
+        public global::Windows.UI.Xaml.Markup.IXamlType Type
+        {
+            get { return _provider.GetXamlTypeByName(_typeName); }
+        }
+
+        public void SetTargetTypeName(string targetTypeName)
+        {
+            _targetTypeName = targetTypeName;
+        }
+        public global::Windows.UI.Xaml.Markup.IXamlType TargetType
+        {
+            get { return _provider.GetXamlTypeByName(_targetTypeName); }
+        }
+
+        public void SetIsAttachable() { _isAttachable = true; }
+        public bool IsAttachable { get { return _isAttachable; } }
+
+        public void SetIsDependencyProperty() { _isDependencyProperty = true; }
+        public bool IsDependencyProperty { get { return _isDependencyProperty; } }
+
+        public void SetIsReadOnly() { _isReadOnly = true; }
+        public bool IsReadOnly { get { return _isReadOnly; } }
+
+        public Getter Getter { get; set; }
+        public object GetValue(object instance)
+        {
+            if (Getter != null)
+                return Getter(instance);
+            else
+                throw new global::System.InvalidOperationException("GetValue");
+        }
+
+        public Setter Setter { get; set; }
+        public void SetValue(object instance, object value)
+        {
+            if (Setter != null)
+                Setter(instance, value);
+            else
+                throw new global::System.InvalidOperationException("SetValue");
         }
     }
 }
